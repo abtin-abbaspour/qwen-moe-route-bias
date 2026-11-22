@@ -1,0 +1,21 @@
+{
+ "dir": "q16-4500-add0.005",
+ "settings": "cache 4500 MiB, bias 0.005 (add), protect 0, drop 0, layers all, cpu share 0.9, kv q8_0, ub 3, chunks 16, engine full, base 0, ref ./results/kld/ref16-f16-ub512/base.kld",
+ "elapsed_s": 225,
+ "ppl_q": 5.908254,
+ "ppl_q_err": 0.078473,
+ "ppl_base": 5.858895,
+ "ppl_base_err": 0.077463,
+ "ppl_ratio": 1.008425,
+ "ppl_ratio_err": 0.001296,
+ "kld_mean": 0.020544,
+ "kld_mean_err": 0.000371,
+ "kld_p99": 0.215403,
+ "same_top": 94.41,
+ "same_top_err": 0.127,
+ "rms_dp": 4.4,
+ "rms_dp_err": 0.096,
+ "hit_rate": 0.9293,
+ "swap_rate_picks": 0.10999,
+ "mass_kept": 0.990558
+}

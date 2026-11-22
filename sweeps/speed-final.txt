@@ -1,0 +1,49 @@
+# final speed runs: additive bias, uniform over the layers, against interleaved delta-0 runs; two passes, the second reversed
+spd-4500-d0-r11 --cache-mib 4500
+spd-4500-add0.00025-r1 --cache-mib 4500 --bias 0.00025 --bias-mode add
+spd-4500-add0.001-r1 --cache-mib 4500 --bias 0.001 --bias-mode add
+spd-4500-add0.005-r1 --cache-mib 4500 --bias 0.005 --bias-mode add
+spd-4500-d0-r12 --cache-mib 4500
+spd-4500-add0.0005-r1 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spd-4500-add0.0025-r1 --cache-mib 4500 --bias 0.0025 --bias-mode add
+spd-4500-d0-r13 --cache-mib 4500
+spd-4500-d0-r21 --cache-mib 4500
+spd-4500-add0.0025-r2 --cache-mib 4500 --bias 0.0025 --bias-mode add
+spd-4500-add0.0005-r2 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spd-4500-d0-r22 --cache-mib 4500
+spd-4500-add0.005-r2 --cache-mib 4500 --bias 0.005 --bias-mode add
+spd-4500-add0.001-r2 --cache-mib 4500 --bias 0.001 --bias-mode add
+spd-4500-add0.00025-r2 --cache-mib 4500 --bias 0.00025 --bias-mode add
+spd-4500-d0-r23 --cache-mib 4500
+spd-3000-d0-r11 --cache-mib 3000
+spd-3000-add0.00025-r1 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spd-3000-add0.001-r1 --cache-mib 3000 --bias 0.001 --bias-mode add
+spd-3000-add0.005-r1 --cache-mib 3000 --bias 0.005 --bias-mode add
+spd-3000-d0-r12 --cache-mib 3000
+spd-3000-add0.0005-r1 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spd-3000-add0.0025-r1 --cache-mib 3000 --bias 0.0025 --bias-mode add
+spd-3000-d0-r13 --cache-mib 3000
+spd-3000-d0-r21 --cache-mib 3000
+spd-3000-add0.0025-r2 --cache-mib 3000 --bias 0.0025 --bias-mode add
+spd-3000-add0.0005-r2 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spd-3000-d0-r22 --cache-mib 3000
+spd-3000-add0.005-r2 --cache-mib 3000 --bias 0.005 --bias-mode add
+spd-3000-add0.001-r2 --cache-mib 3000 --bias 0.001 --bias-mode add
+spd-3000-add0.00025-r2 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spd-3000-d0-r23 --cache-mib 3000
+spd-8000-d0-r11 --cache-mib 8000
+spd-8000-add0.00025-r1 --cache-mib 8000 --bias 0.00025 --bias-mode add
+spd-8000-add0.001-r1 --cache-mib 8000 --bias 0.001 --bias-mode add
+spd-8000-add0.005-r1 --cache-mib 8000 --bias 0.005 --bias-mode add
+spd-8000-d0-r12 --cache-mib 8000
+spd-8000-add0.0005-r1 --cache-mib 8000 --bias 0.0005 --bias-mode add
+spd-8000-add0.0025-r1 --cache-mib 8000 --bias 0.0025 --bias-mode add
+spd-8000-d0-r13 --cache-mib 8000
+spd-8000-d0-r21 --cache-mib 8000
+spd-8000-add0.0025-r2 --cache-mib 8000 --bias 0.0025 --bias-mode add
+spd-8000-add0.0005-r2 --cache-mib 8000 --bias 0.0005 --bias-mode add
+spd-8000-d0-r22 --cache-mib 8000
+spd-8000-add0.005-r2 --cache-mib 8000 --bias 0.005 --bias-mode add
+spd-8000-add0.001-r2 --cache-mib 8000 --bias 0.001 --bias-mode add
+spd-8000-add0.00025-r2 --cache-mib 8000 --bias 0.00025 --bias-mode add
+spd-8000-d0-r23 --cache-mib 8000

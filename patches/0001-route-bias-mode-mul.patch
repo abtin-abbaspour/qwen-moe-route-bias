@@ -1,0 +1,23 @@
+# GPU_bias_test patch 1 of 2, on llama.cpp d02b4c0d with glm53-offload b5e86ee applied (scripts/setup.sh applies both in order).
+# LLAMA_MOE_ROUTE_BIAS_MODE=mul: the route bias in logit space (probs * exp(delta)) for softmax routers, beside the patch's
+# additive rule (probs + delta). Used in calibration; the final runs use the additive rule.
+diff --git a/src/llama-graph.cpp b/src/llama-graph.cpp
+index d748c72..2ae767b 100644
+--- a/src/llama-graph.cpp
++++ b/src/llama-graph.cpp
+@@ -2331,7 +2331,14 @@ ggml_tensor * llm_graph_context::build_moe_ffn(
+                 keep = ggml_argsort_top_k(ctx0, selection_probs, route_protect); // [R, n_tokens]
+                 cb(keep, "ffn_moe_route_keep", il);
+             }
+-            selection_probs = ggml_add(ctx0, selection_probs, route_bias);
++            // GPU_bias_test: LLAMA_MOE_ROUTE_BIAS_MODE=mul applies the bias in logit space, probs * exp(d) for the cached experts,
++            // which selects exactly as logits + d would (softmax is monotone); the default (add) is the patch's probs + d
++            static const bool route_mul = getenv("LLAMA_MOE_ROUTE_BIAS_MODE") != nullptr && std::string(getenv("LLAMA_MOE_ROUTE_BIAS_MODE")) == "mul";
++            if (route_mul) {
++                selection_probs = ggml_mul(ctx0, selection_probs, ggml_exp(ctx0, route_bias));
++            } else {
++                selection_probs = ggml_add(ctx0, selection_probs, route_bias);
++            }
+             cb(selection_probs, "ffn_moe_probs_cache_bias", il);
+             if (keep != nullptr) {
+                 ggml_tensor * sp3  = ggml_reshape_3d(ctx0, selection_probs, 1, n_expert, n_tokens);

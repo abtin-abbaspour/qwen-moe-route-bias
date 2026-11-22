@@ -1,0 +1,21 @@
+{
+ "dir": "s45-mul0.1",
+ "settings": "cache 4500 MiB, bias 0.1 (mul), protect 0, drop 0, layers all, cpu share 0.9, kv q8_0, ub 3, chunks 4, engine full, base 0, ref ./results/kld/base-4500-ub3/base.kld",
+ "elapsed_s": 73,
+ "ppl_q": 5.154777,
+ "ppl_q_err": 0.132984,
+ "ppl_base": 5.15763,
+ "ppl_base_err": 0.132646,
+ "ppl_ratio": 0.999447,
+ "ppl_ratio_err": 0.00184,
+ "kld_mean": 0.009689,
+ "kld_mean_err": 0.000308,
+ "kld_p99": 0.113943,
+ "same_top": 96.104,
+ "same_top_err": 0.214,
+ "rms_dp": 2.915,
+ "rms_dp_err": 0.104,
+ "hit_rate": 0.8495999999999999,
+ "swap_rate_picks": 0.03633,
+ "mass_kept": 0.99912
+}

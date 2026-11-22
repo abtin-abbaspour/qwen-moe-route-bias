@@ -1,0 +1,1 @@
+1319 questions: A 95.07 %, B 94.54 %, B - A -0.53 points [-1.29, +0.23]; only A right 16, only B right 9, McNemar p = 0.23

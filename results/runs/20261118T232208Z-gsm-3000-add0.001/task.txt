@@ -1,0 +1,14 @@
+  100 done, 96.0 % right, 137 tok/s overall
+  200 done, 95.5 % right, 136 tok/s overall
+  300 done, 94.7 % right, 136 tok/s overall
+  400 done, 94.5 % right, 136 tok/s overall
+  500 done, 94.8 % right, 136 tok/s overall
+  600 done, 94.7 % right, 136 tok/s overall
+  700 done, 94.7 % right, 136 tok/s overall
+  800 done, 94.4 % right, 136 tok/s overall
+  900 done, 94.3 % right, 136 tok/s overall
+  1000 done, 94.2 % right, 136 tok/s overall
+  1100 done, 94.0 % right, 136 tok/s overall
+  1200 done, 94.0 % right, 136 tok/s overall
+  1300 done, 94.5 % right, 136 tok/s overall
+gsm8k: 1319 questions, 94.39 % right, 47 cut at 768 tokens

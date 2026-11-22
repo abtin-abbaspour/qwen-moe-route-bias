@@ -1,0 +1,21 @@
+cache 3000 MiB
+  delta 0.00025  gain  -1.25 %  dKLD +0.00087  PPL ratio 1.0001  fails speed
+  delta 0.0005   gain  +5.76 %  dKLD +0.00181  PPL ratio 0.9987  pass
+  delta 0.001    gain  +8.94 %  dKLD +0.00401  PPL ratio 1.0002  pass
+  delta 0.0025   gain +10.95 %  dKLD +0.00993  PPL ratio 1.0023  fails kld
+  delta 0.005    gain +20.98 %  dKLD +0.02070  PPL ratio 1.0062  fails kld
+  -> delta 0.001
+cache 4500 MiB
+  delta 0.00025  gain  +3.27 %  dKLD +0.00079  PPL ratio 0.9990  fails speed
+  delta 0.0005   gain  +7.04 %  dKLD +0.00207  PPL ratio 0.9993  pass
+  delta 0.001    gain  +5.82 %  dKLD +0.00369  PPL ratio 1.0000  pass
+  delta 0.0025   gain +12.32 %  dKLD +0.00840  PPL ratio 1.0028  fails kld
+  delta 0.005    gain +25.36 %  dKLD +0.01593  PPL ratio 1.0072  fails kld
+  -> delta 0.0005
+cache 8000 MiB
+  delta 0.00025  gain  +1.06 %  dKLD +0.00025  PPL ratio 1.0008  fails speed
+  delta 0.0005   gain  +0.82 %  dKLD +0.00071  PPL ratio 1.0001  fails speed
+  delta 0.001    gain  +3.73 %  dKLD +0.00166  PPL ratio 1.0011  fails speed
+  delta 0.0025   gain  +6.91 %  dKLD +0.00409  PPL ratio 1.0011  pass
+  delta 0.005    gain  +8.33 %  dKLD +0.00736  PPL ratio 1.0022  fails kld
+  -> delta 0.0025

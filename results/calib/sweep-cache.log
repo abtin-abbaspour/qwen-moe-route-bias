@@ -1,0 +1,33 @@
+=== 14:30:24 calib-cache-8000: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 214.8 tok/s decode (each the median of 1 x 512)
+calib-cache-8000             engine  214.8 tok/s (mean  215.2), hit 0.9039, draft 0.742, vram 13513 MiB, gpu 172 W
+run_arm.sh: results in ./results/20261118T143024Z-calib-cache-8000
+=== 14:31:56 calib-cache-1000: --cache-mib 1000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 79.9 tok/s decode (each the median of 1 x 512)
+calib-cache-1000             engine   79.9 tok/s (mean   85.8), hit 0.4258, draft 0.368, vram 6516 MiB, gpu 112 W
+run_arm.sh: results in ./results/20261118T143156Z-calib-cache-1000
+=== 14:34:48 calib-cache-2000: --cache-mib 2000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 127.4 tok/s decode (each the median of 1 x 512)
+calib-cache-2000             engine  127.4 tok/s (mean  127.9), hit 0.5043, draft 0.725, vram 7485 MiB, gpu 119 W
+run_arm.sh: results in ./results/20261118T143448Z-calib-cache-2000
+=== 14:37:00 calib-cache-3000: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 145.9 tok/s decode (each the median of 1 x 512)
+calib-cache-3000             engine  145.9 tok/s (mean  147.6), hit 0.6265, draft 0.741, vram 8524 MiB, gpu 131 W
+run_arm.sh: results in ./results/20261118T143700Z-calib-cache-3000
+=== 14:38:59 calib-cache-4500: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 174.9 tok/s decode (each the median of 1 x 512)
+calib-cache-4500             engine  174.9 tok/s (mean  174.9), hit 0.7511, draft 0.750, vram 9993 MiB, gpu 148 W
+run_arm.sh: results in ./results/20261118T143859Z-calib-cache-4500
+=== 14:40:45 calib-cache-6000: --cache-mib 6000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 198.0 tok/s decode (each the median of 1 x 512)
+calib-cache-6000             engine  198.0 tok/s (mean  196.4), hit 0.8369, draft 0.735, vram 11493 MiB, gpu 165 W
+run_arm.sh: results in ./results/20261118T144045Z-calib-cache-6000
+=== 14:42:23 calib-cache-10000: --cache-mib 10000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 233.8 tok/s decode (each the median of 1 x 512)
+calib-cache-10000            engine  233.8 tok/s (mean  236.3), hit 0.9508, draft 0.735, vram 15493 MiB, gpu 193 W
+run_arm.sh: results in ./results/20261118T144223Z-calib-cache-10000
+=== 14:43:49 calib-cache-8000r: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 218.9 tok/s decode (each the median of 1 x 512)
+calib-cache-8000r            engine  218.9 tok/s (mean  220.0), hit 0.9039, draft 0.742, vram 12938 MiB, gpu 182 W
+run_arm.sh: results in ./results/20261118T144349Z-calib-cache-8000r
+=== 14:45:19 sweep done

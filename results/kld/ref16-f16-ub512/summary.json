@@ -1,0 +1,7 @@
+{
+ "dir": "ref16-f16-ub512",
+ "settings": "cache 8000 MiB, bias 0 (add), protect 0, drop 0, layers all, cpu share 0.9, kv f16, ub 512, chunks 16, engine full, base 1, ref none",
+ "elapsed_s": 103,
+ "ppl_final": 5.8611,
+ "ppl_final_err": 0.07757
+}

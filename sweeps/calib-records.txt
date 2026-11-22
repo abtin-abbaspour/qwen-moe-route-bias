@@ -1,0 +1,5 @@
+# calibration 3: per-token route records at delta ~ 0 (additive 1e-30: bit-identical to delta = 0, the fused kernel stays), for the
+# offline map from delta to swap rate (scripts/route_records.py); the records do not change the run, the counting costs a little speed
+calib-rec-3000 --cache-mib 3000 --bias 1e-30 --bias-mode add --route-stats ./results/calib/rec-3000.mrs
+calib-rec-4500 --cache-mib 4500 --bias 1e-30 --bias-mode add --route-stats ./results/calib/rec-4500.mrs
+calib-rec-8000 --cache-mib 8000 --bias 1e-30 --bias-mode add --route-stats ./results/calib/rec-8000.mrs

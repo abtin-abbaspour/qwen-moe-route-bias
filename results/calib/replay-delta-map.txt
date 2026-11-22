@@ -1,0 +1,105 @@
+results/calib/rec-3000.mrs: 607191 token-layers, k=8, n_expert=256, recorded at bias 1e-30 (add), protect 0
+  as recorded: favoured share of the selection 0.6765
+  add: delta     swaps/picks  tokens-swapped  favoured-picks (unbiased)  mass-kept  truncated
+  add: 0.0005        1.944 %         15.01 %       69.60 % (67.65 %)   99.9790 %  0.001 %
+  add: 0.001         3.817 %         27.62 %       71.47 % (67.65 %)   99.9181 %  0.065 %
+  add: 0.002         7.127 %         45.44 %       74.78 % (67.65 %)   99.7044 %  0.903 %
+  add: 0.003         9.828 %         56.65 %       77.48 % (67.65 %)   99.4128 %  2.083 %
+  add: 0.005        13.767 %         68.83 %       81.42 % (67.65 %)   98.7393 %  4.726 %
+  add: 0.0075       16.890 %         75.74 %       84.54 % (67.65 %)   97.9039 %  7.717 %
+  add: 0.01         18.889 %         79.11 %       86.54 % (67.65 %)   97.1507 %  9.944 %
+  add: 0.015        21.253 %         82.23 %       88.90 % (67.65 %)   95.8922 %  12.947 %
+  add: 0.03         23.948 %         84.72 %       91.60 % (67.65 %)   93.4461 %  17.034 %
+  add: swap rate 0.25 % of picks at delta ~ 6.3644e-05
+  add: swap rate 0.5 % of picks at delta ~ 0.00012754
+  add: swap rate 1 % of picks at delta ~ 0.00025505
+  add: swap rate 2 % of picks at delta ~ 0.00051443
+  add: swap rate 4 % of picks at delta ~ 0.0010513
+  add: swap rate 8 % of picks at delta ~ 0.0022998
+  mul: delta     swaps/picks  tokens-swapped  favoured-picks (unbiased)  mass-kept  truncated
+  mul: 0.02          0.855 %          6.80 %       68.51 % (67.65 %)   99.9958 %  0.000 %
+  mul: 0.05          2.115 %         16.46 %       69.77 % (67.65 %)   99.9739 %  0.000 %
+  mul: 0.1           4.148 %         30.49 %       71.80 % (67.65 %)   99.8985 %  0.010 %
+  mul: 0.15          6.052 %         41.68 %       73.70 % (67.65 %)   99.7800 %  0.146 %
+  mul: 0.2           7.822 %         50.51 %       75.47 % (67.65 %)   99.6247 %  0.488 %
+  mul: 0.3          10.937 %         62.78 %       78.59 % (67.65 %)   99.2277 %  1.536 %
+  mul: 0.5          15.615 %         75.08 %       83.27 % (67.65 %)   98.2341 %  4.513 %
+  mul: 0.75         19.333 %         81.03 %       86.98 % (67.65 %)   96.8802 %  8.536 %
+  mul: 1            21.647 %         83.45 %       89.30 % (67.65 %)   95.5452 %  11.748 %
+  mul: swap rate 0.25 % of picks at delta ~ 0.0058136
+  mul: swap rate 0.5 % of picks at delta ~ 0.011657
+  mul: swap rate 1 % of picks at delta ~ 0.023443
+  mul: swap rate 2 % of picks at delta ~ 0.047217
+  mul: swap rate 4 % of picks at delta ~ 0.096259
+  mul: swap rate 8 % of picks at delta ~ 0.20526
+
+results/calib/rec-4500.mrs: 602590 token-layers, k=8, n_expert=256, recorded at bias 1e-30 (add), protect 0
+  as recorded: favoured share of the selection 0.7859
+  add: delta     swaps/picks  tokens-swapped  favoured-picks (unbiased)  mass-kept  truncated
+  add: 0.0005        1.888 %         14.47 %       80.48 % (78.59 %)   99.9797 %  0.000 %
+  add: 0.001         3.598 %         25.71 %       82.19 % (78.59 %)   99.9241 %  0.014 %
+  add: 0.002         6.429 %         40.69 %       85.02 % (78.59 %)   99.7417 %  0.258 %
+  add: 0.003         8.571 %         49.57 %       87.16 % (78.59 %)   99.5102 %  0.615 %
+  add: 0.005        11.483 %         59.03 %       90.08 % (78.59 %)   99.0125 %  1.295 %
+  add: 0.0075       13.682 %         64.58 %       92.28 % (78.59 %)   98.4230 %  2.018 %
+  add: 0.01         15.062 %         67.43 %       93.66 % (78.59 %)   97.9013 %  2.567 %
+  add: 0.015        16.679 %         70.22 %       95.27 % (78.59 %)   97.0377 %  3.334 %
+  add: 0.03         18.598 %         72.75 %       97.19 % (78.59 %)   95.2832 %  4.455 %
+  add: swap rate 0.25 % of picks at delta ~ 6.3233e-05
+  add: swap rate 0.5 % of picks at delta ~ 0.0001281
+  add: swap rate 1 % of picks at delta ~ 0.0002585
+  add: swap rate 2 % of picks at delta ~ 0.00053107
+  add: swap rate 4 % of picks at delta ~ 0.0011262
+  add: swap rate 8 % of picks at delta ~ 0.0027055
+  mul: delta     swaps/picks  tokens-swapped  favoured-picks (unbiased)  mass-kept  truncated
+  mul: 0.02          0.836 %          6.64 %       79.43 % (78.59 %)   99.9959 %  0.000 %
+  mul: 0.05          2.035 %         15.76 %       80.63 % (78.59 %)   99.9753 %  0.000 %
+  mul: 0.1           3.897 %         28.36 %       82.49 % (78.59 %)   99.9064 %  0.002 %
+  mul: 0.15          5.579 %         38.02 %       84.17 % (78.59 %)   99.8013 %  0.038 %
+  mul: 0.2           7.078 %         45.31 %       85.67 % (78.59 %)   99.6681 %  0.142 %
+  mul: 0.3           9.573 %         55.07 %       88.17 % (78.59 %)   99.3433 %  0.470 %
+  mul: 0.5          13.022 %         64.66 %       91.62 % (78.59 %)   98.5863 %  1.274 %
+  mul: 0.75         15.578 %         69.48 %       94.17 % (78.59 %)   97.6078 %  2.257 %
+  mul: 1            17.125 %         71.63 %       95.72 % (78.59 %)   96.6637 %  3.073 %
+  mul: swap rate 0.25 % of picks at delta ~ 0.0059028
+  mul: swap rate 0.5 % of picks at delta ~ 0.011861
+  mul: swap rate 1 % of picks at delta ~ 0.024034
+  mul: swap rate 2 % of picks at delta ~ 0.049134
+  mul: swap rate 4 % of picks at delta ~ 0.10294
+  mul: swap rate 8 % of picks at delta ~ 0.23406
+
+results/calib/rec-8000.mrs: 606627 token-layers, k=8, n_expert=256, recorded at bias 1e-30 (add), protect 0
+  as recorded: favoured share of the selection 0.9175
+  add: delta     swaps/picks  tokens-swapped  favoured-picks (unbiased)  mass-kept  truncated
+  add: 0.0005        1.216 %          9.35 %       92.96 % (91.75 %)   99.9872 %  0.000 %
+  add: 0.001         2.191 %         15.96 %       93.94 % (91.75 %)   99.9557 %  0.000 %
+  add: 0.002         3.561 %         23.99 %       95.31 % (91.75 %)   99.8683 %  0.002 %
+  add: 0.003         4.475 %         28.64 %       96.22 % (91.75 %)   99.7698 %  0.005 %
+  add: 0.005         5.581 %         33.55 %       97.33 % (91.75 %)   99.5816 %  0.017 %
+  add: 0.0075        6.339 %         36.47 %       98.09 % (91.75 %)   99.3790 %  0.034 %
+  add: 0.01          6.784 %         38.01 %       98.53 % (91.75 %)   99.2109 %  0.053 %
+  add: 0.015         7.287 %         39.57 %       99.03 % (91.75 %)   98.9428 %  0.086 %
+  add: 0.03          7.844 %         41.05 %       99.59 % (91.75 %)   98.4343 %  0.134 %
+  add: swap rate 0.25 % of picks at delta ~ 9.4248e-05
+  add: swap rate 0.5 % of picks at delta ~ 0.00019301
+  add: swap rate 1 % of picks at delta ~ 0.00040313
+  add: swap rate 2 % of picks at delta ~ 0.0008913
+  add: swap rate 4 % of picks at delta ~ 0.0024317
+  add: swap rate 8 % of picks at delta ~ 0.042006
+  mul: delta     swaps/picks  tokens-swapped  favoured-picks (unbiased)  mass-kept  truncated
+  mul: 0.02          0.547 %          4.35 %       92.29 % (91.75 %)   99.9974 %  0.000 %
+  mul: 0.05          1.295 %         10.05 %       93.04 % (91.75 %)   99.9848 %  0.000 %
+  mul: 0.1           2.367 %         17.46 %       94.11 % (91.75 %)   99.9456 %  0.000 %
+  mul: 0.15          3.221 %         22.69 %       94.97 % (91.75 %)   99.8919 %  0.000 %
+  mul: 0.2           3.935 %         26.63 %       95.68 % (91.75 %)   99.8270 %  0.001 %
+  mul: 0.3           4.994 %         31.73 %       96.74 % (91.75 %)   99.6842 %  0.004 %
+  mul: 0.5           6.252 %         36.70 %       98.00 % (91.75 %)   99.3925 %  0.017 %
+  mul: 0.75          7.064 %         39.29 %       98.81 % (91.75 %)   99.0568 %  0.043 %
+  mul: 1             7.508 %         40.46 %       99.25 % (91.75 %)   98.7595 %  0.073 %
+  mul: swap rate 0.25 % of picks at delta ~ 0.0090556
+  mul: swap rate 0.5 % of picks at delta ~ 0.018187
+  mul: swap rate 1 % of picks at delta ~ 0.037772
+  mul: swap rate 2 % of picks at delta ~ 0.081634
+  mul: swap rate 4 % of picks at delta ~ 0.20502
+  mul: swap rate 8 % of picks at delta ~ 1.5908
+

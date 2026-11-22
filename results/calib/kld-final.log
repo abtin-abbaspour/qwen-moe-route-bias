@@ -1,0 +1,39 @@
+=== 18:22:32 ref16-f16-ub512: --base --kv f16 --ub 512 --cache-mib 8000 --route-stats 0 --chunks 16
+ref16-f16-ub512                same-top - ± - %, KLD -, PPL ratio -, hit -, swaps -, 103 s
+=== 18:24:20 q16-4500-d0: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16
+q16-4500-d0                    same-top 97.313 ± 0.089 %, KLD 0.00461, PPL ratio 1.0012, hit 0.8231, swaps -, 265 s
+=== 18:28:50 q16-4500-add0.00025: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.00025 --bias-mode add
+q16-4500-add0.00025            same-top 97.130 ± 0.092 %, KLD 0.00540, PPL ratio 1.0002, hit 0.8322, swaps 0.0086, 270 s
+=== 18:33:25 q16-4500-add0.0005: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.0005 --bias-mode add
+q16-4500-add0.0005             same-top 96.803 ± 0.097 %, KLD 0.00668, PPL ratio 1.0004, hit 0.8409, swaps 0.0167, 265 s
+=== 18:37:55 q16-4500-add0.001: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.001 --bias-mode add
+q16-4500-add0.001              same-top 96.348 ± 0.104 %, KLD 0.00831, PPL ratio 1.0011, hit 0.8565, swaps 0.0317, 258 s
+=== 18:42:18 q16-4500-add0.0025: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.0025 --bias-mode add
+q16-4500-add0.0025             same-top 95.457 ± 0.115 %, KLD 0.01302, PPL ratio 1.0040, hit 0.8928, swaps 0.0681, 241 s
+=== 18:46:24 q16-4500-add0.005: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.005 --bias-mode add
+q16-4500-add0.005              same-top 94.410 ± 0.127 %, KLD 0.02054, PPL ratio 1.0084, hit 0.9293, swaps 0.1100, 225 s
+=== 18:50:14 q16-3000-d0: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16
+q16-3000-d0                    same-top 97.396 ± 0.088 %, KLD 0.00495, PPL ratio 1.0017, hit 0.7000, swaps -, 318 s
+=== 18:55:38 q16-3000-add0.00025: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.00025 --bias-mode add
+q16-3000-add0.00025            same-top 97.148 ± 0.092 %, KLD 0.00581, PPL ratio 1.0018, hit 0.7099, swaps 0.0099, 324 s
+=== 19:01:07 q16-3000-add0.0005: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.0005 --bias-mode add
+q16-3000-add0.0005             same-top 96.831 ± 0.097 %, KLD 0.00675, PPL ratio 1.0004, hit 0.7194, swaps 0.0196, 320 s
+=== 19:06:32 q16-3000-add0.001: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.001 --bias-mode add
+q16-3000-add0.001              same-top 96.245 ± 0.105 %, KLD 0.00895, PPL ratio 1.0019, hit 0.7375, swaps 0.0380, 310 s
+=== 19:11:47 q16-3000-add0.0025: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.0025 --bias-mode add
+q16-3000-add0.0025             same-top 95.261 ± 0.117 %, KLD 0.01488, PPL ratio 1.0040, hit 0.7842, swaps 0.0861, 288 s
+=== 19:16:40 q16-3000-add0.005: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.005 --bias-mode add
+q16-3000-add0.005              same-top 93.695 ± 0.134 %, KLD 0.02565, PPL ratio 1.0079, hit 0.8403, swaps 0.1471, 261 s
+=== 19:21:06 q16-8000-d0: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16
+q16-8000-d0                    same-top 97.393 ± 0.088 %, KLD 0.00485, PPL ratio 1.0005, hit 0.9511, swaps -, 212 s
+=== 19:24:44 q16-8000-add0.00025: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.00025 --bias-mode add
+q16-8000-add0.00025            same-top 97.182 ± 0.091 %, KLD 0.00510, PPL ratio 1.0013, hit 0.9556, swaps 0.0040, 217 s
+=== 19:28:26 q16-8000-add0.0005: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.0005 --bias-mode add
+q16-8000-add0.0005             same-top 97.096 ± 0.093 %, KLD 0.00556, PPL ratio 1.0006, hit 0.9594, swaps 0.0076, 216 s
+=== 19:32:07 q16-8000-add0.001: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.001 --bias-mode add
+q16-8000-add0.001              same-top 96.901 ± 0.096 %, KLD 0.00651, PPL ratio 1.0016, hit 0.9658, swaps 0.0140, 214 s
+=== 19:35:46 q16-8000-add0.0025: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.0025 --bias-mode add
+q16-8000-add0.0025             same-top 96.351 ± 0.104 %, KLD 0.00895, PPL ratio 1.0016, hit 0.9780, swaps 0.0285, 209 s
+=== 19:39:20 q16-8000-add0.005: --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.005 --bias-mode add
+q16-8000-add0.005              same-top 95.753 ± 0.111 %, KLD 0.01221, PPL ratio 1.0027, hit 0.9874, swaps 0.0450, 206 s
+=== 19:42:51 kld sweep done

@@ -1,0 +1,541 @@
+0.00.103.802 I cmn  common_fit_a: fitting params to device memory ...
+0.00.103.804 I cmn  common_fit_a: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+0.00.104.274 I common_params_fit_impl: getting device memory data for initial parameters:
+0.00.427.594 I common_memory_breakdown_print: | memory breakdown [MiB]  | total    free     self   model   context   compute    unaccounted |
+0.00.427.597 I common_memory_breakdown_print: |   - CUDA0 (RTX 5070 Ti) | 15879 = 13757 + ( 5048 =  1921 +    3103 +      23) +       -2926 |
+0.00.427.597 I common_memory_breakdown_print: |   - Host                |                  15031 = 15029 +       0 +       2                |
+0.00.444.876 I common_params_fit_impl: projected to use 5048 MiB of device memory vs. 13757 MiB of free device memory
+0.00.444.878 I common_params_fit_impl: will leave 8708 >= 1024 MiB of free device memory, no changes needed
+0.00.444.879 I common_fit_params: successfully fit params to free device memory
+0.00.444.880 I common_fit_params: fitting params to free memory took 0.34 seconds
+0.00.476.565 I llama_model_loader: loaded meta data with 55 key-value pairs and 753 tensors from ./models/qwen3.6-35b-a3b/Qwen3.6-35B-A3B-UD-IQ4_XS.gguf (version GGUF V3 (latest))
+0.00.476.582 I llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+0.00.476.583 I llama_model_loader: - kv   0:                       general.architecture str              = qwen35moe
+0.00.476.584 I llama_model_loader: - kv   1:                               general.type str              = model
+0.00.476.585 I llama_model_loader: - kv   2:                     general.sampling.top_k i32              = 20
+0.00.476.587 I llama_model_loader: - kv   3:                     general.sampling.top_p f32              = 0.950000
+0.00.476.587 I llama_model_loader: - kv   4:                      general.sampling.temp f32              = 1.000000
+0.00.476.588 I llama_model_loader: - kv   5:                               general.name str              = Qwen3.6-35B-A3B
+0.00.476.588 I llama_model_loader: - kv   6:                           general.basename str              = Qwen3.6-35B-A3B
+0.00.476.589 I llama_model_loader: - kv   7:                       general.quantized_by str              = Unsloth
+0.00.476.589 I llama_model_loader: - kv   8:                         general.size_label str              = 35B-A3B
+0.00.476.589 I llama_model_loader: - kv   9:                            general.license str              = apache-2.0
+0.00.476.591 I llama_model_loader: - kv  10:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.6-3...
+0.00.476.591 I llama_model_loader: - kv  11:                           general.repo_url str              = https://huggingface.co/unsloth
+0.00.476.592 I llama_model_loader: - kv  12:                   general.base_model.count u32              = 1
+0.00.476.593 I llama_model_loader: - kv  13:                  general.base_model.0.name str              = Qwen3.6 35B A3B
+0.00.476.593 I llama_model_loader: - kv  14:          general.base_model.0.organization str              = Qwen
+0.00.476.594 I llama_model_loader: - kv  15:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.6-3...
+0.00.476.596 I llama_model_loader: - kv  16:                               general.tags arr[str,3]       = ["qwen3_5_moe", "qwen", "image-text-t...
+0.00.476.597 I llama_model_loader: - kv  17:                      qwen35moe.block_count u32              = 41
+0.00.476.597 I llama_model_loader: - kv  18:                   qwen35moe.context_length u32              = 262144
+0.00.476.598 I llama_model_loader: - kv  19:                 qwen35moe.embedding_length u32              = 2048
+0.00.476.598 I llama_model_loader: - kv  20:             qwen35moe.attention.head_count u32              = 16
+0.00.476.598 I llama_model_loader: - kv  21:          qwen35moe.attention.head_count_kv u32              = 2
+0.00.476.599 I llama_model_loader: - kv  22:          qwen35moe.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+0.00.476.601 I llama_model_loader: - kv  23:                   qwen35moe.rope.freq_base f32              = 10000000.000000
+0.00.476.601 I llama_model_loader: - kv  24: qwen35moe.attention.layer_norm_rms_epsilon f32              = 0.000001
+0.00.476.602 I llama_model_loader: - kv  25:                     qwen35moe.expert_count u32              = 256
+0.00.476.602 I llama_model_loader: - kv  26:                qwen35moe.expert_used_count u32              = 8
+0.00.476.603 I llama_model_loader: - kv  27:             qwen35moe.attention.key_length u32              = 256
+0.00.476.603 I llama_model_loader: - kv  28:           qwen35moe.attention.value_length u32              = 256
+0.00.476.603 I llama_model_loader: - kv  29:       qwen35moe.expert_feed_forward_length u32              = 512
+0.00.476.604 I llama_model_loader: - kv  30: qwen35moe.expert_shared_feed_forward_length u32              = 512
+0.00.476.604 I llama_model_loader: - kv  31:                  qwen35moe.ssm.conv_kernel u32              = 4
+0.00.476.604 I llama_model_loader: - kv  32:                   qwen35moe.ssm.state_size u32              = 128
+0.00.476.605 I llama_model_loader: - kv  33:                  qwen35moe.ssm.group_count u32              = 16
+0.00.476.605 I llama_model_loader: - kv  34:               qwen35moe.ssm.time_step_rank u32              = 32
+0.00.476.606 I llama_model_loader: - kv  35:                   qwen35moe.ssm.inner_size u32              = 4096
+0.00.476.606 I llama_model_loader: - kv  36:          qwen35moe.full_attention_interval u32              = 4
+0.00.476.606 I llama_model_loader: - kv  37:             qwen35moe.rope.dimension_count u32              = 64
+0.00.476.607 I llama_model_loader: - kv  38:             qwen35moe.nextn_predict_layers u32              = 1
+0.00.476.607 I llama_model_loader: - kv  39:                       tokenizer.ggml.model str              = gpt2
+0.00.476.607 I llama_model_loader: - kv  40:                         tokenizer.ggml.pre str              = qwen35
+0.00.476.609 I llama_model_loader: - kv  41:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+0.00.476.610 I llama_model_loader: - kv  42:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+0.00.476.612 I llama_model_loader: - kv  43:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+0.00.476.612 I llama_model_loader: - kv  44:                tokenizer.ggml.eos_token_id u32              = 248046
+0.00.476.613 I llama_model_loader: - kv  45:            tokenizer.ggml.padding_token_id u32              = 248055
+0.00.476.613 I llama_model_loader: - kv  46:                tokenizer.ggml.bos_token_id u32              = 248044
+0.00.476.613 I llama_model_loader: - kv  47:               tokenizer.ggml.add_bos_token bool             = false
+0.00.476.615 I llama_model_loader: - kv  48:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+0.00.476.615 I llama_model_loader: - kv  49:               general.quantization_version u32              = 2
+0.00.476.615 I llama_model_loader: - kv  50:                          general.file_type u32              = 30
+0.00.476.616 I llama_model_loader: - kv  51:                      quantize.imatrix.file str              = Qwen3.6-35B-A3B-GGUF/imatrix_unsloth....
+0.00.476.617 I llama_model_loader: - kv  52:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.6-35B-A3B.txt
+0.00.476.617 I llama_model_loader: - kv  53:             quantize.imatrix.entries_count u32              = 510
+0.00.476.618 I llama_model_loader: - kv  54:              quantize.imatrix.chunks_count u32              = 77
+0.00.476.618 I llama_model_loader: - type  f32:  368 tensors
+0.00.476.618 I llama_model_loader: - type q8_0:  259 tensors
+0.00.476.619 I llama_model_loader: - type q3_K:    2 tensors
+0.00.476.619 I llama_model_loader: - type q4_K:    1 tensors
+0.00.476.619 I llama_model_loader: - type q6_K:    4 tensors
+0.00.476.619 I llama_model_loader: - type iq3_s:   78 tensors
+0.00.476.620 I llama_model_loader: - type iq4_xs:   39 tensors
+0.00.476.620 I llama_model_loader: - type bf16:    2 tensors
+0.00.476.621 I print_info: file format = GGUF V3 (latest)
+0.00.476.621 I print_info: file type   = IQ4_XS - 4.25 bpw
+0.00.476.622 I print_info: file size   = 16.95 GiB (4.10 BPW) 
+0.00.476.708 I llama_prepare_model_devices: using device CUDA0 (NVIDIA GeForce RTX 5070 Ti) (0000:01:00.0) - 13758 MiB free
+0.00.528.375 I load: 0 unused tokens
+0.00.548.231 I load: printing all EOG tokens:
+0.00.548.233 I load:   - 248044 ('<|endoftext|>')
+0.00.548.233 I load:   - 248046 ('<|im_end|>')
+0.00.548.234 I load:   - 248063 ('<|fim_pad|>')
+0.00.548.234 I load:   - 248064 ('<|repo_name|>')
+0.00.548.234 I load:   - 248065 ('<|file_sep|>')
+0.00.548.401 I load: special tokens cache size = 33
+0.00.570.079 I load: token to piece cache size = 1.7581 MB
+0.00.570.084 I print_info: arch                  = qwen35moe
+0.00.570.085 I print_info: vocab_only            = 0
+0.00.570.085 I print_info: no_alloc              = 0
+0.00.570.086 I print_info: n_ctx_train           = 262144
+0.00.570.086 I print_info: n_embd_inp            = 2048
+0.00.570.086 I print_info: n_embd                = 2048
+0.00.570.086 I print_info: n_embd_out            = 2048
+0.00.570.086 I print_info: n_layer               = 40
+0.00.570.087 I print_info: n_layer_all           = 41
+0.00.570.093 I print_info: n_head                = 16
+0.00.570.095 I print_info: n_head_kv             = 2
+0.00.570.095 I print_info: n_rot                 = 64
+0.00.570.095 I print_info: n_swa                 = 0
+0.00.570.095 I print_info: is_swa_any            = 0
+0.00.570.096 I print_info: non_causal_type       = 0
+0.00.570.096 I print_info: n_embd_head_k         = 256
+0.00.570.096 I print_info: n_embd_head_v         = 256
+0.00.570.097 I print_info: n_gqa                 = 8
+0.00.570.098 I print_info: n_embd_k_gqa          = 512
+0.00.570.099 I print_info: n_embd_v_gqa          = 512
+0.00.570.105 I print_info: f_norm_eps            = 0.0e+00
+0.00.570.106 I print_info: f_norm_rms_eps        = 1.0e-06
+0.00.570.106 I print_info: f_clamp_kqv           = 0.0e+00
+0.00.570.107 I print_info: f_max_alibi_bias      = 0.0e+00
+0.00.570.107 I print_info: f_logit_scale         = 0.0e+00
+0.00.570.107 I print_info: f_attn_scale          = 0.0e+00
+0.00.570.108 I print_info: f_attn_value_scale    = 0.0000
+0.00.570.109 I print_info: n_ff                  = 0
+0.00.570.109 I print_info: n_expert              = 256
+0.00.570.110 I print_info: n_expert_used         = 8
+0.00.570.110 I print_info: n_expert_groups       = 0
+0.00.570.111 I print_info: n_group_used          = 0
+0.00.570.111 I print_info: causal attn           = 1
+0.00.570.112 I print_info: pooling type          = -1
+0.00.570.112 I print_info: rope type             = 40
+0.00.570.112 I print_info: rope scaling          = linear
+0.00.570.113 I print_info: freq_base_train       = 10000000.0
+0.00.570.114 I print_info: freq_scale_train      = 1
+0.00.570.114 I print_info: n_ctx_orig_yarn       = 262144
+0.00.570.114 I print_info: rope_yarn_log_mul     = 0.0000
+0.00.570.115 I print_info: rope_finetuned        = unknown
+0.00.570.115 I print_info: mrope sections        = [11, 11, 10, 0]
+0.00.570.115 I print_info: ssm_d_conv            = 4
+0.00.570.115 I print_info: ssm_d_inner           = 4096
+0.00.570.116 I print_info: ssm_d_state           = 128
+0.00.570.116 I print_info: ssm_dt_rank           = 32
+0.00.570.116 I print_info: ssm_n_group           = 16
+0.00.570.116 I print_info: ssm_dt_b_c_rms        = 0
+0.00.570.117 I print_info: model type            = 35B.A3B
+0.00.570.117 I print_info: model params          = 35.51 B
+0.00.570.118 I print_info: general.name          = Qwen3.6-35B-A3B
+0.00.570.119 I print_info: vocab type            = BPE
+0.00.570.119 I print_info: n_vocab               = 248320
+0.00.570.119 I print_info: n_merges              = 247587
+0.00.570.120 I print_info: BOS token             = 248044 '<|endoftext|>'
+0.00.570.120 I print_info: EOS token             = 248046 '<|im_end|>'
+0.00.570.120 I print_info: EOT token             = 248046 '<|im_end|>'
+0.00.570.121 I print_info: PAD token             = 248055 '<|vision_pad|>'
+0.00.570.121 I print_info: LF token              = 198 'Ċ'
+0.00.570.121 I print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+0.00.570.121 I print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+0.00.570.121 I print_info: FIM MID token         = 248061 '<|fim_middle|>'
+0.00.570.122 I print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+0.00.570.122 I print_info: FIM REP token         = 248064 '<|repo_name|>'
+0.00.570.122 I print_info: FIM SEP token         = 248065 '<|file_sep|>'
+0.00.570.122 I print_info: EOG token             = 248044 '<|endoftext|>'
+0.00.570.122 I print_info: EOG token             = 248046 '<|im_end|>'
+0.00.570.122 I print_info: EOG token             = 248063 '<|fim_pad|>'
+0.00.570.123 I print_info: EOG token             = 248064 '<|repo_name|>'
+0.00.570.123 I print_info: EOG token             = 248065 '<|file_sep|>'
+0.00.570.123 I print_info: max token length      = 256
+0.00.570.180 I load_tensors: loading model tensors, this can take a while... (load_mode = none)
+0.00.614.493 W model has unused tensor blk.40.attn_norm.weight (size = 8192 bytes) -- ignoring
+0.00.614.499 W model has unused tensor blk.40.post_attention_norm.weight (size = 8192 bytes) -- ignoring
+0.00.614.507 W model has unused tensor blk.40.attn_q.weight (size = 17825792 bytes) -- ignoring
+0.00.614.510 W model has unused tensor blk.40.attn_k.weight (size = 1114112 bytes) -- ignoring
+0.00.614.514 W model has unused tensor blk.40.attn_v.weight (size = 1114112 bytes) -- ignoring
+0.00.614.526 W model has unused tensor blk.40.attn_output.weight (size = 8912896 bytes) -- ignoring
+0.00.614.529 W model has unused tensor blk.40.attn_q_norm.weight (size = 1024 bytes) -- ignoring
+0.00.614.533 W model has unused tensor blk.40.attn_k_norm.weight (size = 1024 bytes) -- ignoring
+0.00.614.537 W model has unused tensor blk.40.ffn_gate_inp.weight (size = 1048576 bytes) -- ignoring
+0.00.614.540 W model has unused tensor blk.40.ffn_down_exps.weight (size = 150994944 bytes) -- ignoring
+0.00.614.548 W model has unused tensor blk.40.ffn_gate_exps.weight (size = 115343360 bytes) -- ignoring
+0.00.614.551 W model has unused tensor blk.40.ffn_up_exps.weight (size = 115343360 bytes) -- ignoring
+0.00.614.555 W model has unused tensor blk.40.ffn_gate_inp_shexp.weight (size = 4096 bytes) -- ignoring
+0.00.614.559 W model has unused tensor blk.40.ffn_gate_shexp.weight (size = 1114112 bytes) -- ignoring
+0.00.614.563 W model has unused tensor blk.40.ffn_up_shexp.weight (size = 1114112 bytes) -- ignoring
+0.00.614.566 W model has unused tensor blk.40.ffn_down_shexp.weight (size = 1114112 bytes) -- ignoring
+0.00.614.571 W model has unused tensor blk.40.nextn.eh_proj.weight (size = 8912896 bytes) -- ignoring
+0.00.614.575 W model has unused tensor blk.40.nextn.enorm.weight (size = 8192 bytes) -- ignoring
+0.00.614.579 W model has unused tensor blk.40.nextn.hnorm.weight (size = 8192 bytes) -- ignoring
+0.00.614.589 W model has unused tensor blk.40.nextn.shared_head_norm.weight (size = 8192 bytes) -- ignoring
+0.03.972.964 I load_tensors: offloading output layer to GPU
+0.03.972.968 I load_tensors: offloading 40 repeating layers to GPU
+0.03.972.968 I load_tensors: offloaded 42/42 layers to GPU
+0.03.972.972 I load_tensors:        CUDA0 model buffer size =  1921.34 MiB
+0.03.972.973 I load_tensors:    CUDA_Host model buffer size = 15029.31 MiB
+................................................................................................
+0.08.037.526 I cmn  common_init_: added <|endoftext|> logit bias = -inf
+0.08.037.528 I cmn  common_init_: added <|im_end|> logit bias = -inf
+0.08.037.529 I cmn  common_init_: added <|fim_pad|> logit bias = -inf
+0.08.037.529 I cmn  common_init_: added <|repo_name|> logit bias = -inf
+0.08.037.529 I cmn  common_init_: added <|file_sep|> logit bias = -inf
+0.08.037.589 I llama_context: constructing llama_context
+0.08.037.593 I llama_context: n_seq_max             = 1
+0.08.037.593 I llama_context: n_ctx                 = 4096
+0.08.037.593 I llama_context: n_ctx_seq             = 4096
+0.08.037.593 I llama_context: n_batch               = 4096
+0.08.037.594 I llama_context: n_ubatch              = 3
+0.08.037.594 I llama_context: causal_attn           = 1
+0.08.037.594 I llama_context: flash_attn            = enabled
+0.08.037.595 I llama_context: kv_unified            = false
+0.08.037.598 I llama_context: freq_base             = 10000000.0
+0.08.037.599 I llama_context: freq_scale            = 1
+0.08.037.599 I llama_context: n_rs_seq              = 0
+0.08.037.599 I llama_context: n_outputs_max         = 4096
+0.08.037.599 I llama_context: n_outputs_max_per_seq = 1
+0.08.037.600 I llama_context: n_ctx_seq (4096) < n_ctx_train (262144) -- the full capacity of the model will not be utilized
+0.08.038.495 I llama_context:  CUDA_Host  output buffer size =     0.95 MiB
+0.08.038.538 I ggml_backend_cuda_alloc_lazy: device 0: 20 tensors, 80.0 MiB reserved, mapped as the cells are used
+0.08.038.543 I llama_kv_cache:      CUDA0 KV buffer size =    80.00 MiB
+0.08.038.545 I llama_kv_cache: size =   42.50 MiB (  4096 cells,  10 layers,  1/1 seqs), K (q8_0):   21.25 MiB, V (q8_0):   21.25 MiB
+0.08.038.547 I llama_kv_cache: n_rot_k = 256, n_embd_head_k_all = 256
+0.08.038.547 I llama_kv_cache: n_rot_v = 64, n_embd_head_k_all = 256
+0.08.038.736 I init_rotation:      CUDA0 rotation buffer size =     2.66 MiB
+0.08.039.274 I llama_memory_recurrent:      CUDA0 RS buffer size =    62.81 MiB
+0.08.039.279 I llama_memory_recurrent: size =   62.81 MiB (     1 cells,  40 layers,  1 seqs  0 rs_seq), R (f32):    2.81 MiB, S (f32):   60.00 MiB, P (f32):    0.00 MiB
+0.08.039.281 I llama_context: LLAMA_PP_ONE_DEVICE: pipeline parallelism on one device
+0.08.039.342 I llama_context: pipeline parallelism enabled
+0.08.039.399 I llama_moe_cache: LFU admission (0053), half-life 64 steps, 64 samples, 1948 slots
+0.08.039.405 I llama_moe_cache: LFU admission (0053), half-life 64 steps, 64 samples, 96 slots
+0.08.039.408 I llama_moe_cache: LFU admission (0053), half-life 64 steps, 64 samples, 43 slots
+0.08.047.693 I llama_moe_cache: cache-aware routing, selection bias 0.0010 for the cached experts
+0.08.047.694 I llama_moe_cache: asynchronous fills (batches of up to 8 tokens, each layer waits for its own)
+0.08.047.696 I impl:      CUDA0 MoE cache size =  2995.73 MiB for 14514.00 MiB of host experts, 90% of the misses on the CPU
+0.08.047.697 I impl: 37 layers, iq4_xs:  1948 slots (20.6%)
+0.08.047.698 I impl:  2 layers, q6_K:    96 slots (18.8%)
+0.08.047.698 I impl:  1 layers, q6_K:    43 slots (16.8%)
+0.08.047.699 I sched_reserve: reserving ...
+0.08.048.526 I ggml_backend_sched_new: GGML_SCHED_COPIES: 2 pipeline copies of the split inputs
+0.08.048.773 I resolve_fused_ops: resolving fused DeepSeek V4 HC support:
+0.08.049.900 I resolve_fused_ops: fused DeepSeek V4 HC pre enabled
+0.08.050.753 I resolve_fused_ops: fused DeepSeek V4 HC comb enabled
+0.08.051.615 I resolve_fused_ops: fused DeepSeek V4 HC post enabled
+0.08.056.604 I sched_reserve:      CUDA0 compute buffer size =    23.60 MiB
+0.08.056.606 I sched_reserve:  CUDA_Host compute buffer size =     2.34 MiB
+0.08.056.608 I sched_reserve: graph (pp bs=3, tg bs=1): nodes = 4539 / 4499, splits = 122 / 122, input objects = 4 / 4, input tensors = 10 / 10
+0.08.056.609 I sched_reserve: reserve took 8.91 ms, sched copies = 2
+0.08.056.667 I cmn          init: llama threadpool init, n_threads = 16
+0.08.056.676 I 
+0.08.056.706 I system_info: n_threads = 16 (n_threads_batch = 16) / 32 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.08.279.818 I kl_divergence: computing over 16 chunks, n_ctx=4096, batch_size=4096, n_seq=1
+0.08.869.918 I ggml_backend_sched_async_host_input: inputs computed on the host are uploaded asynchronously, on an upload stream of their own
+0.08.870.007 I ggml_backend_cuda_host_input_upload: device 0: inputs computed on the host go up on an upload stream of their own
+0.08.870.020 I operator(): q8_1 activations are quantized once per graph evaluation and reused
+0.08.889.703 I operator(): multi-token small-K matvec one warp, 4 rows a block
+0.10.223.263 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 1, n_diff = 0
+0.11.292.441 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 2, n_diff = 0
+0.12.398.738 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 3, n_diff = 0
+0.13.447.270 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 4, n_diff = 0
+0.14.513.949 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 5, n_diff = 0
+0.15.740.414 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 6, n_diff = 0
+0.16.841.940 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 7, n_diff = 0
+0.18.885.429 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 8, n_diff = 0
+0.19.900.308 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 9, n_diff = 0
+0.20.989.887 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 10, n_diff = 0
+0.21.999.499 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 11, n_diff = 0
+0.23.016.580 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 12, n_diff = 0
+0.24.007.494 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 13, n_diff = 0
+0.25.040.633 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 14, n_diff = 0
+0.26.184.723 I kl_divergence: 17.90 seconds per pass - ETA 4.77 minutes
+
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+   1       6.3509 ±    0.3277       0.00232 ±    0.00406       0.01180 ±    0.00066     3.003 ±  0.214 %    95.066 ±  0.479 %
+0.29.131.523 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 15, n_diff = 0
+0.30.094.331 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 16, n_diff = 0
+0.31.069.943 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 17, n_diff = 0
+0.32.023.467 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 18, n_diff = 0
+0.32.988.236 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 19, n_diff = 0
+0.33.954.885 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 20, n_diff = 0
+0.34.922.462 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 21, n_diff = 0
+0.36.886.441 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 22, n_diff = 0
+0.38.029.643 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 23, n_diff = 0
+0.39.222.164 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 24, n_diff = 0
+0.40.465.145 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 25, n_diff = 0
+0.41.600.924 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 26, n_diff = 0
+0.42.731.714 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 27, n_diff = 0
+0.43.983.231 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 28, n_diff = 0
+   2       6.5229 ±    0.2491       0.00063 ±    0.00254       0.00915 ±    0.00047     2.770 ±  0.181 %    95.848 ±  0.312 %
+0.48.014.280 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 29, n_diff = 0
+0.49.011.705 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 30, n_diff = 0
+0.50.137.146 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 31, n_diff = 0
+0.51.163.159 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 32, n_diff = 0
+0.52.188.014 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 33, n_diff = 0
+0.53.242.299 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 34, n_diff = 0
+0.54.408.230 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 35, n_diff = 0
+0.56.559.361 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 36, n_diff = 0
+0.57.693.532 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 37, n_diff = 0
+0.58.815.183 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 38, n_diff = 0
+0.59.970.438 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 39, n_diff = 0
+1.01.107.649 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 40, n_diff = 0
+1.02.173.217 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 41, n_diff = 0
+1.03.231.830 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 42, n_diff = 0
+   3       5.2592 ±    0.1566      -0.00068 ±    0.00201       0.00900 ±    0.00036     2.823 ±  0.134 %    96.190 ±  0.244 %
+1.07.122.226 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 43, n_diff = 0
+1.08.076.947 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 44, n_diff = 0
+1.09.067.982 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 45, n_diff = 0
+1.10.006.745 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 46, n_diff = 0
+1.10.966.267 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 47, n_diff = 0
+1.11.965.526 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 48, n_diff = 0
+1.13.058.287 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 49, n_diff = 0
+1.15.188.633 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 50, n_diff = 0
+1.16.343.902 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 51, n_diff = 0
+1.17.417.485 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 52, n_diff = 0
+1.18.574.098 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 53, n_diff = 0
+1.19.616.344 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 54, n_diff = 0
+1.20.656.305 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 55, n_diff = 0
+1.21.695.788 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 56, n_diff = 0
+   4       5.1584 ±    0.1331       0.00034 ±    0.00180       0.00933 ±    0.00032     2.920 ±  0.126 %    96.263 ±  0.210 %
+1.25.754.633 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 57, n_diff = 0
+1.26.833.139 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 58, n_diff = 0
+1.27.863.893 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 59, n_diff = 0
+1.28.826.349 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 60, n_diff = 0
+1.29.765.612 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 61, n_diff = 0
+1.30.753.271 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 62, n_diff = 0
+1.31.724.966 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 63, n_diff = 0
+1.33.705.466 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 64, n_diff = 0
+1.34.695.234 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 65, n_diff = 0
+1.35.694.084 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 66, n_diff = 0
+1.36.915.071 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 67, n_diff = 0
+1.38.010.028 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 68, n_diff = 0
+1.39.187.561 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 69, n_diff = 0
+1.40.312.075 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 70, n_diff = 0
+   5       5.4211 ±    0.1269       0.00144 ±    0.00161       0.00899 ±    0.00027     2.846 ±  0.109 %    96.307 ±  0.186 %
+1.44.311.890 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 71, n_diff = 0
+1.45.306.156 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 72, n_diff = 0
+1.46.285.347 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 73, n_diff = 0
+1.47.251.601 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 74, n_diff = 0
+1.48.232.328 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 75, n_diff = 0
+1.49.338.835 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 76, n_diff = 0
+1.50.388.935 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 77, n_diff = 0
+1.52.453.170 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 78, n_diff = 0
+1.53.494.311 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 79, n_diff = 0
+1.54.648.717 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 80, n_diff = 0
+1.55.763.111 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 81, n_diff = 0
+1.56.866.650 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 82, n_diff = 0
+1.57.966.932 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 83, n_diff = 0
+1.59.008.629 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 84, n_diff = 0
+   6       5.5571 ±    0.1190       0.00131 ±    0.00142       0.00835 ±    0.00023     2.702 ±  0.096 %    96.418 ±  0.168 %
+2.03.012.771 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 85, n_diff = 0
+2.04.060.999 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 86, n_diff = 0
+2.05.053.415 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 87, n_diff = 0
+2.05.981.926 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 88, n_diff = 0
+2.06.977.598 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 89, n_diff = 0
+2.07.953.470 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 90, n_diff = 0
+2.09.038.893 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 91, n_diff = 0
+2.11.079.839 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 92, n_diff = 0
+2.12.080.412 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 93, n_diff = 0
+2.13.083.528 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 94, n_diff = 0
+2.14.133.394 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 95, n_diff = 0
+2.15.221.602 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 96, n_diff = 0
+2.16.275.246 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 97, n_diff = 0
+2.17.250.121 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 98, n_diff = 0
+   7       5.7770 ±    0.1148       0.00117 ±    0.00131       0.00837 ±    0.00030     2.639 ±  0.089 %    96.392 ±  0.156 %
+2.21.182.306 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 99, n_diff = 0
+2.22.130.169 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 100, n_diff = 0
+2.23.134.840 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 101, n_diff = 0
+2.24.073.889 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 102, n_diff = 0
+2.24.997.405 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 103, n_diff = 0
+2.25.996.167 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 104, n_diff = 0
+2.26.961.169 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 105, n_diff = 0
+2.29.023.324 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 106, n_diff = 0
+2.30.020.638 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 107, n_diff = 0
+2.31.039.353 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 108, n_diff = 0
+2.32.063.696 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 109, n_diff = 0
+2.33.057.360 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 110, n_diff = 0
+2.34.115.491 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 111, n_diff = 0
+2.35.196.505 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 112, n_diff = 0
+   8       5.9456 ±    0.1108       0.00185 ±    0.00122       0.00831 ±    0.00026     2.641 ±  0.084 %    96.342 ±  0.147 %
+2.39.079.167 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 113, n_diff = 0
+2.39.982.913 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 114, n_diff = 0
+2.40.964.059 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 115, n_diff = 0
+2.41.894.139 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 116, n_diff = 0
+2.42.805.158 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 117, n_diff = 0
+2.43.783.235 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 118, n_diff = 0
+2.44.681.662 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 119, n_diff = 0
+2.46.625.333 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 120, n_diff = 0
+2.47.603.650 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 121, n_diff = 0
+2.48.643.702 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 122, n_diff = 0
+2.49.674.136 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 123, n_diff = 0
+2.50.732.083 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 124, n_diff = 0
+2.51.733.258 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 125, n_diff = 0
+2.52.773.213 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 126, n_diff = 0
+   9       6.0021 ±    0.1049       0.00173 ±    0.00113       0.00812 ±    0.00024     2.632 ±  0.088 %    96.287 ±  0.139 %
+2.56.768.046 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 127, n_diff = 0
+2.57.891.856 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 128, n_diff = 0
+2.59.025.267 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 129, n_diff = 0
+3.00.179.304 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 130, n_diff = 0
+3.01.322.245 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 131, n_diff = 0
+3.02.514.433 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 132, n_diff = 0
+3.03.648.331 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 133, n_diff = 0
+3.05.932.253 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 134, n_diff = 0
+3.07.130.637 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 135, n_diff = 0
+3.08.267.874 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 136, n_diff = 0
+3.09.456.692 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 137, n_diff = 0
+3.10.570.201 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 138, n_diff = 0
+3.11.911.768 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 139, n_diff = 0
+3.13.110.559 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 140, n_diff = 0
+  10       5.6611 ±    0.0936       0.00132 ±    0.00113       0.00917 ±    0.00032     3.011 ±  0.106 %    96.321 ±  0.132 %
+3.17.296.786 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 141, n_diff = 0
+3.18.345.915 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 142, n_diff = 0
+3.19.385.693 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 143, n_diff = 0
+3.20.383.150 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 144, n_diff = 0
+3.21.461.205 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 145, n_diff = 0
+3.22.506.085 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 146, n_diff = 0
+3.23.536.178 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 147, n_diff = 0
+3.25.656.368 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 148, n_diff = 0
+3.26.668.250 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 149, n_diff = 0
+3.27.757.228 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 150, n_diff = 0
+3.28.878.303 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 151, n_diff = 0
+3.29.927.728 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 152, n_diff = 0
+3.31.062.683 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 153, n_diff = 0
+3.32.115.672 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 154, n_diff = 0
+  11       5.7967 ±    0.0922       0.00198 ±    0.00108       0.00925 ±    0.00030     2.970 ±  0.098 %    96.230 ±  0.127 %
+3.36.188.242 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 155, n_diff = 0
+3.37.226.622 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 156, n_diff = 0
+3.38.261.173 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 157, n_diff = 0
+3.39.252.829 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 158, n_diff = 0
+3.40.240.514 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 159, n_diff = 0
+3.41.240.140 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 160, n_diff = 0
+3.42.284.027 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 161, n_diff = 0
+3.44.376.300 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 162, n_diff = 0
+3.45.455.670 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 163, n_diff = 0
+3.46.478.272 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 164, n_diff = 0
+3.47.566.994 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 165, n_diff = 0
+3.48.666.688 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 166, n_diff = 0
+3.49.665.497 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 167, n_diff = 0
+3.50.739.476 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 168, n_diff = 0
+  12       5.8402 ±    0.0888       0.00168 ±    0.00102       0.00921 ±    0.00028     2.949 ±  0.092 %    96.226 ±  0.122 %
+3.54.848.364 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 169, n_diff = 0
+3.55.915.019 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 170, n_diff = 0
+3.56.932.427 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 171, n_diff = 0
+3.58.003.780 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 172, n_diff = 0
+3.58.991.270 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 173, n_diff = 0
+4.00.025.684 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 174, n_diff = 0
+4.01.059.515 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 175, n_diff = 0
+4.03.096.553 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 176, n_diff = 0
+4.04.141.881 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 177, n_diff = 0
+4.05.155.027 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 178, n_diff = 0
+4.06.277.735 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 179, n_diff = 0
+4.07.349.233 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 180, n_diff = 0
+4.08.466.476 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 181, n_diff = 0
+4.09.644.433 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 182, n_diff = 0
+  13       5.8969 ±    0.0867       0.00236 ±    0.00097       0.00922 ±    0.00026     2.940 ±  0.088 %    96.178 ±  0.118 %
+4.13.785.297 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 183, n_diff = 0
+4.14.893.836 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 184, n_diff = 0
+4.16.007.410 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 185, n_diff = 0
+4.17.046.256 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 186, n_diff = 0
+4.18.008.580 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 187, n_diff = 0
+4.19.007.243 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 188, n_diff = 0
+4.19.983.784 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 189, n_diff = 0
+4.22.024.559 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 190, n_diff = 0
+4.23.187.654 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 191, n_diff = 0
+4.24.221.714 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 192, n_diff = 0
+4.25.206.622 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 193, n_diff = 0
+4.26.231.700 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 194, n_diff = 0
+4.27.282.700 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 195, n_diff = 0
+4.28.437.947 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 196, n_diff = 0
+  14       6.1072 ±    0.0875       0.00243 ±    0.00093       0.00911 ±    0.00024     2.900 ±  0.083 %    96.200 ±  0.113 %
+4.32.616.907 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 197, n_diff = 0
+4.33.579.391 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 198, n_diff = 0
+4.34.523.085 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 199, n_diff = 0
+4.35.452.689 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 200, n_diff = 0
+4.36.396.406 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 201, n_diff = 0
+4.37.319.018 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 202, n_diff = 0
+4.38.481.514 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 203, n_diff = 0
+4.40.672.721 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 204, n_diff = 0
+4.41.670.936 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 205, n_diff = 0
+4.42.636.975 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 206, n_diff = 0
+4.43.612.924 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 207, n_diff = 0
+4.44.613.655 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 208, n_diff = 0
+4.45.622.376 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 209, n_diff = 0
+4.46.776.033 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 210, n_diff = 0
+  15       6.0333 ±    0.0832       0.00186 ±    0.00090       0.00898 ±    0.00023     2.858 ±  0.079 %    96.190 ±  0.109 %
+4.50.747.694 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 211, n_diff = 0
+4.51.731.604 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 212, n_diff = 0
+4.52.670.485 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 213, n_diff = 0
+4.53.632.031 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 214, n_diff = 0
+4.54.551.631 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 215, n_diff = 0
+4.55.543.542 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 216, n_diff = 0
+4.56.575.189 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 121, n_same = 217, n_diff = 0
+4.58.721.543 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 218, n_diff = 0
+4.59.820.103 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 219, n_diff = 0
+5.00.875.431 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 220, n_diff = 0
+5.01.997.334 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 221, n_diff = 0
+5.03.052.606 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 222, n_diff = 0
+5.04.077.210 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 223, n_diff = 0
+5.05.210.272 I sched_graph_realloc: graph reallocation: nodes = 4959 (changed = 0), splits = 122, n_same = 224, n_diff = 0
+  16       5.8703 ±    0.0778       0.00194 ±    0.00086       0.00895 ±    0.00023     2.843 ±  0.075 %    96.245 ±  0.105 %
+
+5.08.256.215 I kl_divergence: wrote 32752 positions to ./results/kld/q16-3000-add0.001/positions.bin
+====== Perplexity statistics ======
+Mean PPL(Q)                   :   5.870270 ±   0.077823
+Mean PPL(base)                :   5.858895 ±   0.077463
+Cor(ln(PPL(Q)), ln(PPL(base))):  99.79%
+Mean ln(PPL(Q)/PPL(base))     :   0.001940 ±   0.000863
+Mean PPL(Q)/PPL(base)         :   1.001942 ±   0.000865
+Mean PPL(Q)-PPL(base)         :   0.011376 ±   0.005070
+
+====== KL divergence statistics ======
+Mean    KLD:   0.008953 ±   0.000231
+Maximum KLD:   3.222733
+99.9%   KLD:   0.359752
+99.0%   KLD:   0.085532
+95.0%   KLD:   0.030286
+90.0%   KLD:   0.018147
+Median  KLD:   0.003309
+10.0%   KLD:   0.000064
+ 5.0%   KLD:   0.000017
+ 1.0%   KLD:   0.000002
+ 0.1%   KLD:  -0.000001
+Minimum KLD:  -0.000034
+
+====== Token probability statistics ======
+Mean    Δp:  0.009 ± 0.016 %
+Maximum Δp: 74.517%
+99.9%   Δp: 20.938%
+99.0%   Δp:  8.103%
+95.0%   Δp:  3.317%
+90.0%   Δp:  1.899%
+75.0%   Δp:  0.388%
+Median  Δp: -0.000%
+25.0%   Δp: -0.380%
+10.0%   Δp: -1.827%
+ 5.0%   Δp: -3.245%
+ 1.0%   Δp: -7.835%
+ 0.1%   Δp: -22.180%
+Minimum Δp: -66.570%
+RMS Δp    :  2.843 ± 0.075 %
+Same top p: 96.245 ± 0.105 %
+
+5.08.289.156 I llama_perf_context_print:        load time =    7845.11 ms
+5.08.289.157 I llama_perf_context_print: prompt eval time =  256166.33 ms / 65536 tokens (    3.91 ms per token,   255.83 tokens per second)
+5.08.289.158 I llama_perf_context_print:        eval time =       0.00 ms /     1 runs   (    0.00 ms per token,      inf tokens per second)
+5.08.289.158 I llama_perf_context_print:       total time =  307812.45 ms / 65537 tokens
+5.08.289.159 I llama_perf_context_print:    graphs reused =      21552
+5.08.289.159 I llama_perf_context_print:   graph reallocs =        224    /     0        (same size) / (changed size)
+5.08.289.271 I common_memory_breakdown_print: | memory breakdown [MiB]  | total   free     self   model   context   compute    unaccounted |
+5.08.289.273 I common_memory_breakdown_print: |   - CUDA0 (RTX 5070 Ti) | 15879 = 8561 + ( 5086 =  1921 +    3141 +      23) +        2231 |
+5.08.289.273 I common_memory_breakdown_print: |   - Host                |                 15031 = 15029 +       0 +       2                |
+5.08.452.171 I llama_moe_cache: ubatch <= 8: hits = 10568045, misses = 3761396 (3761396 on the CPU), hit rate = 73.75%, uploaded = 281938.99 MiB
+5.08.452.179 I llama_moe_cache: route total: 2588656 token-layers, 27.82% with a swap, 0.3039 swaps per token-layer (3.799% of picks), unbiased mass kept 99.9179%, favoured picks 78.67% (unbiased top-k 74.87%), swapped-in gap mean 0.0004 max 0.0010 (score)
+5.08.452.186 I llama_moe_cache: route swaps per token by layer: 0.2083 0.3232 0.2679 0.4453 0.3201 0.3074 0.2718 0.3308 0.3507 0.3288 0.2417 0.2040 0.2840 0.2650 0.2625 0.2463 0.2856 0.2953 0.2739 0.2912 0.3232 0.2855 0.2582 0.2339 0.3109 0.2859 0.3049 0.2906 0.3276 0.3309 0.3136 0.3422 0.2626 0.3078 0.2375 0.3768 0.4141 0.3819 0.4688 0.2867 0.0000

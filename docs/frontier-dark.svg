@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="540" viewBox="0 0 920 540" font-family="system-ui, -apple-system, Segoe UI, sans-serif" role="img" aria-label="Decode speed gain against added KL divergence for 3,000, 4,500 and 8,000 MiB expert caches. Within the quality limit the bias gives about 5 % at the two small caches and 7 % at 8,000 MiB; larger deltas give up to 25 % at several times the quality cost.">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c3c2b7"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9085e9"/></marker></defs>
+<rect width="920" height="540" rx="12" fill="#1a1a19"/>
+<text x="78" y="36" font-size="19" font-weight="600" fill="#f0efec">Route bias: decode speed gain against quality cost</text>
+<text x="78" y="60" font-size="13" fill="#c3c2b7">Qwen3.6-35B-A3B IQ4_XS, RTX 5070 Ti 16 GB. Points, left to right: bias delta 0, 0.00025, 0.0005, 0.001, 0.0025, 0.005.</text>
+<line x1="78" y1="86" x2="100" y2="86" stroke="#3987e5" stroke-width="2" stroke-linecap="round"/><circle cx="89" cy="86" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/><text x="108" y="90.5" font-size="13" text-anchor="start" fill="#c3c2b7">3,000 MiB cache</text>
+<line x1="228" y1="86" x2="250" y2="86" stroke="#d95926" stroke-width="2" stroke-linecap="round"/><circle cx="239" cy="86" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/><text x="258" y="90.5" font-size="13" text-anchor="start" fill="#c3c2b7">4,500 MiB cache</text>
+<line x1="378" y1="86" x2="400" y2="86" stroke="#199e70" stroke-width="2" stroke-linecap="round"/><circle cx="389" cy="86" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/><text x="408" y="90.5" font-size="13" text-anchor="start" fill="#c3c2b7">8,000 MiB cache</text>
+<circle cx="539" cy="86" r="8" fill="none" stroke="#c3c2b7" stroke-width="1.5"/><text x="554" y="90.5" font-size="13" text-anchor="start" fill="#c3c2b7">picked by the pre-registered rule</text>
+<rect x="78.0" y="118.0" width="141.54545454545456" height="269.8666666666667" fill="rgba(255,255,255,0.05)"/>
+<line x1="78" y1="446.53333333333336" x2="770" y2="446.53333333333336" stroke="#2c2c2a" stroke-width="1"/><text x="68" y="451.03333333333336" font-size="12" text-anchor="end" fill="#898781">+0 %</text>
+<line x1="78" y1="387.8666666666667" x2="770" y2="387.8666666666667" stroke="#2c2c2a" stroke-width="1"/><text x="68" y="392.3666666666667" font-size="12" text-anchor="end" fill="#898781">+5 %</text>
+<line x1="78" y1="329.2" x2="770" y2="329.2" stroke="#2c2c2a" stroke-width="1"/><text x="68" y="333.7" font-size="12" text-anchor="end" fill="#898781">+10 %</text>
+<line x1="78" y1="270.5333333333333" x2="770" y2="270.5333333333333" stroke="#2c2c2a" stroke-width="1"/><text x="68" y="275.0333333333333" font-size="12" text-anchor="end" fill="#898781">+15 %</text>
+<line x1="78" y1="211.86666666666667" x2="770" y2="211.86666666666667" stroke="#2c2c2a" stroke-width="1"/><text x="68" y="216.36666666666667" font-size="12" text-anchor="end" fill="#898781">+20 %</text>
+<line x1="78" y1="153.2" x2="770" y2="153.2" stroke="#2c2c2a" stroke-width="1"/><text x="68" y="157.7" font-size="12" text-anchor="end" fill="#898781">+25 %</text>
+<text x="78.0" y="492" font-size="12" text-anchor="middle" fill="#898781">0.000</text>
+<text x="235.27272727272728" y="492" font-size="12" text-anchor="middle" fill="#898781">0.005</text>
+<text x="392.54545454545456" y="492" font-size="12" text-anchor="middle" fill="#898781">0.010</text>
+<text x="549.8181818181818" y="492" font-size="12" text-anchor="middle" fill="#898781">0.015</text>
+<text x="707.0909090909091" y="492" font-size="12" text-anchor="middle" fill="#898781">0.020</text>
+<line x1="78" y1="470" x2="770" y2="470" stroke="#383835" stroke-width="1"/>
+<text x="424.0" y="522" font-size="13" text-anchor="middle" fill="#c3c2b7">Added KL divergence against delta 0 (lower is better)</text>
+<text transform="translate(22 294.0) rotate(-90)" font-size="13" text-anchor="middle" fill="#c3c2b7">Decode speed gain against delta 0</text>
+<line x1="219.54545454545456" y1="118.0" x2="219.54545454545456" y2="470" stroke="#c3c2b7" stroke-width="1"/><text x="227.54545454545456" y="132.0" font-size="12" text-anchor="start" fill="#c3c2b7">Quality limit 0.0045:</text><text x="227.54545454545456" y="148.0" font-size="12" text-anchor="start" fill="#c3c2b7">what the 8-bit KV cache already costs</text>
+<line x1="78" y1="387.8666666666667" x2="770" y2="387.8666666666667" stroke="#c3c2b7" stroke-width="1"/><text x="770" y="380.8666666666667" font-size="12" text-anchor="end" fill="#c3c2b7">Speed limit +5 %</text>
+<text x="86.0" y="132.0" font-size="12" text-anchor="start" fill="#898781">passes both</text>
+<path d="M78.0,446.5 L105.3,437.2 L134.8,423.1 L204.0,385.0 L390.4,318.0 L729.1,200.4" fill="none" stroke="#3987e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="78.0" cy="446.5" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="105.3" cy="437.2" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="134.8" cy="423.1" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="204.0" cy="385.0" r="9" fill="none" stroke="#c3c2b7" stroke-width="1.5"/>
+<circle cx="204.0" cy="385.0" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="390.4" cy="318.0" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="729.1" cy="200.4" r="4.5" fill="#3987e5" stroke="#1a1a19" stroke-width="2"/>
+<text x="741.1" y="204.9" font-size="13" text-anchor="start" fill="#f0efec" font-weight="600">3,000 MiB</text>
+<path d="M78.0,446.5 L102.9,442.8 L143.1,415.9 L194.2,389.9 L342.3,301.9 L579.1,149.0" fill="none" stroke="#d95926" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="78.0" cy="446.5" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="102.9" cy="442.8" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="143.1" cy="415.9" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="194.2" cy="389.9" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="342.3" cy="301.9" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="579.1" cy="149.0" r="4.5" fill="#d95926" stroke="#1a1a19" stroke-width="2"/>
+<text x="591.1" y="153.5" font-size="13" text-anchor="start" fill="#f0efec" font-weight="600">4,500 MiB</text>
+<path d="M78.0,446.5 L85.8,434.1 L100.4,437.0 L130.2,402.8 L206.8,365.5 L309.5,348.8" fill="none" stroke="#199e70" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="78.0" cy="446.5" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="85.8" cy="434.1" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="100.4" cy="437.0" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="130.2" cy="402.8" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="206.8" cy="365.5" r="9" fill="none" stroke="#c3c2b7" stroke-width="1.5"/>
+<circle cx="206.8" cy="365.5" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/>
+<circle cx="309.5" cy="348.8" r="4.5" fill="#199e70" stroke="#1a1a19" stroke-width="2"/>
+<text x="317.5" y="372.8" font-size="13" text-anchor="start" fill="#f0efec" font-weight="600">8,000 MiB</text>
+</svg>

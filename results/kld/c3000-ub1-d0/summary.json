@@ -1,0 +1,19 @@
+{
+ "dir": "c3000-ub1-d0",
+ "settings": "cache 3000 MiB, bias 0 (add), protect 0, cpu share 0.9, kv q8_0, ub 1, chunks 4, engine full, base 0, ref ./results/kld/ref-f16-ub512/base.kld",
+ "elapsed_s": 145,
+ "ppl_q": 5.156827,
+ "ppl_q_err": 0.132872,
+ "ppl_base": 5.156649,
+ "ppl_base_err": 0.132699,
+ "ppl_ratio": 1.000035,
+ "ppl_ratio_err": 0.001368,
+ "kld_mean": 0.005269,
+ "kld_mean_err": 0.000235,
+ "kld_p99": 0.053809,
+ "same_top": 97.191,
+ "same_top_err": 0.183,
+ "rms_dp": 2.168,
+ "rms_dp_err": 0.101,
+ "hit_rate": 0.7526
+}

@@ -1,0 +1,13 @@
+=== 14:58:55 calib-rec-3000: --cache-mib 3000 --bias 1e-30 --bias-mode add --route-stats ./results/calib/rec-3000.mrs
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 140.6 tok/s decode (each the median of 1 x 512)
+calib-rec-3000               engine  140.6 tok/s (mean  142.6), hit 0.6265, draft 0.741, vram 8001 MiB, gpu 131 W, swaps 0.0000 of picks, mass kept 1.0000
+run_arm.sh: results in ./results/20261118T145855Z-calib-rec-3000
+=== 15:00:56 calib-rec-4500: --cache-mib 4500 --bias 1e-30 --bias-mode add --route-stats ./results/calib/rec-4500.mrs
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 166.9 tok/s decode (each the median of 1 x 512)
+calib-rec-4500               engine  166.9 tok/s (mean  167.1), hit 0.7511, draft 0.750, vram 9446 MiB, gpu 146 W, swaps 0.0000 of picks, mass kept 1.0000
+run_arm.sh: results in ./results/20261118T150056Z-calib-rec-4500
+=== 15:02:44 calib-rec-8000: --cache-mib 8000 --bias 1e-30 --bias-mode add --route-stats ./results/calib/rec-8000.mrs
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 209.3 tok/s decode (each the median of 1 x 512)
+calib-rec-8000               engine  209.3 tok/s (mean  211.2), hit 0.9039, draft 0.742, vram 12948 MiB, gpu 177 W, swaps 0.0000 of picks, mass kept 1.0000
+run_arm.sh: results in ./results/20261118T150244Z-calib-rec-8000
+=== 15:04:16 sweep done

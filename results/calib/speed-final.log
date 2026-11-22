@@ -1,0 +1,193 @@
+=== 16:58:51 spd-4500-d0-r11: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 156.2 tok/s decode (each the median of 1 x 512)
+spd-4500-d0-r11              engine  156.2 tok/s (mean  157.3), hit 0.7511, draft 0.750, vram 10226 MiB, gpu 151 W
+run_arm.sh: results in ./results/20261118T165851Z-spd-4500-d0-r11
+=== 17:00:46 spd-4500-add0.00025-r1: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 164.5 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.00025-r1       engine  164.5 tok/s (mean  164.2), hit 0.7636, draft 0.737, vram 9714 MiB, gpu 154 W
+run_arm.sh: results in ./results/20261118T170046Z-spd-4500-add0.00025-r1
+=== 17:02:36 spd-4500-add0.001-r1: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 164.7 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.001-r1         engine  164.7 tok/s (mean  165.2), hit 0.7861, draft 0.734, vram 9911 MiB, gpu 155 W
+run_arm.sh: results in ./results/20261118T170236Z-spd-4500-add0.001-r1
+=== 17:04:26 spd-4500-add0.005-r1: --cache-mib 4500 --bias 0.005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 202.9 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.005-r1         engine  202.9 tok/s (mean  199.5), hit 0.8696, draft 0.744, vram 9934 MiB, gpu 174 W
+run_arm.sh: results in ./results/20261118T170426Z-spd-4500-add0.005-r1
+=== 17:06:05 spd-4500-d0-r12: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 150.8 tok/s decode (each the median of 1 x 512)
+spd-4500-d0-r12              engine  150.8 tok/s (mean  150.6), hit 0.7511, draft 0.750, vram 9582 MiB, gpu 142 W
+run_arm.sh: results in ./results/20261118T170605Z-spd-4500-d0-r12
+=== 17:08:03 spd-4500-add0.0005-r1: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 173.7 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.0005-r1        engine  173.7 tok/s (mean  173.4), hit 0.7675, draft 0.751, vram 9672 MiB, gpu 154 W
+run_arm.sh: results in ./results/20261118T170803Z-spd-4500-add0.0005-r1
+=== 17:09:49 spd-4500-add0.0025-r1: --cache-mib 4500 --bias 0.0025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 190.4 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.0025-r1        engine  190.3 tok/s (mean  189.6), hit 0.8268, draft 0.729, vram 9653 MiB, gpu 166 W
+run_arm.sh: results in ./results/20261118T170949Z-spd-4500-add0.0025-r1
+=== 17:11:28 spd-4500-d0-r13: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 169.7 tok/s decode (each the median of 1 x 512)
+spd-4500-d0-r13              engine  169.7 tok/s (mean  170.2), hit 0.7511, draft 0.750, vram 9708 MiB, gpu 152 W
+run_arm.sh: results in ./results/20261118T171128Z-spd-4500-d0-r13
+=== 17:13:15 spd-4500-d0-r21: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 171.9 tok/s decode (each the median of 1 x 512)
+spd-4500-d0-r21              engine  171.9 tok/s (mean  172.4), hit 0.7511, draft 0.750, vram 9664 MiB, gpu 153 W
+run_arm.sh: results in ./results/20261118T171316Z-spd-4500-d0-r21
+=== 17:15:02 spd-4500-add0.0025-r2: --cache-mib 4500 --bias 0.0025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 175.8 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.0025-r2        engine  175.8 tok/s (mean  177.3), hit 0.8268, draft 0.729, vram 9664 MiB, gpu 159 W
+run_arm.sh: results in ./results/20261118T171502Z-spd-4500-add0.0025-r2
+=== 17:16:46 spd-4500-add0.0005-r2: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 174.9 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.0005-r2        engine  174.9 tok/s (mean  176.3), hit 0.7675, draft 0.751, vram 9670 MiB, gpu 155 W
+run_arm.sh: results in ./results/20261118T171646Z-spd-4500-add0.0005-r2
+=== 17:18:30 spd-4500-d0-r22: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 157.0 tok/s decode (each the median of 1 x 512)
+spd-4500-d0-r22              engine  157.0 tok/s (mean  158.2), hit 0.7511, draft 0.750, vram 9662 MiB, gpu 146 W
+run_arm.sh: results in ./results/20261118T171830Z-spd-4500-d0-r22
+=== 17:20:23 spd-4500-add0.005-r2: --cache-mib 4500 --bias 0.005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 210.7 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.005-r2         engine  210.7 tok/s (mean  209.7), hit 0.8696, draft 0.744, vram 9664 MiB, gpu 176 W
+run_arm.sh: results in ./results/20261118T172023Z-spd-4500-add0.005-r2
+=== 17:21:56 spd-4500-add0.001-r2: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 179.2 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.001-r2         engine  179.2 tok/s (mean  180.4), hit 0.7861, draft 0.734, vram 9640 MiB, gpu 159 W
+run_arm.sh: results in ./results/20261118T172156Z-spd-4500-add0.001-r2
+=== 17:23:39 spd-4500-add0.00025-r2: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 172.1 tok/s decode (each the median of 1 x 512)
+spd-4500-add0.00025-r2       engine  172.1 tok/s (mean  173.0), hit 0.7636, draft 0.737, vram 9640 MiB, gpu 155 W
+run_arm.sh: results in ./results/20261118T172339Z-spd-4500-add0.00025-r2
+=== 17:25:25 spd-4500-d0-r23: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 172.1 tok/s decode (each the median of 1 x 512)
+spd-4500-d0-r23              engine  172.1 tok/s (mean  171.7), hit 0.7511, draft 0.750, vram 9638 MiB, gpu 153 W
+run_arm.sh: results in ./results/20261118T172525Z-spd-4500-d0-r23
+=== 17:27:11 spd-3000-d0-r11: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 127.7 tok/s decode (each the median of 1 x 512)
+spd-3000-d0-r11              engine  127.7 tok/s (mean  129.1), hit 0.6265, draft 0.741, vram 8136 MiB, gpu 128 W
+run_arm.sh: results in ./results/20261118T172711Z-spd-3000-d0-r11
+=== 17:29:22 spd-3000-add0.00025-r1: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 130.0 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.00025-r1       engine  130.0 tok/s (mean  130.5), hit 0.6322, draft 0.737, vram 8138 MiB, gpu 129 W
+run_arm.sh: results in ./results/20261118T172922Z-spd-3000-add0.00025-r1
+=== 17:31:31 spd-3000-add0.001-r1: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 150.5 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.001-r1         engine  150.5 tok/s (mean  152.0), hit 0.6554, draft 0.747, vram 8139 MiB, gpu 140 W
+run_arm.sh: results in ./results/20261118T173131Z-spd-3000-add0.001-r1
+=== 17:33:28 spd-3000-add0.005-r1: --cache-mib 3000 --bias 0.005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 161.9 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.005-r1         engine  161.9 tok/s (mean  161.6), hit 0.7546, draft 0.739, vram 8138 MiB, gpu 147 W
+run_arm.sh: results in ./results/20261118T173328Z-spd-3000-add0.005-r1
+=== 17:35:19 spd-3000-d0-r12: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 143.2 tok/s decode (each the median of 1 x 512)
+spd-3000-d0-r12              engine  143.2 tok/s (mean  145.2), hit 0.6265, draft 0.741, vram 8136 MiB, gpu 136 W
+run_arm.sh: results in ./results/20261118T173519Z-spd-3000-d0-r12
+=== 17:37:19 spd-3000-add0.0005-r1: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 147.5 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.0005-r1        engine  147.5 tok/s (mean  147.9), hit 0.6437, draft 0.738, vram 8138 MiB, gpu 137 W
+run_arm.sh: results in ./results/20261118T173719Z-spd-3000-add0.0005-r1
+=== 17:39:18 spd-3000-add0.0025-r1: --cache-mib 3000 --bias 0.0025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 161.8 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.0025-r1        engine  161.8 tok/s (mean  162.5), hit 0.7029, draft 0.736, vram 8138 MiB, gpu 146 W
+run_arm.sh: results in ./results/20261118T173918Z-spd-3000-add0.0025-r1
+=== 17:41:09 spd-3000-d0-r13: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 143.2 tok/s decode (each the median of 1 x 512)
+spd-3000-d0-r13              engine  143.2 tok/s (mean  144.6), hit 0.6265, draft 0.741, vram 8136 MiB, gpu 136 W
+run_arm.sh: results in ./results/20261118T174109Z-spd-3000-d0-r13
+=== 17:43:09 spd-3000-d0-r21: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 142.6 tok/s decode (each the median of 1 x 512)
+spd-3000-d0-r21              engine  142.6 tok/s (mean  144.9), hit 0.6265, draft 0.741, vram 8136 MiB, gpu 135 W
+run_arm.sh: results in ./results/20261118T174309Z-spd-3000-d0-r21
+=== 17:45:09 spd-3000-add0.0025-r2: --cache-mib 3000 --bias 0.0025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 146.3 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.0025-r2        engine  146.3 tok/s (mean  147.5), hit 0.7029, draft 0.736, vram 8138 MiB, gpu 139 W
+run_arm.sh: results in ./results/20261118T174509Z-spd-3000-add0.0025-r2
+=== 17:47:08 spd-3000-add0.0005-r2: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 146.6 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.0005-r2        engine  146.6 tok/s (mean  147.4), hit 0.6437, draft 0.738, vram 8138 MiB, gpu 137 W
+run_arm.sh: results in ./results/20261118T174708Z-spd-3000-add0.0005-r2
+=== 17:49:07 spd-3000-d0-r22: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 143.4 tok/s decode (each the median of 1 x 512)
+spd-3000-d0-r22              engine  143.4 tok/s (mean  145.3), hit 0.6265, draft 0.741, vram 8136 MiB, gpu 136 W
+run_arm.sh: results in ./results/20261118T174907Z-spd-3000-d0-r22
+=== 17:51:07 spd-3000-add0.005-r2: --cache-mib 3000 --bias 0.005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 175.7 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.005-r2         engine  175.7 tok/s (mean  176.3), hit 0.7546, draft 0.739, vram 8138 MiB, gpu 155 W
+run_arm.sh: results in ./results/20261118T175107Z-spd-3000-add0.005-r2
+=== 17:52:52 spd-3000-add0.001-r2: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 151.4 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.001-r2         engine  151.4 tok/s (mean  152.4), hit 0.6554, draft 0.747, vram 8138 MiB, gpu 140 W
+run_arm.sh: results in ./results/20261118T175252Z-spd-3000-add0.001-r2
+=== 17:54:47 spd-3000-add0.00025-r2: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 144.5 tok/s decode (each the median of 1 x 512)
+spd-3000-add0.00025-r2       engine  144.5 tok/s (mean  145.2), hit 0.6322, draft 0.737, vram 8144 MiB, gpu 136 W
+run_arm.sh: results in ./results/20261118T175448Z-spd-3000-add0.00025-r2
+=== 17:56:47 spd-3000-d0-r23: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 127.9 tok/s decode (each the median of 1 x 512)
+spd-3000-d0-r23              engine  127.9 tok/s (mean  129.2), hit 0.6265, draft 0.741, vram 8142 MiB, gpu 127 W
+run_arm.sh: results in ./results/20261118T175647Z-spd-3000-d0-r23
+=== 17:58:58 spd-8000-d0-r11: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 218.2 tok/s decode (each the median of 1 x 512)
+spd-8000-d0-r11              engine  218.2 tok/s (mean  219.6), hit 0.9039, draft 0.742, vram 13140 MiB, gpu 183 W
+run_arm.sh: results in ./results/20261118T175858Z-spd-8000-d0-r11
+=== 18:00:28 spd-8000-add0.00025-r1: --cache-mib 8000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 221.1 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.00025-r1       engine  221.1 tok/s (mean  221.4), hit 0.9109, draft 0.743, vram 13142 MiB, gpu 185 W
+run_arm.sh: results in ./results/20261118T180028Z-spd-8000-add0.00025-r1
+=== 18:01:57 spd-8000-add0.001-r1: --cache-mib 8000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 228.3 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.001-r1         engine  228.3 tok/s (mean  227.4), hit 0.9277, draft 0.736, vram 13142 MiB, gpu 189 W
+run_arm.sh: results in ./results/20261118T180157Z-spd-8000-add0.001-r1
+=== 18:03:24 spd-8000-add0.005-r1: --cache-mib 8000 --bias 0.005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 236.7 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.005-r1         engine  236.7 tok/s (mean  239.0), hit 0.9648, draft 0.725, vram 13142 MiB, gpu 198 W
+run_arm.sh: results in ./results/20261118T180324Z-spd-8000-add0.005-r1
+=== 18:04:49 spd-8000-d0-r12: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 218.9 tok/s decode (each the median of 1 x 512)
+spd-8000-d0-r12              engine  218.9 tok/s (mean  219.7), hit 0.9039, draft 0.742, vram 13140 MiB, gpu 184 W
+run_arm.sh: results in ./results/20261118T180449Z-spd-8000-d0-r12
+=== 18:06:18 spd-8000-add0.0005-r1: --cache-mib 8000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 222.7 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.0005-r1        engine  222.7 tok/s (mean  221.3), hit 0.9188, draft 0.723, vram 13142 MiB, gpu 188 W
+run_arm.sh: results in ./results/20261118T180618Z-spd-8000-add0.0005-r1
+=== 18:07:47 spd-8000-add0.0025-r1: --cache-mib 8000 --bias 0.0025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 234.8 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.0025-r1        engine  234.8 tok/s (mean  235.2), hit 0.9458, draft 0.740, vram 13142 MiB, gpu 194 W
+run_arm.sh: results in ./results/20261118T180747Z-spd-8000-add0.0025-r1
+=== 18:09:14 spd-8000-d0-r13: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 218.8 tok/s decode (each the median of 1 x 512)
+spd-8000-d0-r13              engine  218.8 tok/s (mean  219.9), hit 0.9039, draft 0.742, vram 13140 MiB, gpu 184 W
+run_arm.sh: results in ./results/20261118T180914Z-spd-8000-d0-r13
+=== 18:10:45 spd-8000-d0-r21: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 216.3 tok/s decode (each the median of 1 x 512)
+spd-8000-d0-r21              engine  216.3 tok/s (mean  217.3), hit 0.9039, draft 0.742, vram 13146 MiB, gpu 183 W
+run_arm.sh: results in ./results/20261118T181045Z-spd-8000-d0-r21
+=== 18:12:16 spd-8000-add0.0025-r2: --cache-mib 8000 --bias 0.0025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 233.3 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.0025-r2        engine  233.3 tok/s (mean  233.7), hit 0.9458, draft 0.740, vram 13213 MiB, gpu 193 W
+run_arm.sh: results in ./results/20261118T181216Z-spd-8000-add0.0025-r2
+=== 18:13:42 spd-8000-add0.0005-r2: --cache-mib 8000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 222.5 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.0005-r2        engine  222.4 tok/s (mean  220.9), hit 0.9188, draft 0.723, vram 13187 MiB, gpu 187 W
+run_arm.sh: results in ./results/20261118T181342Z-spd-8000-add0.0005-r2
+=== 18:15:11 spd-8000-d0-r22: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 218.8 tok/s decode (each the median of 1 x 512)
+spd-8000-d0-r22              engine  218.7 tok/s (mean  219.8), hit 0.9039, draft 0.742, vram 13185 MiB, gpu 184 W
+run_arm.sh: results in ./results/20261118T181511Z-spd-8000-d0-r22
+=== 18:16:40 spd-8000-add0.005-r2: --cache-mib 8000 --bias 0.005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 233.0 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.005-r2         engine  232.9 tok/s (mean  236.1), hit 0.9648, draft 0.725, vram 13194 MiB, gpu 197 W
+run_arm.sh: results in ./results/20261118T181640Z-spd-8000-add0.005-r2
+=== 18:18:06 spd-8000-add0.001-r2: --cache-mib 8000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 228.7 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.001-r2         engine  228.7 tok/s (mean  227.5), hit 0.9277, draft 0.736, vram 13197 MiB, gpu 190 W
+run_arm.sh: results in ./results/20261118T181806Z-spd-8000-add0.001-r2
+=== 18:19:33 spd-8000-add0.00025-r2: --cache-mib 8000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 222.1 tok/s decode (each the median of 1 x 512)
+spd-8000-add0.00025-r2       engine  222.1 tok/s (mean  221.8), hit 0.9109, draft 0.743, vram 13197 MiB, gpu 185 W
+run_arm.sh: results in ./results/20261118T181933Z-spd-8000-add0.00025-r2
+=== 18:21:02 spd-8000-d0-r23: --cache-mib 8000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 218.3 tok/s decode (each the median of 1 x 512)
+spd-8000-d0-r23              engine  218.3 tok/s (mean  219.8), hit 0.9039, draft 0.742, vram 13147 MiB, gpu 184 W
+run_arm.sh: results in ./results/20261118T182102Z-spd-8000-d0-r23
+=== 18:22:32 sweep done

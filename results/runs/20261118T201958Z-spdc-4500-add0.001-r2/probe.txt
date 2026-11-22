@@ -1,0 +1,27 @@
+warmup
+  warmup: 128 tok, ttft 0.81s, decode 157.8 tok/s
+  p01 rep 1: 512 tok ttft 0.19s decode 188.4 engine 188.4 draft 444/289 finish length
+  p02 rep 1: 512 tok ttft 0.25s decode 171.5 engine 171.5 draft 447/287 finish length
+  p03 rep 1: 512 tok ttft 0.27s decode 170.6 engine 170.6 draft 423/299 finish length
+  p04 rep 1: 512 tok ttft 0.23s decode 198.8 engine 198.8 draft 406/307 finish length
+  p05 rep 1: 512 tok ttft 0.22s decode 186.8 engine 186.8 draft 414/303 finish length
+  p06 rep 1: 512 tok ttft 0.23s decode 184.9 engine 184.9 draft 379/321 finish length
+  p07 rep 1: 512 tok ttft 0.25s decode 192.2 engine 192.2 draft 390/315 finish length
+  p08 rep 1: 512 tok ttft 0.15s decode 167.9 engine 167.9 draft 405/307 finish length
+  p09 rep 1: 512 tok ttft 0.24s decode 181.2 engine 181.2 draft 426/297 finish length
+  p10 rep 1: 512 tok ttft 0.16s decode 185.0 engine 185.0 draft 427/297 finish length
+  p11 rep 1: 512 tok ttft 0.30s decode 183.2 engine 183.2 draft 396/312 finish length
+  p12 rep 1: 512 tok ttft 0.23s decode 181.3 engine 181.3 draft 452/285 finish length
+  p13 rep 1: 512 tok ttft 0.27s decode 163.5 engine 163.5 draft 379/321 finish length
+  p14 rep 1: 512 tok ttft 0.25s decode 176.4 engine 176.4 draft 423/299 finish length
+  p15 rep 1: 512 tok ttft 0.25s decode 174.8 engine 174.8 draft 419/301 finish length
+  p16 rep 1: 512 tok ttft 0.29s decode 175.7 engine 175.7 draft 409/305 finish length
+  p17 rep 1: 512 tok ttft 0.35s decode 176.0 engine 176.0 draft 370/326 finish length
+  p18 rep 1: 512 tok ttft 0.30s decode 168.7 engine 168.7 draft 417/301 finish length
+  p19 rep 1: 512 tok ttft 0.17s decode 184.3 engine 184.3 draft 426/297 finish length
+  p20 rep 1: 512 tok ttft 0.28s decode 181.2 engine 181.2 draft 398/312 finish length
+  p21 rep 1: 512 tok ttft 0.29s decode 171.2 engine 171.2 draft 430/296 finish length
+  p22 rep 1: 512 tok ttft 0.27s decode 186.3 engine 186.3 draft 390/315 finish length
+  p23 rep 1: 512 tok ttft 0.28s decode 171.7 engine 171.7 draft 434/294 finish length
+  p24 rep 1: 512 tok ttft 0.27s decode 175.9 engine 175.9 draft 425/298 finish length
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 178.8 tok/s decode (each the median of 1 x 512)

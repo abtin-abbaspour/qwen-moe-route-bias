@@ -1,0 +1,24 @@
+# Fetched by scripts/setup.sh and scripts/get-data.sh
+/third_party/
+/models/
+/data/
+
+# Reference logits for the KL-divergence runs (about 0.5 MB per scored position; kld.sh --base writes them again)
+*.kld
+
+# Per-token routing records (115 MB each; scripts/route_records.py reads them)
+*.mrs
+
+# Raw server logs (over 100 MB in all); the numbers used are in each run's summary.json, decode.json and probe.txt
+server.log
+
+# Smoke tests, a voided run, build and kernel-test logs, scratch
+/results/smoke/
+/results/calib/void-*/
+/results/build-cuda13.log
+/results/test-backend-ops-*.log
+stop
+*.stop
+*.part
+__pycache__/
+*.pyc

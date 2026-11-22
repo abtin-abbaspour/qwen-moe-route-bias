@@ -1,0 +1,8 @@
+# screening round 2 at 4,500 MiB: the bias where swaps are cheap (layers 16-39), and a weighted allocation
+s45-late16-0.001       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001  --bias-mode add --bias-layers 16-39
+s45-late16-0.0025      --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --bias-layers 16-39
+s45-late16-0.005       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005  --bias-mode add --bias-layers 16-39
+s45-late16-0.01        --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.01   --bias-mode add --bias-layers 16-39
+s45-late24-0.005       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005  --bias-mode add --bias-layers 24-39
+s45-w25-0.0025         --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --bias-layers 0-15:0.25,16-39
+s45-w25-0.005          --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005  --bias-mode add --bias-layers 0-15:0.25,16-39

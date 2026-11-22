@@ -1,0 +1,20 @@
+# final quality rows: 16 chunks (32,752 scored positions), 3-token steps, against the f16 reference
+ref16-f16-ub512 --base --kv f16 --ub 512 --cache-mib 8000 --route-stats 0 --chunks 16
+q16-4500-d0 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16
+q16-4500-add0.00025 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.00025 --bias-mode add
+q16-4500-add0.0005 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.0005 --bias-mode add
+q16-4500-add0.001 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.001 --bias-mode add
+q16-4500-add0.0025 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.0025 --bias-mode add
+q16-4500-add0.005 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 4500 --ub 3 --chunks 16 --bias 0.005 --bias-mode add
+q16-3000-d0 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16
+q16-3000-add0.00025 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.00025 --bias-mode add
+q16-3000-add0.0005 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.0005 --bias-mode add
+q16-3000-add0.001 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.001 --bias-mode add
+q16-3000-add0.0025 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.0025 --bias-mode add
+q16-3000-add0.005 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 3000 --ub 3 --chunks 16 --bias 0.005 --bias-mode add
+q16-8000-d0 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16
+q16-8000-add0.00025 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.00025 --bias-mode add
+q16-8000-add0.0005 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.0005 --bias-mode add
+q16-8000-add0.001 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.001 --bias-mode add
+q16-8000-add0.0025 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.0025 --bias-mode add
+q16-8000-add0.005 --ref ./results/kld/ref16-f16-ub512/base.kld --cache-mib 8000 --ub 3 --chunks 16 --bias 0.005 --bias-mode add

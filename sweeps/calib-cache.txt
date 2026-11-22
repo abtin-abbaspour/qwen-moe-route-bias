@@ -1,0 +1,9 @@
+# calibration 1: decode speed and hit rate against the GPU expert cache size, plain router (delta = 0), Killy's shipped cpu-share 0.9
+calib-cache-8000  --cache-mib 8000
+calib-cache-1000  --cache-mib 1000
+calib-cache-2000  --cache-mib 2000
+calib-cache-3000  --cache-mib 3000
+calib-cache-4500  --cache-mib 4500
+calib-cache-6000  --cache-mib 6000
+calib-cache-10000 --cache-mib 10000
+calib-cache-8000r --cache-mib 8000

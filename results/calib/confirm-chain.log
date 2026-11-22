@@ -1,0 +1,198 @@
+=== 19:50:48 spdc-3000-add0.0005-r1: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 146.0 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.0005-r1       engine  146.0 tok/s (mean  146.9), hit 0.6437, draft 0.738, vram 8194 MiB, gpu 129 W
+run_arm.sh: results in ./results/20261118T195048Z-spdc-3000-add0.0005-r1
+=== 19:52:48 spdc-3000-d0-r1: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 128.7 tok/s decode (each the median of 1 x 512)
+spdc-3000-d0-r1              engine  128.7 tok/s (mean  129.8), hit 0.6265, draft 0.741, vram 8165 MiB, gpu 123 W
+run_arm.sh: results in ./results/20261118T195248Z-spdc-3000-d0-r1
+=== 19:54:59 spdc-3000-add0.001-r1: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 148.8 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.001-r1        engine  148.8 tok/s (mean  150.7), hit 0.6554, draft 0.747, vram 8197 MiB, gpu 135 W
+run_arm.sh: results in ./results/20261118T195459Z-spdc-3000-add0.001-r1
+=== 19:56:56 spdc-3000-add0.00025-r1: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 143.0 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.00025-r1      engine  143.0 tok/s (mean  144.0), hit 0.6322, draft 0.737, vram 8162 MiB, gpu 132 W
+run_arm.sh: results in ./results/20261118T195656Z-spdc-3000-add0.00025-r1
+=== 19:58:59 spdc-4500-add0.00025-r1: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 171.3 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.00025-r1      engine  171.3 tok/s (mean  173.3), hit 0.7636, draft 0.737, vram 9664 MiB, gpu 152 W
+run_arm.sh: results in ./results/20261118T195859Z-spdc-4500-add0.00025-r1
+=== 20:00:45 spdc-4500-add0.0005-r1: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 174.5 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.0005-r1       engine  174.4 tok/s (mean  176.2), hit 0.7675, draft 0.751, vram 9664 MiB, gpu 153 W
+run_arm.sh: results in ./results/20261118T200045Z-spdc-4500-add0.0005-r1
+=== 20:02:31 spdc-4500-add0.001-r1: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 179.9 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.001-r1        engine  179.9 tok/s (mean  179.0), hit 0.7861, draft 0.734, vram 9663 MiB, gpu 157 W
+run_arm.sh: results in ./results/20261118T200231Z-spdc-4500-add0.001-r1
+=== 20:04:15 spdc-4500-d0-r1: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 172.3 tok/s decode (each the median of 1 x 512)
+spdc-4500-d0-r1              engine  172.3 tok/s (mean  172.8), hit 0.7511, draft 0.750, vram 9662 MiB, gpu 153 W
+run_arm.sh: results in ./results/20261118T200415Z-spdc-4500-d0-r1
+=== 20:06:01 spdc-3000-d0-r2: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 142.1 tok/s decode (each the median of 1 x 512)
+spdc-3000-d0-r2              engine  142.1 tok/s (mean  144.1), hit 0.6265, draft 0.741, vram 8184 MiB, gpu 135 W
+run_arm.sh: results in ./results/20261118T200601Z-spdc-3000-d0-r2
+=== 20:08:02 spdc-3000-add0.0005-r2: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 130.5 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.0005-r2       engine  130.5 tok/s (mean  130.7), hit 0.6437, draft 0.738, vram 8162 MiB, gpu 129 W
+run_arm.sh: results in ./results/20261118T200803Z-spdc-3000-add0.0005-r2
+=== 20:10:13 spdc-3000-add0.00025-r2: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 128.9 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.00025-r2      engine  128.9 tok/s (mean  129.4), hit 0.6322, draft 0.737, vram 8194 MiB, gpu 127 W
+run_arm.sh: results in ./results/20261118T201013Z-spdc-3000-add0.00025-r2
+=== 20:12:24 spdc-3000-add0.001-r2: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 150.5 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.001-r2        engine  150.5 tok/s (mean  151.4), hit 0.6554, draft 0.747, vram 8162 MiB, gpu 138 W
+run_arm.sh: results in ./results/20261118T201224Z-spdc-3000-add0.001-r2
+=== 20:14:21 spdc-4500-add0.00025-r2: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 153.5 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.00025-r2      engine  153.5 tok/s (mean  155.0), hit 0.7636, draft 0.737, vram 9664 MiB, gpu 144 W
+run_arm.sh: results in ./results/20261118T201421Z-spdc-4500-add0.00025-r2
+=== 20:16:16 spdc-4500-d0-r2: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 172.1 tok/s decode (each the median of 1 x 512)
+spdc-4500-d0-r2              engine  172.1 tok/s (mean  171.7), hit 0.7511, draft 0.750, vram 9662 MiB, gpu 151 W
+run_arm.sh: results in ./results/20261118T201616Z-spdc-4500-d0-r2
+=== 20:18:04 spdc-4500-add0.0005-r2: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 155.7 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.0005-r2       engine  155.7 tok/s (mean  157.1), hit 0.7675, draft 0.751, vram 9668 MiB, gpu 144 W
+run_arm.sh: results in ./results/20261118T201804Z-spdc-4500-add0.0005-r2
+=== 20:19:58 spdc-4500-add0.001-r2: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 178.8 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.001-r2        engine  178.8 tok/s (mean  179.0), hit 0.7861, draft 0.734, vram 9726 MiB, gpu 158 W
+run_arm.sh: results in ./results/20261118T201958Z-spdc-4500-add0.001-r2
+=== 20:21:42 spdc-3000-add0.001-r3: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 150.0 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.001-r3        engine  150.0 tok/s (mean  150.4), hit 0.6554, draft 0.747, vram 8233 MiB, gpu 139 W
+run_arm.sh: results in ./results/20261118T202142Z-spdc-3000-add0.001-r3
+=== 20:23:40 spdc-3000-d0-r3: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 143.0 tok/s decode (each the median of 1 x 512)
+spdc-3000-d0-r3              engine  143.0 tok/s (mean  144.6), hit 0.6265, draft 0.741, vram 8218 MiB, gpu 135 W
+run_arm.sh: results in ./results/20261118T202340Z-spdc-3000-d0-r3
+=== 20:25:41 spdc-3000-add0.0005-r3: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 146.5 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.0005-r3       engine  146.4 tok/s (mean  147.4), hit 0.6437, draft 0.738, vram 8202 MiB, gpu 137 W
+run_arm.sh: results in ./results/20261118T202541Z-spdc-3000-add0.0005-r3
+=== 20:27:40 spdc-3000-add0.00025-r3: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 144.4 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.00025-r3      engine  144.4 tok/s (mean  145.2), hit 0.6322, draft 0.737, vram 8168 MiB, gpu 135 W
+run_arm.sh: results in ./results/20261118T202740Z-spdc-3000-add0.00025-r3
+=== 20:29:41 spdc-4500-add0.001-r3: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 178.9 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.001-r3        engine  178.9 tok/s (mean  179.1), hit 0.7861, draft 0.734, vram 9670 MiB, gpu 157 W
+run_arm.sh: results in ./results/20261118T202941Z-spdc-4500-add0.001-r3
+=== 20:31:25 spdc-4500-d0-r3: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 170.7 tok/s decode (each the median of 1 x 512)
+spdc-4500-d0-r3              engine  170.7 tok/s (mean  170.9), hit 0.7511, draft 0.750, vram 9628 MiB, gpu 151 W
+run_arm.sh: results in ./results/20261118T203125Z-spdc-4500-d0-r3
+=== 20:33:12 spdc-4500-add0.0005-r3: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 175.1 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.0005-r3       engine  175.0 tok/s (mean  176.0), hit 0.7675, draft 0.751, vram 9627 MiB, gpu 154 W
+run_arm.sh: results in ./results/20261118T203312Z-spdc-4500-add0.0005-r3
+=== 20:34:57 spdc-4500-add0.00025-r3: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 170.4 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.00025-r3      engine  170.4 tok/s (mean  173.1), hit 0.7636, draft 0.737, vram 9628 MiB, gpu 154 W
+run_arm.sh: results in ./results/20261118T203457Z-spdc-4500-add0.00025-r3
+=== 20:36:44 spdc-3000-add0.00025-r4: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 144.1 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.00025-r4      engine  144.0 tok/s (mean  144.5), hit 0.6322, draft 0.737, vram 8157 MiB, gpu 136 W
+run_arm.sh: results in ./results/20261118T203644Z-spdc-3000-add0.00025-r4
+=== 20:38:45 spdc-3000-add0.001-r4: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 149.3 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.001-r4        engine  149.3 tok/s (mean  150.8), hit 0.6554, draft 0.747, vram 8156 MiB, gpu 138 W
+run_arm.sh: results in ./results/20261118T203845Z-spdc-3000-add0.001-r4
+=== 20:40:42 spdc-3000-d0-r4: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 126.7 tok/s decode (each the median of 1 x 512)
+spdc-3000-d0-r4              engine  126.7 tok/s (mean  128.3), hit 0.6265, draft 0.741, vram 8195 MiB, gpu 126 W
+run_arm.sh: results in ./results/20261118T204042Z-spdc-3000-d0-r4
+=== 20:42:54 spdc-3000-add0.0005-r4: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 146.0 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.0005-r4       engine  146.0 tok/s (mean  147.2), hit 0.6437, draft 0.738, vram 8164 MiB, gpu 136 W
+run_arm.sh: results in ./results/20261118T204254Z-spdc-3000-add0.0005-r4
+=== 20:44:54 spdc-4500-add0.001-r4: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 179.8 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.001-r4        engine  179.8 tok/s (mean  179.8), hit 0.7861, draft 0.734, vram 9693 MiB, gpu 157 W
+run_arm.sh: results in ./results/20261118T204454Z-spdc-4500-add0.001-r4
+=== 20:46:38 spdc-4500-d0-r4: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 169.9 tok/s decode (each the median of 1 x 512)
+spdc-4500-d0-r4              engine  169.9 tok/s (mean  170.3), hit 0.7511, draft 0.750, vram 9627 MiB, gpu 151 W
+run_arm.sh: results in ./results/20261118T204638Z-spdc-4500-d0-r4
+=== 20:48:25 spdc-4500-add0.00025-r4: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 172.4 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.00025-r4      engine  172.4 tok/s (mean  173.5), hit 0.7636, draft 0.737, vram 9627 MiB, gpu 154 W
+run_arm.sh: results in ./results/20261118T204825Z-spdc-4500-add0.00025-r4
+=== 20:50:12 spdc-4500-add0.0005-r4: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 174.5 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.0005-r4       engine  174.5 tok/s (mean  175.5), hit 0.7675, draft 0.751, vram 9657 MiB, gpu 154 W
+run_arm.sh: results in ./results/20261118T205012Z-spdc-4500-add0.0005-r4
+=== 20:51:57 spdc-3000-add0.0005-r5: --cache-mib 3000 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 130.2 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.0005-r5       engine  130.2 tok/s (mean  131.0), hit 0.6437, draft 0.738, vram 8127 MiB, gpu 129 W
+run_arm.sh: results in ./results/20261118T205157Z-spdc-3000-add0.0005-r5
+=== 20:54:07 spdc-3000-d0-r5: --cache-mib 3000
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 140.8 tok/s decode (each the median of 1 x 512)
+spdc-3000-d0-r5              engine  140.8 tok/s (mean  143.4), hit 0.6265, draft 0.741, vram 8132 MiB, gpu 134 W
+run_arm.sh: results in ./results/20261118T205407Z-spdc-3000-d0-r5
+=== 20:56:09 spdc-3000-add0.001-r5: --cache-mib 3000 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 148.8 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.001-r5        engine  148.7 tok/s (mean  150.8), hit 0.6554, draft 0.747, vram 8127 MiB, gpu 138 W
+run_arm.sh: results in ./results/20261118T205609Z-spdc-3000-add0.001-r5
+=== 20:58:06 spdc-3000-add0.00025-r5: --cache-mib 3000 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 143.2 tok/s decode (each the median of 1 x 512)
+spdc-3000-add0.00025-r5      engine  143.2 tok/s (mean  144.4), hit 0.6322, draft 0.737, vram 8127 MiB, gpu 135 W
+run_arm.sh: results in ./results/20261118T205806Z-spdc-3000-add0.00025-r5
+=== 21:00:07 spdc-4500-add0.001-r5: --cache-mib 4500 --bias 0.001 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 180.4 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.001-r5        engine  180.4 tok/s (mean  179.5), hit 0.7861, draft 0.734, vram 9630 MiB, gpu 157 W
+run_arm.sh: results in ./results/20261118T210007Z-spdc-4500-add0.001-r5
+=== 21:01:51 spdc-4500-d0-r5: --cache-mib 4500
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 170.2 tok/s decode (each the median of 1 x 512)
+spdc-4500-d0-r5              engine  170.2 tok/s (mean  171.2), hit 0.7511, draft 0.750, vram 9627 MiB, gpu 152 W
+run_arm.sh: results in ./results/20261118T210151Z-spdc-4500-d0-r5
+=== 21:03:38 spdc-4500-add0.0005-r5: --cache-mib 4500 --bias 0.0005 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 175.2 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.0005-r5       engine  175.2 tok/s (mean  175.6), hit 0.7675, draft 0.751, vram 9629 MiB, gpu 155 W
+run_arm.sh: results in ./results/20261118T210338Z-spdc-4500-add0.0005-r5
+=== 21:05:23 spdc-4500-add0.00025-r5: --cache-mib 4500 --bias 0.00025 --bias-mode add
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 152.6 tok/s decode (each the median of 1 x 512)
+spdc-4500-add0.00025-r5      engine  152.6 tok/s (mean  153.9), hit 0.7636, draft 0.737, vram 9582 MiB, gpu 144 W
+run_arm.sh: results in ./results/20261118T210523Z-spdc-4500-add0.00025-r5
+=== 21:07:19 sweep done
+=== 21:07:19 GSM8K smoke test
+gsm8k: 5 questions, 80.00 % right, 1 cut at 768 tokens
+run_task.sh: results in ./results/20261118T210719Z-gsm-smoke-8000-d0
+smoke: 5 answered, 4 right
+=== 21:07:57 gsm-8000-d0
+  100 done, 95.0 % right, 205 tok/s overall
+  200 done, 95.5 % right, 205 tok/s overall
+  300 done, 95.0 % right, 205 tok/s overall
+  400 done, 95.0 % right, 205 tok/s overall
+  500 done, 95.2 % right, 205 tok/s overall
+  600 done, 95.5 % right, 205 tok/s overall
+  700 done, 95.4 % right, 205 tok/s overall
+  800 done, 95.4 % right, 205 tok/s overall
+  900 done, 95.4 % right, 205 tok/s overall
+  1000 done, 95.1 % right, 205 tok/s overall
+  1100 done, 94.8 % right, 205 tok/s overall
+  1200 done, 94.8 % right, 205 tok/s overall
+  1300 done, 95.2 % right, 205 tok/s overall
+gsm8k: 1319 questions, 95.07 % right, 41 cut at 768 tokens
+run_task.sh: results in ./results/20261118T210757Z-gsm-8000-d0
+=== 21:45:42 gsm-8000-add0.0025
+  100 done, 96.0 % right, 225 tok/s overall
+  200 done, 95.0 % right, 224 tok/s overall
+  300 done, 94.7 % right, 225 tok/s overall
+  400 done, 94.5 % right, 224 tok/s overall
+  500 done, 94.4 % right, 224 tok/s overall
+  600 done, 94.8 % right, 224 tok/s overall
+  700 done, 94.9 % right, 224 tok/s overall
+  800 done, 94.8 % right, 224 tok/s overall
+  900 done, 94.8 % right, 224 tok/s overall
+  1000 done, 94.7 % right, 224 tok/s overall
+  1100 done, 94.3 % right, 224 tok/s overall
+  1200 done, 94.3 % right, 224 tok/s overall
+  1300 done, 94.6 % right, 224 tok/s overall
+gsm8k: 1319 questions, 94.54 % right, 42 cut at 768 tokens
+run_task.sh: results in ./results/20261118T214542Z-gsm-8000-add0.0025
+=== 22:19:54 chain done

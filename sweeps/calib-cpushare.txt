@@ -1,0 +1,9 @@
+# calibration 2: the share of misses the CPU computes once the cache is full (the rest are uploaded), plain router (delta = 0)
+# 1.0 freezes the cache once it is full; 0.9 is what glm53-offload ships
+calib-cs-4500-0.9  --cache-mib 4500 --cpu-share 0.9
+calib-cs-4500-0.5  --cache-mib 4500 --cpu-share 0.5
+calib-cs-4500-0.75 --cache-mib 4500 --cpu-share 0.75
+calib-cs-4500-1.0  --cache-mib 4500 --cpu-share 1.0
+calib-cs-8000-0.75 --cache-mib 8000 --cpu-share 0.75
+calib-cs-8000-1.0  --cache-mib 8000 --cpu-share 1.0
+calib-cs-8000-0.9  --cache-mib 8000 --cpu-share 0.9

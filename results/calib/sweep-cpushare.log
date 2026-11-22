@@ -1,0 +1,29 @@
+=== 14:46:08 calib-cs-4500-0.9: --cache-mib 4500 --cpu-share 0.9
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 173.5 tok/s decode (each the median of 1 x 512)
+calib-cs-4500-0.9            engine  173.5 tok/s (mean  173.3), hit 0.7511, draft 0.750, vram 9466 MiB, gpu 148 W
+run_arm.sh: results in ./results/20261118T144608Z-calib-cs-4500-0.9
+=== 14:47:54 calib-cs-4500-0.5: --cache-mib 4500 --cpu-share 0.5
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 152.1 tok/s decode (each the median of 1 x 512)
+calib-cs-4500-0.5            engine  152.0 tok/s (mean  153.3), hit 0.7712, draft 0.731, vram 9433 MiB, gpu 140 W
+run_arm.sh: results in ./results/20261118T144754Z-calib-cs-4500-0.5
+=== 14:49:49 calib-cs-4500-0.75: --cache-mib 4500 --cpu-share 0.75
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 172.8 tok/s decode (each the median of 1 x 512)
+calib-cs-4500-0.75           engine  172.8 tok/s (mean  174.9), hit 0.7682, draft 0.739, vram 9434 MiB, gpu 152 W
+run_arm.sh: results in ./results/20261118T144949Z-calib-cs-4500-0.75
+=== 14:51:34 calib-cs-4500-1.0: --cache-mib 4500 --cpu-share 1.0
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 117.1 tok/s decode (each the median of 1 x 512)
+calib-cs-4500-1.0            engine  117.1 tok/s (mean  117.7), hit 0.4286, draft 0.739, vram 9433 MiB, gpu 113 W
+run_arm.sh: results in ./results/20261118T145134Z-calib-cs-4500-1.0
+=== 14:53:53 calib-cs-8000-0.75: --cache-mib 8000 --cpu-share 0.75
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 222.3 tok/s decode (each the median of 1 x 512)
+calib-cs-8000-0.75           engine  222.3 tok/s (mean  222.1), hit 0.9271, draft 0.724, vram 12946 MiB, gpu 184 W
+run_arm.sh: results in ./results/20261118T145353Z-calib-cs-8000-0.75
+=== 14:55:22 calib-cs-8000-1.0: --cache-mib 8000 --cpu-share 1.0
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 160.9 tok/s decode (each the median of 1 x 512)
+calib-cs-8000-1.0            engine  160.9 tok/s (mean  162.6), hit 0.7078, draft 0.737, vram 12945 MiB, gpu 144 W
+run_arm.sh: results in ./results/20261118T145522Z-calib-cs-8000-1.0
+=== 14:57:12 calib-cs-8000-0.9: --cache-mib 8000 --cpu-share 0.9
+SUMMARY qwen3.6-35b-a3b: 24 prompts, median 219.3 tok/s decode (each the median of 1 x 512)
+calib-cs-8000-0.9            engine  219.2 tok/s (mean  220.7), hit 0.9039, draft 0.742, vram 12970 MiB, gpu 182 W
+run_arm.sh: results in ./results/20261118T145712Z-calib-cs-8000-0.9
+=== 14:58:41 sweep done

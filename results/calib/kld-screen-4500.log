@@ -1,0 +1,49 @@
+=== 16:15:10 base-4500-ub3: --base --cache-mib 4500 --ub 3 --route-stats 0
+base-4500-ub3                  same-top - ± - %, KLD -, PPL ratio -, hit 0.8122, swaps -, 74 s
+=== 16:16:30 s45-add0.000125: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.000125 --bias-mode add
+s45-add0.000125                same-top 97.362 ± 0.177 %, KLD 0.00514, PPL ratio 1.0005, hit 0.8171, swaps 0.0044, 75 s
+=== 16:17:50 s45-add0.00025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.00025 --bias-mode add
+s45-add0.00025                 same-top 97.130 ± 0.185 %, KLD 0.00577, PPL ratio 0.9992, hit 0.8216, swaps 0.0089, 74 s
+=== 16:19:09 s45-add0.0005: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0005 --bias-mode add
+s45-add0.0005                  same-top 96.886 ± 0.192 %, KLD 0.00662, PPL ratio 0.9991, hit 0.8305, swaps 0.0172, 72 s
+=== 16:20:26 s45-add0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add
+s45-add0.001                   same-top 96.299 ± 0.209 %, KLD 0.00885, PPL ratio 1.0000, hit 0.8463, swaps 0.0328, 70 s
+=== 16:21:42 s45-add0.0025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add
+s45-add0.0025                  same-top 95.469 ± 0.230 %, KLD 0.01485, PPL ratio 1.0056, hit 0.8835, swaps 0.0712, 67 s
+=== 16:22:54 s45-add0.005: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005 --bias-mode add
+s45-add0.005                   same-top 94.419 ± 0.254 %, KLD 0.02374, PPL ratio 1.0074, hit 0.9217, swaps 0.1159, 63 s
+=== 16:24:02 s45-mul1e-30: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 1e-30 --bias-mode mul
+s45-mul1e-30                   same-top 97.692 ± 0.166 %, KLD 0.00492, PPL ratio 0.9987, hit 0.8123, swaps 0.0000, 77 s
+=== 16:25:25 s45-mul0.0125: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0125 --bias-mode mul
+s45-mul0.0125                  same-top 97.130 ± 0.185 %, KLD 0.00531, PPL ratio 1.0005, hit 0.8173, swaps 0.0049, 77 s
+=== 16:26:47 s45-mul0.025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.025 --bias-mode mul
+s45-mul0.025                   same-top 97.191 ± 0.183 %, KLD 0.00603, PPL ratio 0.9997, hit 0.8225, swaps 0.0097, 76 s
+=== 16:28:08 s45-mul0.05: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.05 --bias-mode mul
+s45-mul0.05                    same-top 96.678 ± 0.198 %, KLD 0.00731, PPL ratio 0.9979, hit 0.8320, swaps 0.0190, 76 s
+=== 16:29:29 s45-mul0.1: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.1 --bias-mode mul
+s45-mul0.1                     same-top 96.104 ± 0.214 %, KLD 0.00969, PPL ratio 0.9994, hit 0.8496, swaps 0.0363, 73 s
+=== 16:30:47 s45-mul0.2: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.2 --bias-mode mul
+s45-mul0.2                     same-top 95.603 ± 0.227 %, KLD 0.01529, PPL ratio 1.0007, hit 0.8792, swaps 0.0668, 75 s
+=== 16:32:07 s45-drop0.00025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.00025 --bias-mode add --drop
+s45-drop0.00025                same-top 97.069 ± 0.186 %, KLD 0.00565, PPL ratio 0.9999, hit 0.8215, swaps 0.0088, 84 s
+=== 16:33:36 s45-drop0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --drop
+s45-drop0.001                  same-top 96.055 ± 0.215 %, KLD 0.00908, PPL ratio 1.0000, hit 0.8462, swaps 0.0327, 77 s
+=== 16:34:59 s45-drop0.0025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --drop
+s45-drop0.0025                 same-top 94.968 ± 0.242 %, KLD 0.01623, PPL ratio 1.0125, hit 0.8830, swaps 0.0714, 76 s
+=== 16:36:21 s45-prot2-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --protect 2
+s45-prot2-0.001                same-top 96.483 ± 0.204 %, KLD 0.00893, PPL ratio 0.9993, hit 0.8463, swaps 0.0327, 82 s
+=== 16:37:48 s45-prot2-0.0025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --protect 2
+s45-prot2-0.0025               same-top 95.554 ± 0.228 %, KLD 0.01433, PPL ratio 1.0040, hit 0.8833, swaps 0.0711, 77 s
+=== 16:39:10 s45-L00-07-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 0-7
+s45-L00-07-0.001               same-top 96.971 ± 0.189 %, KLD 0.00667, PPL ratio 1.0005, hit 0.8200, swaps 0.0071, 83 s
+=== 16:40:38 s45-L08-15-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 8-15
+s45-L08-15-0.001               same-top 96.898 ± 0.192 %, KLD 0.00617, PPL ratio 0.9996, hit 0.8183, swaps 0.0061, 83 s
+=== 16:42:06 s45-L16-23-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 16-23
+s45-L16-23-0.001               same-top 97.240 ± 0.181 %, KLD 0.00541, PPL ratio 0.9980, hit 0.8183, swaps 0.0061, 85 s
+=== 16:43:36 s45-L24-31-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 24-31
+s45-L24-31-0.001               same-top 97.106 ± 0.185 %, KLD 0.00520, PPL ratio 0.9999, hit 0.8188, swaps 0.0066, 80 s
+=== 16:45:01 s45-L32-39-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 32-39
+s45-L32-39-0.001               same-top 97.106 ± 0.185 %, KLD 0.00535, PPL ratio 1.0005, hit 0.8198, swaps 0.0072, 77 s
+=== 16:46:23 s45-add0.001-rep: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add
+s45-add0.001-rep               same-top 96.299 ± 0.209 %, KLD 0.00885, PPL ratio 1.0000, hit 0.8463, swaps 0.0328, 76 s
+=== 16:47:44 kld sweep done

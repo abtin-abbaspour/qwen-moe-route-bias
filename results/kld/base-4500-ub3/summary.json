@@ -1,0 +1,8 @@
+{
+ "dir": "base-4500-ub3",
+ "settings": "cache 4500 MiB, bias 0 (add), protect 0, drop 0, layers all, cpu share 0.9, kv q8_0, ub 3, chunks 4, engine full, base 1, ref none",
+ "elapsed_s": 74,
+ "ppl_final": 5.1593,
+ "ppl_final_err": 0.13281,
+ "hit_rate": 0.8122
+}

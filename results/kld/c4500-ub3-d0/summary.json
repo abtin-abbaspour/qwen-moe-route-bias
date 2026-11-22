@@ -1,0 +1,19 @@
+{
+ "dir": "c4500-ub3-d0",
+ "settings": "cache 4500 MiB, bias 0 (add), protect 0, cpu share 0.9, kv q8_0, ub 3, chunks 4, engine full, base 0, ref ./results/kld/ref-f16-ub512/base.kld",
+ "elapsed_s": 86,
+ "ppl_q": 5.159308,
+ "ppl_q_err": 0.132811,
+ "ppl_base": 5.156649,
+ "ppl_base_err": 0.132699,
+ "ppl_ratio": 1.000516,
+ "ppl_ratio_err": 0.001356,
+ "kld_mean": 0.004922,
+ "kld_mean_err": 0.000189,
+ "kld_p99": 0.046817,
+ "same_top": 97.069,
+ "same_top_err": 0.186,
+ "rms_dp": 2.059,
+ "rms_dp_err": 0.096,
+ "hit_rate": 0.8122
+}

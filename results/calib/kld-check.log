@@ -1,0 +1,82 @@
+=== 15:04:19 ref-f16-ub512: --base --kv f16 --ub 512 --cache-mib 8000 --route-stats 0
+0.32.714.175 I Final estimate: PPL = 5.1575 +/- 0.13279
+ref-f16-ub512                  same-top - ± - %, KLD -, PPL ratio -, hit -, swaps -, 34 s
+=== 15:05:03 c8000-q8-ub512-d0: --ref ./results/kld/ref-f16-ub512/base.kld --ub 512 --cache-mib 8000 --route-stats 0
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.165419 ±   0.133117
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.001701 ±   0.001308
+Mean PPL(Q)-PPL(base)         :   0.008771 ±   0.006750
+Mean    KLD:   0.004539 ±   0.000169
+RMS Δp    :  2.033 ± 0.085 %
+Same top p: 97.215 ± 0.182 %
+c8000-q8-ub512-d0              same-top 97.215 ± 0.182 %, KLD 0.00454, PPL ratio 1.0017, hit -, swaps -, 34 s
+=== 15:05:47 c4500-ub1-d0: --ref ./results/kld/ref-f16-ub512/base.kld --ub 1 --cache-mib 4500
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.161780 ±   0.133061
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.000995 ±   0.001296
+Mean PPL(Q)-PPL(base)         :   0.005131 ±   0.006683
+Mean    KLD:   0.004982 ±   0.000150
+RMS Δp    :  2.064 ± 0.076 %
+Same top p: 97.154 ± 0.184 %
+2.21.255.010 I llama_moe_cache: ubatch <= 8: hits = 4392785, misses = 784559 (784559 on the CPU), hit rate = 84.85%, uploaded = 111035.95 MiB
+c4500-ub1-d0                   same-top 97.154 ± 0.184 %, KLD 0.00498, PPL ratio 1.0010, hit 0.8485, swaps -, 143 s
+=== 15:08:20 c4500-ub3-d0: --ref ./results/kld/ref-f16-ub512/base.kld --ub 3 --cache-mib 4500
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.159308 ±   0.132811
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.000516 ±   0.001356
+Mean PPL(Q)-PPL(base)         :   0.002660 ±   0.006990
+Mean    KLD:   0.004922 ±   0.000189
+RMS Δp    :  2.059 ± 0.096 %
+Same top p: 97.069 ± 0.186 %
+1.24.546.597 I llama_moe_cache: ubatch <= 8: hits = 2926156, misses = 676452 (676452 on the CPU), hit rate = 81.22%, uploaded = 78378.33 MiB
+c4500-ub3-d0                   same-top 97.069 ± 0.186 %, KLD 0.00492, PPL ratio 1.0005, hit 0.8122, swaps -, 86 s
+=== 15:09:56 c4500-ub1-add0.005: --ref ./results/kld/ref-f16-ub512/base.kld --ub 1 --cache-mib 4500 --bias 0.005 --bias-mode add
+0.08.521.617 I llama_moe_cache: cache-aware routing, selection bias 0.0050 for the cached experts
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.171068 ±   0.133178
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.002796 ±   0.002645
+Mean PPL(Q)-PPL(base)         :   0.014419 ±   0.013628
+Mean    KLD:   0.021209 ±   0.000664
+RMS Δp    :  4.244 ± 0.150 %
+Same top p: 94.455 ± 0.253 %
+2.10.000.865 I llama_moe_cache: ubatch <= 8: hits = 4869198, misses = 308146 (308146 on the CPU), hit rate = 94.05%, uploaded = 45968.06 MiB
+2.10.000.873 I llama_moe_cache: route total: 647168 token-layers, 58.98% with a swap, 0.8901 swaps per token-layer (11.126% of picks), unbiased mass kept 99.0594%, favoured picks 94.06% (unbiased top-k 82.93%), swapped-i
+c4500-ub1-add0.005             same-top 94.455 ± 0.253 %, KLD 0.02121, PPL ratio 1.0028, hit 0.9405, swaps 0.1113, 132 s
+=== 15:12:18 c3000-ub1-d0: --ref ./results/kld/ref-f16-ub512/base.kld --ub 1 --cache-mib 3000
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.156827 ±   0.132872
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.000035 ±   0.001368
+Mean PPL(Q)-PPL(base)         :   0.000179 ±   0.007052
+Mean    KLD:   0.005269 ±   0.000235
+RMS Δp    :  2.168 ± 0.101 %
+Same top p: 97.191 ± 0.183 %
+2.23.656.395 I llama_moe_cache: ubatch <= 8: hits = 3896399, misses = 1280945 (1280945 on the CPU), hit rate = 75.26%, uploaded = 156977.74 MiB
+c3000-ub1-d0                   same-top 97.191 ± 0.183 %, KLD 0.00527, PPL ratio 1.0000, hit 0.7526, swaps -, 145 s
+=== 15:14:53 c2000-ub1-d0: --ref ./results/kld/ref-f16-ub512/base.kld --ub 1 --cache-mib 2000
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.162289 ±   0.133099
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.001094 ±   0.001392
+Mean PPL(Q)-PPL(base)         :   0.005641 ±   0.007181
+Mean    KLD:   0.005394 ±   0.000195
+RMS Δp    :  2.173 ± 0.091 %
+Same top p: 96.910 ± 0.191 %
+2.34.003.495 I llama_moe_cache: ubatch <= 8: hits = 3390426, misses = 1786918 (1786918 on the CPU), hit rate = 65.49%, uploaded = 178954.16 MiB
+c2000-ub1-d0                   same-top 96.910 ± 0.191 %, KLD 0.00539, PPL ratio 1.0011, hit 0.6549, swaps -, 155 s
+=== 15:17:38 c4500-ub1-d0-rep: --ref ./results/kld/ref-f16-ub512/base.kld --ub 1 --cache-mib 4500
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+Mean PPL(Q)                   :   5.161780 ±   0.133061
+Mean PPL(base)                :   5.156649 ±   0.132699
+Mean PPL(Q)/PPL(base)         :   1.000995 ±   0.001296
+Mean PPL(Q)-PPL(base)         :   0.005131 ±   0.006683
+Mean    KLD:   0.004982 ±   0.000150
+RMS Δp    :  2.064 ± 0.076 %
+Same top p: 97.154 ± 0.184 %
+2.09.291.417 I llama_moe_cache: ubatch <= 8: hits = 4392785, misses = 784559 (784559 on the CPU), hit rate = 84.85%, uploaded = 111035.95 MiB
+c4500-ub1-d0-rep               same-top 97.154 ± 0.184 %, KLD 0.00498, PPL ratio 1.0010, hit 0.8485, swaps -, 130 s
+=== 15:19:59 kld check done

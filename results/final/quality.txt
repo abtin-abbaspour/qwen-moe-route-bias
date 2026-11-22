@@ -1,0 +1,39 @@
+== cache 3000
+q16-3000-d0                KLD 0.00495 [0.00443, 0.00564]  same top 97.396 % [97.201, 97.576]  ln PPL ratio +0.00170
+q16-3000-add0.00025        KLD 0.00582 [0.00526, 0.00646]  same top 97.148 % [96.967, 97.327]  ln PPL ratio +0.00180
+q16-3000-add0.0005         KLD 0.00675 [0.00611, 0.00751]  same top 96.831 % [96.620, 97.063]  ln PPL ratio +0.00039
+q16-3000-add0.001          KLD 0.00895 [0.00817, 0.00994]  same top 96.245 % [96.011, 96.478]  ln PPL ratio +0.00194
+q16-3000-add0.0025         KLD 0.01488 [0.01357, 0.01638]  same top 95.261 % [94.946, 95.553]  ln PPL ratio +0.00402
+q16-3000-add0.005          KLD 0.02565 [0.02299, 0.02925]  same top 93.695 % [93.341, 94.015]  ln PPL ratio +0.00786
+against q16-3000-d0: positive = the row is worse
+  q16-3000-add0.00025        dKLD +0.00087 [+0.00057, +0.00123]  same-top drop +0.247 points [+0.071, +0.418]  McNemar 473 vs 392, p = 0.00649
+  q16-3000-add0.0005         dKLD +0.00181 [+0.00154, +0.00215]  same-top drop +0.565 points [+0.354, +0.741]  McNemar 592 vs 407, p = 5.29e-09
+  q16-3000-add0.001          dKLD +0.00401 [+0.00357, +0.00456]  same-top drop +1.151 points [+0.920, +1.369]  McNemar 773 vs 396, p = 1.33e-28
+  q16-3000-add0.0025         dKLD +0.00993 [+0.00909, +0.01096]  same-top drop +2.134 points [+1.864, +2.408]  McNemar 1085 vs 386, p = 5.55e-77
+  q16-3000-add0.005          dKLD +0.02070 [+0.01842, +0.02366]  same-top drop +3.701 points [+3.390, +4.023]  McNemar 1587 vs 375, p = 7.16e-177
+== cache 4500
+q16-4500-d0                KLD 0.00461 [0.00420, 0.00511]  same top 97.313 % [97.112, 97.512]  ln PPL ratio +0.00117
+q16-4500-add0.00025        KLD 0.00540 [0.00492, 0.00597]  same top 97.130 % [96.918, 97.327]  ln PPL ratio +0.00021
+q16-4500-add0.0005         KLD 0.00668 [0.00600, 0.00748]  same top 96.803 % [96.598, 96.989]  ln PPL ratio +0.00044
+q16-4500-add0.001          KLD 0.00831 [0.00765, 0.00907]  same top 96.348 % [96.094, 96.577]  ln PPL ratio +0.00115
+q16-4500-add0.0025         KLD 0.01302 [0.01173, 0.01457]  same top 95.457 % [95.174, 95.712]  ln PPL ratio +0.00401
+q16-4500-add0.005          KLD 0.02054 [0.01861, 0.02304]  same top 94.410 % [94.091, 94.725]  ln PPL ratio +0.00839
+against q16-4500-d0: positive = the row is worse
+  q16-4500-add0.00025        dKLD +0.00079 [+0.00051, +0.00110]  same-top drop +0.183 points [+0.003, +0.375]  McNemar 480 vs 420, p = 0.0492
+  q16-4500-add0.0005         dKLD +0.00207 [+0.00170, +0.00251]  same-top drop +0.510 points [+0.320, +0.717]  McNemar 577 vs 410, p = 1.18e-07
+  q16-4500-add0.001          dKLD +0.00369 [+0.00330, +0.00408]  same-top drop +0.965 points [+0.754, +1.181]  McNemar 721 vs 405, p = 3.4e-21
+  q16-4500-add0.0025         dKLD +0.00840 [+0.00742, +0.00955]  same-top drop +1.856 points [+1.630, +2.092]  McNemar 996 vs 388, p = 7.35e-62
+  q16-4500-add0.005          dKLD +0.01593 [+0.01429, +0.01797]  same-top drop +2.904 points [+2.636, +3.193]  McNemar 1339 vs 388, p = 3.24e-122
+== cache 8000
+q16-8000-d0                KLD 0.00485 [0.00422, 0.00567]  same top 97.393 % [97.186, 97.582]  ln PPL ratio +0.00049
+q16-8000-add0.00025        KLD 0.00510 [0.00455, 0.00579]  same top 97.182 % [96.986, 97.376]  ln PPL ratio +0.00130
+q16-8000-add0.0005         KLD 0.00556 [0.00494, 0.00627]  same top 97.096 % [96.903, 97.290]  ln PPL ratio +0.00063
+q16-8000-add0.001          KLD 0.00651 [0.00587, 0.00728]  same top 96.901 % [96.681, 97.103]  ln PPL ratio +0.00163
+q16-8000-add0.0025         KLD 0.00895 [0.00793, 0.01016]  same top 96.351 % [96.109, 96.574]  ln PPL ratio +0.00159
+q16-8000-add0.005          KLD 0.01221 [0.01084, 0.01397]  same top 95.753 % [95.479, 96.002]  ln PPL ratio +0.00273
+against q16-8000-d0: positive = the row is worse
+  q16-8000-add0.00025        dKLD +0.00025 [-0.00010, +0.00059]  same-top drop +0.211 points [+0.022, +0.384]  McNemar 451 vs 382, p = 0.0184
+  q16-8000-add0.0005         dKLD +0.00071 [+0.00039, +0.00099]  same-top drop +0.296 points [+0.123, +0.464]  McNemar 504 vs 407, p = 0.00146
+  q16-8000-add0.001          dKLD +0.00166 [+0.00126, +0.00205]  same-top drop +0.492 points [+0.295, +0.683]  McNemar 574 vs 413, p = 3.33e-07
+  q16-8000-add0.0025         dKLD +0.00409 [+0.00351, +0.00472]  same-top drop +1.041 points [+0.818, +1.233]  McNemar 728 vs 387, p = 1.03e-24
+  q16-8000-add0.005          dKLD +0.00736 [+0.00638, +0.00847]  same-top drop +1.640 points [+1.427, +1.845]  McNemar 925 vs 388, p = 6.31e-51

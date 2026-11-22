@@ -1,0 +1,25 @@
+# screening at 4,500 MiB, 3-token steps (as MTP verify), 4 chunks: every row against the delta-0 run of the same setting
+base-4500-ub3          --base --cache-mib 4500 --ub 3 --route-stats 0
+s45-add0.000125        --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.000125 --bias-mode add
+s45-add0.00025         --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.00025 --bias-mode add
+s45-add0.0005          --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0005 --bias-mode add
+s45-add0.001           --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add
+s45-add0.0025          --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add
+s45-add0.005           --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005 --bias-mode add
+s45-mul1e-30           --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 1e-30 --bias-mode mul
+s45-mul0.0125          --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0125 --bias-mode mul
+s45-mul0.025           --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.025 --bias-mode mul
+s45-mul0.05            --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.05 --bias-mode mul
+s45-mul0.1             --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.1 --bias-mode mul
+s45-mul0.2             --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.2 --bias-mode mul
+s45-drop0.00025        --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.00025 --bias-mode add --drop
+s45-drop0.001          --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --drop
+s45-drop0.0025         --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --drop
+s45-prot2-0.001        --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --protect 2
+s45-prot2-0.0025       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --protect 2
+s45-L00-07-0.001       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 0-7
+s45-L08-15-0.001       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 8-15
+s45-L16-23-0.001       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 16-23
+s45-L24-31-0.001       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 24-31
+s45-L32-39-0.001       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 32-39
+s45-add0.001-rep       --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add

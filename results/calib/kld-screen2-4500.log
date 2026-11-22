@@ -1,0 +1,15 @@
+=== 16:49:10 s45-late16-0.001: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.001 --bias-mode add --bias-layers 16-39
+s45-late16-0.001               same-top 97.215 ± 0.182 %, KLD 0.00645, PPL ratio 1.0005, hit 0.8325, swaps 0.0199, 75 s
+=== 16:50:31 s45-late16-0.0025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --bias-layers 16-39
+s45-late16-0.0025              same-top 96.067 ± 0.215 %, KLD 0.01018, PPL ratio 1.0008, hit 0.8538, swaps 0.0433, 73 s
+=== 16:51:49 s45-late16-0.005: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005 --bias-mode add --bias-layers 16-39
+s45-late16-0.005               same-top 95.078 ± 0.239 %, KLD 0.01579, PPL ratio 1.0019, hit 0.8764, swaps 0.0721, 69 s
+=== 16:53:04 s45-late16-0.01: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.01 --bias-mode add --bias-layers 16-39
+s45-late16-0.01                same-top 92.916 ± 0.284 %, KLD 0.03113, PPL ratio 1.0168, hit 0.9005, swaps 0.1132, 69 s
+=== 16:54:18 s45-late24-0.005: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005 --bias-mode add --bias-layers 24-39
+s45-late24-0.005               same-top 95.677 ± 0.225 %, KLD 0.01221, PPL ratio 1.0001, hit 0.8557, swaps 0.0495, 72 s
+=== 16:55:35 s45-w25-0.0025: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.0025 --bias-mode add --bias-layers 0-15:0.25,16-39
+s45-w25-0.0025                 same-top 95.994 ± 0.217 %, KLD 0.01099, PPL ratio 0.9990, hit 0.8630, swaps 0.0510, 72 s
+=== 16:56:52 s45-w25-0.005: --ref ./results/kld/base-4500-ub3/base.kld --cache-mib 4500 --ub 3 --bias 0.005 --bias-mode add --bias-layers 0-15:0.25,16-39
+s45-w25-0.005                  same-top 95.017 ± 0.240 %, KLD 0.01741, PPL ratio 1.0024, hit 0.8930, swaps 0.0865, 68 s
+=== 16:58:05 kld sweep done

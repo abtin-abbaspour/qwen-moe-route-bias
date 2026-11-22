@@ -1,0 +1,601 @@
+# GPU_bias_test patch 2 of 2, on top of patch 1.
+# - LLAMA_MOE_ROUTE_STATS: counts the bias's swaps (1) or also writes per-token routing records (a path), from an unbiased softmax
+#   kept beside the fused top-k kernel so the bias path stays bit-identical; LLAMA_MOE_ROUTE_BIAS_LAYERS: the bias in chosen layers
+#   only, optionally scaled ("a-b[:s],..."); LLAMA_MOE_ROUTE_DROP: swapped-in experts get weight 0 (screening only).
+# - llama-perplexity: LLAMA_KLD_DUMP=<path> writes per-position KL divergence, probability difference, losses and top tokens
+#   ("KLD1" format, read by scripts/paired.py).
+diff --git a/src/llama-graph.cpp b/src/llama-graph.cpp
+index 2ae767b..1079a37 100644
+--- a/src/llama-graph.cpp
++++ b/src/llama-graph.cpp
+@@ -2271,6 +2271,29 @@ ggml_tensor * llm_graph_context::build_moe_ffn(
+         cb(logits, "ffn_moe_logits_biased", il);
+     }
+ 
++    // GPU_bias_test: LLAMA_MOE_ROUTE_STATS: with the route bias on, the unbiased scores once more, apart from the router chain (a node
++    // of the chain kept as an output would stop the CUDA top-k MoE fusion and change the arithmetic); the MoE cache reads them with
++    // the selected experts and counts the experts the bias swapped (see route_stats_take)
++    // GPU_bias_test: LLAMA_MOE_ROUTE_DROP=1: the experts the bias swapped in (outside the unbiased top-k) are computed -- they are
++    // cached, so they are hits -- but weighted 0, and the other weights are renormalized: the displaced expert is dropped instead of
++    // substituted, at the same hits and misses as the plain bias.  Reads the same separate copy of the unbiased scores.
++    static const bool route_drop = getenv("LLAMA_MOE_ROUTE_DROP") != nullptr && atoi(getenv("LLAMA_MOE_ROUTE_DROP")) != 0;
++    ggml_tensor * route_ref = nullptr;
++    {
++        static const bool route_stats = getenv("LLAMA_MOE_ROUTE_STATS") != nullptr && *getenv("LLAMA_MOE_ROUTE_STATS") != '\0' &&
++            std::string(getenv("LLAMA_MOE_ROUTE_STATS")) != "0";
++        if ((route_stats || route_drop) && moe_cache != nullptr && selected_experts_in == nullptr && hparams.n_expert_groups <= 1 &&
++            moe_cache->get_route_bias(il, n_tokens, n_expert_used) != nullptr &&
++            (gating_op == LLAMA_EXPERT_GATING_FUNC_TYPE_SOFTMAX || gating_op == LLAMA_EXPERT_GATING_FUNC_TYPE_SIGMOID)) {
++            route_ref = gating_op == LLAMA_EXPERT_GATING_FUNC_TYPE_SOFTMAX ? ggml_soft_max(ctx0, logits) : ggml_sigmoid(ctx0, logits);
++            if (route_stats) {
++                ggml_set_output(route_ref);
++            }
++            cb(route_ref, "ffn_moe_route_ref", il);
++            ggml_build_forward_expand(gf, route_ref);
++        }
++    }
++
+     ggml_tensor * probs = nullptr;
+     switch (gating_op) {
+         case LLAMA_EXPERT_GATING_FUNC_TYPE_SOFTMAX:
+@@ -2380,6 +2403,9 @@ ggml_tensor * llm_graph_context::build_moe_ffn(
+     if (selected_experts == nullptr) {
+         selected_experts = ggml_argsort_top_k(ctx0, selection_probs, n_expert_used); // [n_expert_used, n_tokens]
+         cb(selected_experts->src[0], "ffn_moe_argsort", il);
++        if (route_ref != nullptr && (route_ref->flags & GGML_TENSOR_FLAG_OUTPUT)) {
++            moe_cache->set_route_ref(selected_experts, route_ref); // GPU_bias_test: the stats read it
++        }
+     }
+     cb(selected_experts, "ffn_moe_topk", il);
+ 
+@@ -2437,6 +2463,29 @@ ggml_tensor * llm_graph_context::build_moe_ffn(
+     //call early so that topk-moe can be used
+     ggml_build_forward_expand(gf, weights);
+ 
++    // GPU_bias_test LLAMA_MOE_ROUTE_DROP: an expert is in the unbiased top-k iff its unbiased score beats the unbiased (k+1)-th; the
++    // others (swapped in by the bias) get weight 0 and the rest are renormalized.  After the fused router, which it reads only.
++    if (route_drop && route_ref != nullptr && selected_experts_in == nullptr) {
++        ggml_tensor * r3   = ggml_reshape_3d(ctx0, route_ref, 1, n_expert, n_tokens);
++        ggml_tensor * top  = ggml_argsort_top_k(ctx0, route_ref, n_expert_used + 1);                 // [k+1, n_tokens]
++        ggml_tensor * nxt  = ggml_cont(ctx0, ggml_view_2d(ctx0, top, 1, n_tokens, top->nb[1], n_expert_used*top->nb[0]));
++        ggml_tensor * vnx  = ggml_get_rows(ctx0, r3, nxt);                                            // [1, 1, n_tokens]
++        ggml_tensor * vsel = ggml_get_rows(ctx0, r3, selected_experts);                               // [1, k, n_tokens]
++        ggml_tensor * keep = ggml_step(ctx0, ggml_sub(ctx0, vsel, vnx));                              // 1 in the unbiased top-k
++        cb(keep, "ffn_moe_route_keep_mask", il);
++        ggml_tensor * wk = ggml_mul(ctx0, weights, keep);
++        if (norm_w) {
++            // renormalized: w*keep * (sum w / sum w*keep), exactly w when nothing is dropped (the two sums are the same numbers)
++            ggml_tensor * s_all  = ggml_sum_rows(ctx0, ggml_reshape_2d(ctx0, weights, n_expert_used, n_tokens)); // [1, n_tokens]
++            ggml_tensor * s_kept = ggml_clamp(ctx0, ggml_sum_rows(ctx0, ggml_reshape_2d(ctx0, wk, n_expert_used, n_tokens)),
++                                              6.103515625e-5, INFINITY);
++            ggml_tensor * f      = ggml_reshape_3d(ctx0, ggml_div(ctx0, s_all, s_kept), 1, 1, n_tokens);
++            wk = ggml_mul(ctx0, wk, f);
++        }
++        weights = wk;
++        cb(weights, "ffn_moe_weights_dropped", il);
++    }
++
+     // 0166 LLAMA_TP_DECODE phase 1: the router alone
+     if (moe_td_phase == 1) {
+         // 0171: contiguous here, so the later lookup builds no CONT of its own in its split
+diff --git a/src/llama-moe-cache.cpp b/src/llama-moe-cache.cpp
+index 7b0d19f..4ef8e34 100644
+--- a/src/llama-moe-cache.cpp
++++ b/src/llama-moe-cache.cpp
+@@ -551,6 +551,241 @@ struct llama_moe_cache::impl {
+     int32_t *               ids_pin = nullptr;
+     pending_plan defer_st;
+ 
++    // GPU_bias_test: LLAMA_MOE_ROUTE_STATS=1 (or a file path: per-token records too).  With the route bias on, the unbiased selection
++    // scores of each small-batch lookup (src[0] of the graph's ffn_moe_probs_cache_bias node, kept allocated by the graph) are read
++    // with the selected experts; the host compares the unbiased top-k with the selection: the experts the bias swapped in, the
++    // unbiased score mass the swaps gave up, and the favoured (cached or being filled) share of both sets
++    static int route_stats_mode() {
++        static const int v = [] {
++            const char * s = getenv("LLAMA_MOE_ROUTE_STATS");
++            if (s == nullptr || *s == '\0' || strcmp(s, "0") == 0) {
++                return 0;
++            }
++            return strcmp(s, "1") == 0 ? 1 : 2;
++        }();
++        return v;
++    }
++    struct route_stats {
++        uint64_t tok         = 0;    // token-layers looked up with the bias on
++        uint64_t tok_swapped = 0;    // of which the selection differs from the unbiased top-k
++        uint64_t swaps       = 0;    // experts of the unbiased top-k not selected (= selected experts outside it)
++        uint64_t fav_sel     = 0;    // selected experts the bias favoured
++        uint64_t fav_ref     = 0;    // unbiased top-k experts the bias favoured
++        double   mass_ref    = 0.0;  // sum of the unbiased scores of the unbiased top-k
++        double   mass_sel    = 0.0;  // and of the selection
++        double   gap_sum     = 0.0;  // per swapped-in expert: log score of the unbiased k-th minus its own
++        float    gap_max     = 0.0f;
++        void add(const route_stats & o) {
++            tok += o.tok; tok_swapped += o.tok_swapped; swaps += o.swaps; fav_sel += o.fav_sel; fav_ref += o.fav_ref;
++            mass_ref += o.mass_ref; mass_sel += o.mass_sel; gap_sum += o.gap_sum; gap_max = std::max(gap_max, o.gap_max);
++        }
++    };
++    route_stats rs_tot, rs_win;
++    std::vector<route_stats> rs_layer;
++    ggml_backend_buffer_ptr rs_pin_buf;
++    float *  rs_pin   = nullptr;
++    size_t   rs_cap   = 0;
++    int32_t  rs_il    = -1;
++    int64_t  rs_n_tok = 0;
++    int64_t  rs_n_exp = 0;
++    FILE *   rs_file  = nullptr;
++    bool     rs_file_tried = false;
++    uint32_t rs_step  = 0;
++    std::vector<int32_t> rs_order;
++    std::vector<uint8_t> rs_flag;
++    std::vector<float>   rs_key;
++
++    // the selections the graphs registered with set_route_ref -> their unbiased scores
++    std::unordered_map<const ggml_tensor *, const ggml_tensor *> route_refs;
++
++    // the unbiased scores of the lookup's ids: the registered selection is a few views or a CONT above them
++    const ggml_tensor * route_ref_of(const ggml_tensor * sel) const {
++        if (route_refs.empty()) {
++            return nullptr;
++        }
++        const ggml_tensor * q[16];
++        int nq = 0;
++        q[nq++] = sel;
++        for (int h = 0; h < nq; ++h) {
++            const ggml_tensor * t = q[h];
++            const auto it = route_refs.find(t);
++            if (it != route_refs.end()) {
++                return it->second;
++            }
++            for (int j = 0; j < GGML_MAX_SRC && nq < 16; ++j) {
++                if (t->src[j] != nullptr) {
++                    q[nq++] = t->src[j];
++                }
++            }
++        }
++        return nullptr;
++    }
++
++    // with the read of the selected experts: the unbiased scores of the same tokens, into pinned memory
++    void route_stats_read(ggml_backend_t backend, int32_t il, const ggml_tensor * sel) {
++        rs_il = -1;
++        const layer & l = layers[il];
++        if (route_stats_mode() == 0 || l.route_bias == nullptr) {
++            return;
++        }
++        const ggml_tensor * ref = route_ref_of(sel);
++        if (ref == nullptr || ref->type != GGML_TYPE_F32 || !ggml_is_contiguous(ref) || ref->data == nullptr ||
++            ref->ne[0] != (int64_t) l.route_bias_last.size() || (size_t) ggml_nrows(ref)*n_expert_used != ids.size()) {
++            return;
++        }
++        const ggml_tensor * base = base_of(ref);
++        if (base->buffer == nullptr || ggml_backend_buffer_is_host(base->buffer) ||
++            ggml_backend_buft_get_device(ggml_backend_buffer_get_type(base->buffer)) != ggml_backend_get_device(backend)) {
++            return;
++        }
++        const size_t nb = ggml_nbytes(ref);
++        if (nb > rs_cap) {
++            ggml_backend_buffer_type_t buft_pin = ggml_backend_dev_host_buffer_type(ggml_backend_get_device(backend));
++            rs_pin_buf.reset(buft_pin != nullptr ? ggml_backend_buft_alloc_buffer(buft_pin, std::max<size_t>(nb, 256*1024)) : nullptr);
++            rs_pin = rs_pin_buf ? (float *) ggml_backend_buffer_get_base(rs_pin_buf.get()) : nullptr;
++            rs_cap = rs_pin_buf ? ggml_backend_buffer_get_size(rs_pin_buf.get()) : 0;
++            if (rs_pin == nullptr) {
++                return;
++            }
++        }
++        ggml_backend_tensor_get_async(backend, ref, rs_pin, 0, nb);
++        rs_il    = il;
++        rs_n_tok = ggml_nrows(ref);
++        rs_n_exp = ref->ne[0];
++    }
++
++    // once the ids are in: compare, count, and write the per-token records
++    // record (little endian): u32 step, u16 layer, u8 token in the batch, u8 n, then n entries of u16 expert, u8 flags (1 favoured,
++    // 2 selected, 4 in the unbiased top-k), u8 0, f32 unbiased score; the entries are the top max(k+1, 24) by unbiased score, then
++    // the selected experts outside them
++    void route_stats_take(int32_t il) {
++        if (rs_il != il) {
++            return;
++        }
++        rs_il = -1;
++        const layer & l = layers[il];
++        const int64_t k  = n_expert_used;
++        const int64_t ne = rs_n_exp;
++        if (rs_layer.size() != layers.size()) {
++            rs_layer.assign(layers.size(), route_stats());
++        }
++        if (route_stats_mode() == 2 && !rs_file_tried) {
++            rs_file_tried = true;
++            static int n_open = 0; // a second cache in the process (an MTP context) writes to <path>.1
++            std::string path = getenv("LLAMA_MOE_ROUTE_STATS");
++            if (n_open++ > 0) {
++                path += "." + std::to_string(n_open - 1);
++            }
++            rs_file = fopen(path.c_str(), "wb");
++            if (rs_file == nullptr) {
++                LLAMA_LOG_WARN("llama_moe_cache: cannot write the route records to %s\n", path.c_str());
++            } else {
++                // header: "MRS1", u32 n_expert_used, u32 n_expert, f32 bias, u32 mode (0 add, 1 mul), u32 protect
++                const char * m = getenv("LLAMA_MOE_ROUTE_BIAS_MODE");
++                const char * r = getenv("LLAMA_MOE_ROUTE_PROTECT");
++                const uint32_t h[2] = { (uint32_t) k, (uint32_t) ne };
++                const float    d    = route_bias_value();
++                const uint32_t h2[2] = { (uint32_t) (m != nullptr && strcmp(m, "mul") == 0), (uint32_t) (r != nullptr ? atoi(r) : 0) };
++                fwrite("MRS1", 1, 4, rs_file);
++                fwrite(h, sizeof(uint32_t), 2, rs_file);
++                fwrite(&d, sizeof(float), 1, rs_file);
++                fwrite(h2, sizeof(uint32_t), 2, rs_file);
++            }
++        }
++        rs_order.resize(ne);
++        rs_flag.resize(ne);
++        const int64_t n_top = std::min<int64_t>(ne, std::max<int64_t>(k + 1, 24));
++        auto fav = [&](int32_t e) {
++            return l.route_bias_last[e] - (l.route_epb.empty() ? 0.0f : l.route_epb[e]) > 0.0f;
++        };
++        static const bool mul = getenv("LLAMA_MOE_ROUTE_BIAS_MODE") != nullptr && strcmp(getenv("LLAMA_MOE_ROUTE_BIAS_MODE"), "mul") == 0;
++        struct rec_e { uint16_t e; uint8_t flags; uint8_t pad; float p; };
++        std::vector<rec_e> rec;
++        rs_key.resize(ne);
++        for (int64_t t = 0; t < rs_n_tok; ++t) {
++            const float   * p = rs_pin + t*ne;
++            const int32_t * s = ids.data() + t*k;
++            float * key = rs_key.data(); // the unbiased selection score: p, plus exp_probs_b where the router has one
++            for (int64_t e = 0; e < ne; ++e) {
++                key[e] = p[e] + (l.route_epb.empty() ? 0.0f : l.route_epb[e]);
++            }
++            std::iota(rs_order.begin(), rs_order.end(), 0);
++            std::partial_sort(rs_order.begin(), rs_order.begin() + n_top, rs_order.end(),
++                [key](int32_t a, int32_t b) { return key[a] > key[b] || (key[a] == key[b] && a < b); });
++            std::fill(rs_flag.begin(), rs_flag.end(), 0);
++            route_stats st;
++            st.tok = 1;
++            for (int64_t r = 0; r < k; ++r) {
++                rs_flag[rs_order[r]] |= 4;
++            }
++            for (int64_t r = 0; r < k; ++r) {
++                const int32_t e = s[r];
++                if (e < 0 || e >= ne) {
++                    continue;
++                }
++                rs_flag[e] |= 2;
++                st.mass_sel += p[e];
++                st.fav_sel  += fav(e) ? 1 : 0;
++            }
++            for (int64_t r = 0; r < k; ++r) {
++                const int32_t e = rs_order[r];
++                st.mass_ref += p[e];
++                st.fav_ref  += fav(e) ? 1 : 0;
++                st.swaps    += (rs_flag[e] & 2) ? 0 : 1;
++            }
++            st.tok_swapped = st.swaps > 0 ? 1 : 0;
++            const float kk = key[rs_order[k - 1]];
++            for (int64_t r = 0; r < k; ++r) {
++                const int32_t e = s[r];
++                if (e >= 0 && e < ne && !(rs_flag[e] & 4)) {
++                    const float gap = mul ? logf(std::max(kk, 1e-30f)) - logf(std::max(key[e], 1e-30f)) : kk - key[e];
++                    st.gap_sum += gap;
++                    st.gap_max  = std::max(st.gap_max, gap);
++                }
++            }
++            rs_tot.add(st);
++            rs_win.add(st);
++            rs_layer[il].add(st);
++            if (rs_file != nullptr) {
++                rec.clear();
++                for (int64_t r = 0; r < n_top; ++r) {
++                    const int32_t e = rs_order[r];
++                    rec.push_back({ (uint16_t) e, (uint8_t) (rs_flag[e] | (fav(e) ? 1 : 0)), 0, p[e] });
++                }
++                for (int64_t r = 0; r < k; ++r) {
++                    const int32_t e = s[r];
++                    bool listed = false;
++                    for (int64_t q = 0; q < n_top && !listed; ++q) {
++                        listed = rs_order[q] == e;
++                    }
++                    if (e >= 0 && e < ne && !listed) {
++                        rec.push_back({ (uint16_t) e, (uint8_t) (rs_flag[e] | (fav(e) ? 1 : 0)), 0, p[e] });
++                    }
++                }
++                const uint32_t step = rs_step;
++                const uint16_t lay  = (uint16_t) il;
++                const uint8_t  tb[2] = { (uint8_t) t, (uint8_t) rec.size() };
++                fwrite(&step, sizeof(step), 1, rs_file);
++                fwrite(&lay, sizeof(lay), 1, rs_file);
++                fwrite(tb, 1, 2, rs_file);
++                fwrite(rec.data(), sizeof(rec_e), rec.size(), rs_file);
++            }
++        }
++    }
++
++    void route_stats_log(const char * name, const route_stats & st) const {
++        if (st.tok == 0) {
++            return;
++        }
++        const double picks = (double) st.tok*n_expert_used;
++        LLAMA_LOG_INFO("llama_moe_cache: route %s: %llu token-layers, %.2f%% with a swap, %.4f swaps per token-layer (%.3f%% of picks), "
++            "unbiased mass kept %.4f%%, favoured picks %.2f%% (unbiased top-k %.2f%%), swapped-in gap mean %.4f max %.4f (%s)\n",
++            name, (unsigned long long) st.tok, 100.0*st.tok_swapped/st.tok, (double) st.swaps/st.tok, 100.0*st.swaps/picks,
++            st.mass_ref > 0.0 ? 100.0*st.mass_sel/st.mass_ref : 0.0, 100.0*st.fav_sel/picks, 100.0*st.fav_ref/picks,
++            st.swaps > 0 ? st.gap_sum/st.swaps : 0.0, (double) st.gap_max,
++            getenv("LLAMA_MOE_ROUTE_BIAS_MODE") != nullptr && strcmp(getenv("LLAMA_MOE_ROUTE_BIAS_MODE"), "mul") == 0 ? "log score" : "score");
++    }
++
+     // LLAMA_MOE_ASYNC_FILL=1 and LLAMA_MOE_ROUTE_BIAS=d, see get_route_bias and the small-batch path of copy
+     static bool async_fill_enabled() {
+         static const bool v = getenv("LLAMA_MOE_ASYNC_FILL") != nullptr && atoi(getenv("LLAMA_MOE_ASYNC_FILL")) != 0;
+@@ -562,6 +797,47 @@ struct llama_moe_cache::impl {
+         static const int32_t v = getenv("LLAMA_MOE_ASYNC_FILL_TOKENS") != nullptr ? std::max(1, atoi(getenv("LLAMA_MOE_ASYNC_FILL_TOKENS"))) : 0;
+         return v;
+     }
++    // GPU_bias_test: LLAMA_MOE_ROUTE_BIAS_LAYERS=a-b[:s][,c-d[:s]...]: the bias only in those layers, times s where given (0 elsewhere;
++    // the graph is unchanged).  E.g. 16-39 (late layers only) or 0-15:0.25,16-39 (a quarter of the bias in the early layers)
++    struct bias_range { int a, b; float s; };
++    static float route_bias_for(int32_t il) {
++        static const std::vector<bias_range> ranges = [] {
++            std::vector<bias_range> r;
++            const char * env = getenv("LLAMA_MOE_ROUTE_BIAS_LAYERS");
++            if (env == nullptr || *env == '\0') {
++                return r;
++            }
++            const std::string str(env);
++            size_t pos = 0;
++            while (pos < str.size()) {
++                size_t end = str.find(',', pos);
++                if (end == std::string::npos) {
++                    end = str.size();
++                }
++                const std::string tok = str.substr(pos, end - pos);
++                const size_t dash  = tok.find('-');
++                const size_t colon = tok.find(':');
++                const int a = atoi(tok.c_str());
++                const int b = dash != std::string::npos && (colon == std::string::npos || dash < colon) ? atoi(tok.c_str() + dash + 1) : a;
++                const float sc = colon != std::string::npos ? (float) atof(tok.c_str() + colon + 1) : 1.0f;
++                r.push_back({ a, b, sc });
++                pos = end + 1;
++            }
++            for (const auto & x : r) {
++                LLAMA_LOG_INFO("llama_moe_cache: route bias in layers %d-%d, times %.3f\n", x.a, x.b, (double) x.s);
++            }
++            return r;
++        }();
++        if (ranges.empty()) {
++            return route_bias_value();
++        }
++        for (const auto & r : ranges) {
++            if (il >= r.a && il <= r.b) {
++                return route_bias_value()*r.s;
++            }
++        }
++        return 0.0f;
++    }
+     static float route_bias_value() {
+         static const float v = getenv("LLAMA_MOE_ROUTE_BIAS") != nullptr ? (float) atof(getenv("LLAMA_MOE_ROUTE_BIAS")) : 0.0f;
+         return v;
+@@ -1868,6 +2144,9 @@ struct llama_moe_cache::impl {
+         if (trace != nullptr) {
+             fclose(trace);
+         }
++        if (rs_file != nullptr) {
++            fclose(rs_file);
++        }
+     }
+ 
+     ggml_tensor * get_slot_map(int32_t il, int64_t n_tokens, int64_t n_expert_used) const {
+@@ -2157,6 +2436,7 @@ struct llama_moe_cache::impl {
+             memcpy(ids.data(), ids_pin, ids.size()*sizeof(int32_t));
+         }
+         const int64_t t_ids = predict_enabled() ? ggml_time_us() : 0;
++        route_stats_take(il); // GPU_bias_test
+         if (trace != nullptr) {
+             write_trace(il, defer_st.n_used);
+         }
+@@ -2314,7 +2594,7 @@ struct llama_moe_cache::impl {
+         }
+         // LLAMA_MOE_ROUTE_BIAS (0046): the selection bias of this layer for the next token, as the lookup sets it after its plan
+         if (l.route_bias != nullptr) {
+-            const float d = route_bias_value();
++            const float d = route_bias_for(il); // GPU_bias_test: per layer
+             const int32_t * slots_rb = g.slru.slot_map[il];
+             const int32_t * slots_rx = gx != nullptr ? gx->slru.slot_map[il] : nullptr; // 0145
+             for (int32_t e = 0; e < g.slru.n_expert; ++e) {
+@@ -2352,6 +2632,8 @@ struct llama_moe_cache::impl {
+                 LLAMA_LOG_INFO("llama_moe_cache: window: tokens %zu-%zu: hit rate = %.2f%% (%zu hits, %zu misses, %zu on the CPU), uploaded = %.1f MiB, prefetched = %zu (%.1f MiB)\n",
+                     win_total - win_tokens, win_total, n > 0 ? 100.0*win.hits/n : 0.0, win.hits, win.misses, win.cpu, win.bytes/1024.0/1024.0,
+                     win_pf_n, win_pf_bytes/1024.0/1024.0);
++                route_stats_log("window", rs_win); // GPU_bias_test
++                rs_win = route_stats();
+                 win_tokens = 0;
+                 win = stats();
+                 win_pf_n     = 0;
+@@ -2998,6 +3280,7 @@ struct llama_moe_cache::impl {
+ 
+     void begin() {
+         stash.clear();
++        rs_step++; // GPU_bias_test
+         p_cur++; // 0088
+     }
+ 
+@@ -3157,6 +3440,7 @@ struct llama_moe_cache::impl {
+             ids_in_pin = ids_pin != nullptr && ggml_nbytes(sel) <= 64*1024;
+         }
+         ggml_backend_tensor_get_async(backend, sel, ids_in_pin ? (void *) ids_pin : (void *) ids.data(), 0, ggml_nbytes(sel));
++        route_stats_read(backend, il, sel); // GPU_bias_test
+         pred_pending = false;
+         pred_in_pin = false;
+         if (prefetch_enabled() && il + 1 < (int32_t) layers.size() && layers[il + 1].pred != nullptr && layers[il + 1].pred->data != nullptr &&
+@@ -3227,6 +3511,7 @@ struct llama_moe_cache::impl {
+             l.fill_ev_pending = false;
+         }
+ 
++        route_stats_take(il); // GPU_bias_test
+         if (trace != nullptr) {
+             write_trace(il, it_cpu != cpu_parts.end() ? it_cpu->second.n_used : n_expert_used);
+         }
+@@ -3360,7 +3645,7 @@ struct llama_moe_cache::impl {
+ 
+         // LLAMA_MOE_ROUTE_BIAS: the selection bias of this layer for the next token, d for the cached experts (the pending fills included)
+         if (l.route_bias != nullptr) {
+-            const float d = route_bias_value();
++            const float d = route_bias_for(il); // GPU_bias_test: per layer
+             const int32_t * slots_rb = g.slru.slot_map[il];
+             for (int32_t e = 0; e < g.slru.n_expert; ++e) {
+                 l.route_bias_host[e] = (l.route_epb.empty() ? 0.0f : l.route_epb[e]) + (slots_rb[e] < g.slru.n_slots ? d : 0.0f);
+@@ -3405,6 +3690,8 @@ struct llama_moe_cache::impl {
+                 LLAMA_LOG_INFO("llama_moe_cache: window: tokens %zu-%zu: hit rate = %.2f%% (%zu hits, %zu misses, %zu on the CPU), uploaded = %.1f MiB, prefetched = %zu (%.1f MiB)\n",
+                     win_total - win_tokens, win_total, n > 0 ? 100.0*win.hits/n : 0.0, win.hits, win.misses, win.cpu, win.bytes/1024.0/1024.0,
+                     win_pf_n, win_pf_bytes/1024.0/1024.0);
++                route_stats_log("window", rs_win); // GPU_bias_test
++                rs_win = route_stats();
+                 win_tokens = 0;
+                 win = stats();
+                 win_pf_n = 0;
+@@ -3593,6 +3880,16 @@ struct llama_moe_cache::impl {
+         };
+         log("ubatch <= 8", stats_small);
+         log("ubatch  > 8", stats_large);
++        route_stats_log("total", rs_tot); // GPU_bias_test
++        if (rs_tot.tok > 0) {
++            std::string per_layer;
++            char buf[32];
++            for (const route_stats & st : rs_layer) {
++                snprintf(buf, sizeof(buf), " %.4f", st.tok > 0 ? (double) st.swaps/st.tok : 0.0);
++                per_layer += buf;
++            }
++            LLAMA_LOG_INFO("llama_moe_cache: route swaps per token by layer:%s\n", per_layer.c_str());
++        }
+         if (stats_copy.hits > 0) {
+             LLAMA_LOG_INFO("llama_moe_cache: large batches: %zu experts copied from the cache, %.2f MiB\n", stats_copy.hits, stats_copy.bytes/1024.0/1024.0);
+         }
+@@ -3629,6 +3926,13 @@ ggml_tensor * llama_moe_cache::get_cpu_map(int32_t il) const {
+     return il >= 0 && il < (int32_t) pimpl->layers.size() ? pimpl->layers[il].cpu_map : nullptr;
+ }
+ 
++void llama_moe_cache::set_route_ref(const ggml_tensor * sel, const ggml_tensor * ref) {
++    if (pimpl->route_refs.size() > 65536) {
++        pimpl->route_refs.clear(); // the keys of freed graphs; every live graph registered its selections when it was built
++    }
++    pimpl->route_refs[sel] = ref;
++}
++
+ ggml_tensor * llama_moe_cache::get_route_bias(int32_t il, int64_t n_tokens, int64_t n_expert_used) const {
+     if (il < 0 || il >= (int32_t) pimpl->layers.size() || pimpl->layers[il].route_bias == nullptr) {
+         return nullptr;
+diff --git a/src/llama-moe-cache.h b/src/llama-moe-cache.h
+index ccb5e97..36dc5f1 100644
+--- a/src/llama-moe-cache.h
++++ b/src/llama-moe-cache.h
+@@ -45,6 +45,10 @@ public:
+     // 0170: upload the twins the last graph's lookups changed (before a graph, while no pair all-reduce waits)
+     void td_flush();
+ 
++    // GPU_bias_test LLAMA_MOE_ROUTE_STATS: the unbiased scores (F32 [n_expert, n_tokens] on the device, an output of the graph) of the
++    // selection sel, per graph build; the lookup of sel reads them with the selected experts
++    void set_route_ref(const ggml_tensor * sel, const ggml_tensor * ref);
++
+     // true when the route bias of layer il already holds the layer's exp_probs_b (it replaces exp_probs_b in the graph, see 0034)
+     bool route_bias_folded(int32_t il) const;
+ 
+diff --git a/tools/perplexity/perplexity.cpp b/tools/perplexity/perplexity.cpp
+index 601361a..7645e64 100644
+--- a/tools/perplexity/perplexity.cpp
++++ b/tools/perplexity/perplexity.cpp
+@@ -188,7 +188,10 @@ struct kl_divergence_result {
+     size_t count            = 0.0;
+ };
+ 
+-static std::pair<double, float> log_softmax(int n_vocab, const float * logits, const uint16_t * base_log_prob, int tok, kl_divergence_result & kld) {
++// GPU_bias_test: pos (optional) receives the top token of this run and of the base, as int32, and both NLLs, as float
++struct kld_pos { int32_t top_q, top_base; float nll_q, nll_base; };
++static std::pair<double, float> log_softmax(int n_vocab, const float * logits, const uint16_t * base_log_prob, int tok, kl_divergence_result & kld,
++        kld_pos * pos = nullptr) {
+     float max_logit = logits[0];
+     int imax = 0;
+     for (int i = 1; i < n_vocab; ++i) {
+@@ -238,6 +241,9 @@ static std::pair<double, float> log_softmax(int n_vocab, const float * logits, c
+     if (imax == imax_base) {
+         ++kld.n_same_top;
+     }
++    if (pos != nullptr) {
++        *pos = { imax, imax_base, nll, nll_base };
++    }
+ 
+     const float p_base = expf(-nll_base);
+     const float p = expf(-nll);
+@@ -253,11 +259,11 @@ static std::pair<double, float> log_softmax(int n_vocab, const float * logits, c
+ 
+ static void process_logits(int n_vocab, const float * logits, const int * tokens, int n_token,
+         std::vector<std::thread> & workers, const std::vector<uint16_t> & base_log_probs, kl_divergence_result & kld,
+-        float * kld_values, float * p_diff_values) {
++        float * kld_values, float * p_diff_values, kld_pos * pos_values = nullptr) {
+     std::mutex mutex;
+     const int nv = 2*((n_vocab + 1)/2) + 4;
+     int counter = 0;
+-    auto compute = [&mutex, &counter, &base_log_probs, &kld, n_vocab, logits, tokens, n_token, nv, kld_values, p_diff_values] () {
++    auto compute = [&mutex, &counter, &base_log_probs, &kld, n_vocab, logits, tokens, n_token, nv, kld_values, p_diff_values, pos_values] () {
+         kl_divergence_result local_kld;
+         while (true) {
+             std::unique_lock<std::mutex> lock(mutex);
+@@ -279,7 +285,8 @@ static void process_logits(int n_vocab, const float * logits, const int * tokens
+                 break;
+             }
+             lock.unlock();
+-            std::pair<double, float> v = log_softmax(n_vocab, logits + size_t(i)*n_vocab, base_log_probs.data() + size_t(i)*nv, tokens[i+1], local_kld);
++            std::pair<double, float> v = log_softmax(n_vocab, logits + size_t(i)*n_vocab, base_log_probs.data() + size_t(i)*nv, tokens[i+1], local_kld,
++                                                     pos_values != nullptr ? pos_values + i : nullptr);
+             kld_values[i]    = (float)v.first;
+             p_diff_values[i] = v.second;
+         }
+@@ -1738,6 +1745,7 @@ static void kl_divergence(llama_context * ctx, const common_params & params) {
+     std::vector<uint16_t> log_probs_uint16(size_t(n_ctx - 1 - n_ctx/2) * nv);
+     std::vector<float>    kld_values(size_t(n_ctx - 1 - n_ctx/2)*n_chunk);
+     std::vector<float> p_diff_values(size_t(n_ctx - 1 - n_ctx/2)*n_chunk);
++    std::vector<kld_pos> pos_values(size_t(n_ctx - 1 - n_ctx/2)*n_chunk); // GPU_bias_test: LLAMA_KLD_DUMP
+     std::vector<float> logits;
+     if (num_batches > 1) {
+         logits.reserve(size_t(n_ctx) * n_vocab);
+@@ -1768,6 +1776,7 @@ static void kl_divergence(llama_context * ctx, const common_params & params) {
+     kl_divergence_result kld;
+     auto    kld_ptr =    kld_values.data();
+     auto p_diff_ptr = p_diff_values.data();
++    auto    pos_ptr =    pos_values.data();
+ 
+     const int first = n_ctx/2;
+ 
+@@ -1847,7 +1856,8 @@ static void kl_divergence(llama_context * ctx, const common_params & params) {
+             const float * all_logits = num_batches > 1 ? logits.data() : llama_get_logits_ith(ctx, seq*n_ctx + first);
+ 
+             process_logits(n_vocab, all_logits, tokens.data() + start + seq*n_ctx + first, n_ctx - 1 - first,
+-                    workers, log_probs_uint16, kld, kld_ptr, p_diff_ptr);
++                    workers, log_probs_uint16, kld, kld_ptr, p_diff_ptr, pos_ptr);
++            pos_ptr    += n_ctx - 1 - first;
+             p_diff_ptr += n_ctx - 1 - first;
+             kld_ptr    += n_ctx - 1 - first;
+ 
+@@ -1886,6 +1896,26 @@ static void kl_divergence(llama_context * ctx, const common_params & params) {
+ 
+     if (kld.count < 100) return; // we do not wish to do statistics on so few values
+ 
++    // GPU_bias_test LLAMA_KLD_DUMP=<path>: the per-position values, in text order, before the sorts below.  Format: "KLD1", u32 count,
++    // then count x (f32 kld, f32 p_diff, f32 nll, f32 nll_base, i32 top token, i32 top token of the base)
++    if (const char * dump = getenv("LLAMA_KLD_DUMP"); dump != nullptr && *dump != '\0') {
++        const size_t n_pos = (size_t) kld.count;
++        if (FILE * f = fopen(dump, "wb")) {
++            const uint32_t n32 = (uint32_t) n_pos;
++            fwrite("KLD1", 1, 4, f);
++            fwrite(&n32, sizeof(n32), 1, f);
++            for (size_t i = 0; i < n_pos; ++i) {
++                const float   fv[4] = { kld_values[i], p_diff_values[i], pos_values[i].nll_q, pos_values[i].nll_base };
++                const int32_t iv[2] = { pos_values[i].top_q, pos_values[i].top_base };
++                fwrite(fv, sizeof(float), 4, f);
++                fwrite(iv, sizeof(int32_t), 2, f);
++            }
++            fclose(f);
++            LOG_INF("%s: wrote %zu positions to %s\n", __func__, n_pos, dump);
++        } else {
++            LOG_ERR("%s: cannot write %s\n", __func__, dump);
++        }
++    }
+     std::sort(kld_values.begin(), kld_values.end());
+     std::sort(p_diff_values.begin(), p_diff_values.end());
+ 

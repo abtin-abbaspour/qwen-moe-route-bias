@@ -1,0 +1,21 @@
+{
+ "dir": "s45-late16-0.005",
+ "settings": "cache 4500 MiB, bias 0.005 (add), protect 0, drop 0, layers 16-39, cpu share 0.9, kv q8_0, ub 3, chunks 4, engine full, base 0, ref ./results/kld/base-4500-ub3/base.kld",
+ "elapsed_s": 69,
+ "ppl_q": 5.167212,
+ "ppl_q_err": 0.133078,
+ "ppl_base": 5.15763,
+ "ppl_base_err": 0.132646,
+ "ppl_ratio": 1.001858,
+ "ppl_ratio_err": 0.002291,
+ "kld_mean": 0.015792,
+ "kld_mean_err": 0.000451,
+ "kld_p99": 0.155168,
+ "same_top": 95.078,
+ "same_top_err": 0.239,
+ "rms_dp": 3.82,
+ "rms_dp_err": 0.151,
+ "hit_rate": 0.8764,
+ "swap_rate_picks": 0.07208,
+ "mass_kept": 0.9938710000000001
+}

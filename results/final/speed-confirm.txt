@@ -1,0 +1,8 @@
+cache 3000 MiB: 5 blocks; delta-0 run means 129.8, 144.1, 144.6, 128.3, 143.4 tok/s
+  add0.00025   block gains +10.97, -10.09, +0.46, +12.74, +0.79 -> median +0.79 % (pooled mean, registered statistic: +2.58 %)
+  add0.0005    block gains +13.26, -9.26, +2.00, +14.77, -8.57 -> median +2.00 % (pooled mean, registered statistic: +1.94 %)
+  add0.001     block gains +16.10, +5.09, +4.02, +17.60, +5.25 -> median +5.25 % (pooled mean, registered statistic: +9.29 %)
+cache 4500 MiB: 5 blocks; delta-0 run means 172.8, 171.7, 170.9, 170.3, 171.2 tok/s
+  add0.00025   block gains +0.32, -9.67, +1.35, +1.92, -10.10 -> median +0.32 % (pooled mean, registered statistic: -3.25 %)
+  add0.0005    block gains +1.98, -8.44, +3.01, +3.09, +2.61 -> median +2.61 % (pooled mean, registered statistic: +0.44 %)
+  add0.001     block gains +3.64, +4.38, +4.83, +5.60, +4.91 -> median +4.83 % (pooled mean, registered statistic: +4.66 %)

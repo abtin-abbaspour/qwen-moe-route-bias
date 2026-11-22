@@ -1,0 +1,18 @@
+cache 3000 MiB: 6 delta-0 runs, mean decode 139.7 tok/s; one delta-0 run against the rest: -9.01 to +4.82 %
+  add0.00025     gain  -1.25 % (median  -0.45 %; passes -6.51, +4.01), hit 0.6322, draft acceptance 0.737
+  add0.0005      gain  +5.76 % (median  +6.38 %; passes +5.92, +5.59), hit 0.6437, draft acceptance 0.738
+  add0.001       gain  +8.94 % (median  +9.41 %; passes +8.80, +9.09), hit 0.6554, draft acceptance 0.747
+  add0.0025      gain +10.95 % (median +11.55 %; passes +16.33, +5.58), hit 0.7029, draft acceptance 0.736
+  add0.005       gain +20.98 % (median +22.06 %; passes +15.71, +26.26), hit 0.7546, draft acceptance 0.739
+cache 4500 MiB: 6 delta-0 runs, mean decode 163.4 tok/s; one delta-0 run against the rest: -9.31 to +6.68 %
+  add0.00025     gain  +3.27 % (median  +3.28 %; passes +0.65, +5.90), hit 0.7636, draft acceptance 0.737
+  add0.0005      gain  +7.04 % (median  +7.46 %; passes +6.17, +7.91), hit 0.7675, draft acceptance 0.751
+  add0.001       gain  +5.82 % (median  +5.76 %; passes +1.14, +10.50), hit 0.7861, draft acceptance 0.734
+  add0.0025      gain +12.32 % (median +11.60 %; passes +16.12, +8.52), hit 0.8268, draft acceptance 0.729
+  add0.005       gain +25.36 % (median +24.36 %; passes +22.27, +28.45), hit 0.8696, draft acceptance 0.744
+cache 8000 MiB: 6 delta-0 runs, mean decode 219.4 tok/s; one delta-0 run against the rest: -1.09 to +0.30 %
+  add0.00025     gain  +1.06 % (median  +0.88 %; passes +0.98, +1.14), hit 0.9109, draft acceptance 0.743
+  add0.0005      gain  +0.82 % (median  +0.31 %; passes +0.91, +0.72), hit 0.9188, draft acceptance 0.723
+  add0.001       gain  +3.73 % (median  +4.12 %; passes +3.70, +3.75), hit 0.9277, draft acceptance 0.736
+  add0.0025      gain  +6.91 % (median  +6.67 %; passes +7.25, +6.57), hit 0.9458, draft acceptance 0.740
+  add0.005       gain  +8.33 % (median  +8.26 %; passes +9.00, +7.65), hit 0.9648, draft acceptance 0.725

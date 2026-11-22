@@ -1,0 +1,42 @@
+# confirmation speed runs (results/AMENDMENT-1.md): 5 blocks per cache size, each block the four quality-passing settings in a
+# shuffled order (seed 20261118); the cache sizes alternate block by block. Gain per block against that block's delta-0 run.
+spdc-3000-add0.0005-r1 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spdc-3000-d0-r1 --cache-mib 3000
+spdc-3000-add0.001-r1 --cache-mib 3000 --bias 0.001 --bias-mode add
+spdc-3000-add0.00025-r1 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spdc-4500-add0.00025-r1 --cache-mib 4500 --bias 0.00025 --bias-mode add
+spdc-4500-add0.0005-r1 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spdc-4500-add0.001-r1 --cache-mib 4500 --bias 0.001 --bias-mode add
+spdc-4500-d0-r1 --cache-mib 4500
+spdc-3000-d0-r2 --cache-mib 3000
+spdc-3000-add0.0005-r2 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spdc-3000-add0.00025-r2 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spdc-3000-add0.001-r2 --cache-mib 3000 --bias 0.001 --bias-mode add
+spdc-4500-add0.00025-r2 --cache-mib 4500 --bias 0.00025 --bias-mode add
+spdc-4500-d0-r2 --cache-mib 4500
+spdc-4500-add0.0005-r2 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spdc-4500-add0.001-r2 --cache-mib 4500 --bias 0.001 --bias-mode add
+spdc-3000-add0.001-r3 --cache-mib 3000 --bias 0.001 --bias-mode add
+spdc-3000-d0-r3 --cache-mib 3000
+spdc-3000-add0.0005-r3 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spdc-3000-add0.00025-r3 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spdc-4500-add0.001-r3 --cache-mib 4500 --bias 0.001 --bias-mode add
+spdc-4500-d0-r3 --cache-mib 4500
+spdc-4500-add0.0005-r3 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spdc-4500-add0.00025-r3 --cache-mib 4500 --bias 0.00025 --bias-mode add
+spdc-3000-add0.00025-r4 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spdc-3000-add0.001-r4 --cache-mib 3000 --bias 0.001 --bias-mode add
+spdc-3000-d0-r4 --cache-mib 3000
+spdc-3000-add0.0005-r4 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spdc-4500-add0.001-r4 --cache-mib 4500 --bias 0.001 --bias-mode add
+spdc-4500-d0-r4 --cache-mib 4500
+spdc-4500-add0.00025-r4 --cache-mib 4500 --bias 0.00025 --bias-mode add
+spdc-4500-add0.0005-r4 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spdc-3000-add0.0005-r5 --cache-mib 3000 --bias 0.0005 --bias-mode add
+spdc-3000-d0-r5 --cache-mib 3000
+spdc-3000-add0.001-r5 --cache-mib 3000 --bias 0.001 --bias-mode add
+spdc-3000-add0.00025-r5 --cache-mib 3000 --bias 0.00025 --bias-mode add
+spdc-4500-add0.001-r5 --cache-mib 4500 --bias 0.001 --bias-mode add
+spdc-4500-d0-r5 --cache-mib 4500
+spdc-4500-add0.0005-r5 --cache-mib 4500 --bias 0.0005 --bias-mode add
+spdc-4500-add0.00025-r5 --cache-mib 4500 --bias 0.00025 --bias-mode add
