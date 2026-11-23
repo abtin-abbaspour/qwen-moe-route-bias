@@ -1,0 +1,100 @@
+# qwen-moe-route-bias patch 3, on top of patch 2 (independent of it: touches only ggml-cpu.c).
+# - GGML_CPU_MMID_DYN=1 (on in serve.sh by default; --no-work-share turns it off): the CPU's MUL_MAT_ID splits each expert
+#   matrix too small to chunk (a decode step's few tokens per expert) into one fixed share per thread. Here those matrices' rows
+#   go into one queue for the whole op, in pieces of GGML_CPU_MMID_DYN_ROWS rows (default 32), and the threads take pieces as
+#   they finish. Each output row is still one vec_dot call on the same data, so the output is bit-identical. Off unless set.
+diff --git a/ggml/src/ggml-cpu/ggml-cpu.c b/ggml/src/ggml-cpu/ggml-cpu.c
+index 27d4af7..7b6b8d2 100644
+--- a/ggml/src/ggml-cpu/ggml-cpu.c
++++ b/ggml/src/ggml-cpu/ggml-cpu.c
+@@ -1570,6 +1570,20 @@ static bool ggml_cpu_mmid_static(void) {
+     return v != 0;
+ }
+ 
++// GGML_CPU_MMID_DYN=1: the expert matrices too small to chunk (decode: a few tokens per expert) are not split into one fixed
++// share per thread; their rows go into one queue for the whole op, in pieces of GGML_CPU_MMID_DYN_ROWS rows (default 32),
++// which threads take as they finish, so a thread that runs slow takes fewer pieces instead of holding up the barrier. Each
++// output row is still computed by one vec_dot call on the same data, so results are bit-identical. 0 = off (stock split).
++static int ggml_cpu_mmid_dyn_rows(void) {
++    static int v = -1;
++    if (v < 0) {
++        const char * s = getenv("GGML_CPU_MMID_DYN");
++        const char * r = getenv("GGML_CPU_MMID_DYN_ROWS");
++        v = s != NULL && atoi(s) != 0 ? (r != NULL && atoi(r) > 0 ? atoi(r) : 32) : 0;
++    }
++    return v;
++}
++
+ static void ggml_compute_forward_mul_mat_id(
+         const struct ggml_compute_params * params,
+               struct ggml_tensor * dst) {
+@@ -1696,6 +1710,16 @@ static void ggml_compute_forward_mul_mat_id(
+         *current_chunk_ctr = nth;
+     }
+ 
++    // shared queue (GGML_CPU_MMID_DYN): the threadpool's chunk counter, unused otherwise in this op; every thread takes piece
++    // ith first, so the counter starts at nth
++    enum { MMID_DYN_MAX_EXPERTS = 1024 };
++    const int dyn_rows = ggml_is_numa() || ggml_cpu_mmid_static() || n_as > MMID_DYN_MAX_EXPERTS ? 0 : ggml_cpu_mmid_dyn_rows();
++    if (dyn_rows > 0 && ith == 0) {
++        ggml_threadpool_chunk_set(params->threadpool, nth);
++    }
++    int64_t  n_dyn = 0;                                // pieces left to the shared queue
++    uint64_t dyn_set[MMID_DYN_MAX_EXPERTS / 64] = {0}; // the experts left to it (this thread's copy; all threads agree)
++
+     ggml_barrier(params->threadpool);
+ 
+     for (int cur_a = 0; cur_a < n_as; ++cur_a) {
+@@ -1729,6 +1753,11 @@ static void ggml_compute_forward_mul_mat_id(
+         int64_t nchunk1 = (nr1 + chunk_size - 1) / chunk_size;
+ 
+         if (nchunk0 * nchunk1 < nth * 4 || disable_chunking) {
++            if (dyn_rows > 0) {
++                dyn_set[cur_a / 64] |= (uint64_t) 1 << (cur_a % 64);
++                n_dyn += (nr0 + dyn_rows - 1) / dyn_rows; // done below, from the shared queue
++                continue;
++            }
+             nchunk0 = nr0 > nr1 ? nth : 1;
+             nchunk1 = nr0 > nr1 ? 1 : nth;
+         }
+@@ -1763,6 +1792,40 @@ static void ggml_compute_forward_mul_mat_id(
+             current_chunk = atomic_fetch_add_explicit(current_chunk_ctr, 1, memory_order_relaxed);
+         }
+     }
++
++    if (n_dyn == 0) {
++        return;
++    }
++
++    // the shared queue: piece p is the p-th dyn_rows-row slice (with all of the expert's tokens) of the queued experts, in
++    // expert order; every queued expert has npc pieces, and a thread's pieces come in increasing order, so it walks forward
++    {
++        const void * wdata = (src1->type == vec_dot_type) ? src1->data : params->wdata;
++        const size_t row_size = ggml_row_size(vec_dot_type, ne10);
++        const int64_t npc = (ne01 + dyn_rows - 1) / dyn_rows;
++
++        int     cur_a = -1;
++        int64_t base  = -npc; // first piece of expert cur_a
++
++        for (int64_t piece = ith; piece < n_dyn; piece = ggml_threadpool_chunk_add(params->threadpool, 1)) {
++            while (piece >= base + npc) {
++                base += npc;
++                do {
++                    ++cur_a;
++                } while (cur_a < n_as && !((dyn_set[cur_a / 64] >> (cur_a % 64)) & 1));
++                GGML_ASSERT(cur_a < n_as);
++            }
++
++            const int64_t ir0_start = (piece - base) * dyn_rows;
++            const int64_t ir0_end   = MIN(ir0_start + dyn_rows, ne01);
++
++            ggml_compute_forward_mul_mat_id_one_chunk(
++                dst, src0, src1, ids, cur_a,
++                ir0_start, ir0_end, 0, matrix_row_counts[cur_a],
++                (const char *) src0->data + cur_a * nb02, matrix_rows, row_size, src1_cont, wdata
++            );
++        }
++    }
+ }
+ 
+ /////////////////////////////////

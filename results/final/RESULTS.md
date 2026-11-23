@@ -119,4 +119,6 @@ p = 0.14). 4,500 MiB had no pick, so it had no GSM8K run.
   `results/kld/q16-*`, with per-position dumps.
 - **Scripts:** `scripts/speed_compare.py`, `speed_blocks.py`, `paired.py`, `apply_rule.py`, `gsm8k.py`; run lists in `sweeps/`.
 - **Engine changes:** `patches/0001-route-bias-mode-mul.patch` and `patches/0002-route-stats-layers-drop-kld-dump.patch`, on
-  llama.cpp d02b4c0d with glm53-offload b5e86ee applied; `scripts/setup.sh` applies all three.
+  llama.cpp d02b4c0d with glm53-offload b5e86ee applied. `patches/0003-cpu-moe-work-share.patch` (CPU work sharing, on by default
+  in `scripts/serve.sh`) came after these measurements: it leaves the output byte-identical and the median speed unchanged, and keeps
+  speed steady from one server start to the next. `scripts/setup.sh` applies all four.

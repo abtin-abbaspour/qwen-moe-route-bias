@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# serve.sh -- start the patched llama-server for the GPU_bias_test runs. Run it inside the cuda13 distrobox:
+# serve.sh -- start the patched llama-server for this project's runs. Run it inside the cuda13 distrobox:
 #   distrobox enter cuda13 -- scripts/serve.sh [options] [-- extra llama-server args]
 #
 # Adapted from killy-netsphere/glm53-offload (recipes/common.sh + 1gpu.sh): the routed experts stay in host RAM, the GPU keeps
@@ -23,6 +23,11 @@
 #   --no-mtp          no MTP drafting
 #   --engine E        full: the model-agnostic engine switches of common.sh; min: the cache and the bias only (default full)
 #   --host-thp        pinned host buffers on transparent huge pages (GGML_CUDA_HOST_THP=1, glm53-offload patch 0037; off as shipped)
+#   --no-aslr         start the server with address-space randomization off (setarch -R): the same memory layout every start
+#   --no-work-share   the stock CPU split: each small expert matrix of a decode step divided into one fixed share per thread.
+#                     By default (--work-share) those matrices go to one queue the CPU threads share (GGML_CPU_MMID_DYN=1,
+#                     patches/0003), which keeps decode speed steady from one server start to the next; same output either way
+#   --work-share-rows N  rows per piece of that queue (GGML_CPU_MMID_DYN_ROWS, default 32)
 #   --dry-run         print the command and environment, start nothing
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -30,7 +35,7 @@ MODEL=${MODEL:-$ROOT/models/qwen3.6-35b-a3b/Qwen3.6-35B-A3B-UD-IQ4_XS.gguf}
 BIN=${BIN:-$ROOT/third_party/llama.cpp/build-cuda13/bin}
 
 CACHE_MIB=8000; BIAS=0; ROUTE_STATS=1; MODE=add; PROTECT=0; CPU_SHARE=0.9; CTX=65536; THREADS=16; PORT=8080; LOG_EVERY=0; MTP=1; ENGINE=full
-DRY=0
+DRY=0; WORK_SHARE=1
 while [ $# -gt 0 ]; do case $1 in
   --cache-mib) CACHE_MIB=$2; shift 2;;
   --bias) BIAS=$2; shift 2;;
@@ -47,6 +52,10 @@ while [ $# -gt 0 ]; do case $1 in
   --no-mtp) MTP=0; shift;;
   --engine) ENGINE=$2; shift 2;;
   --host-thp) HOST_THP=1; shift;;
+  --no-aslr) NO_ASLR=1; shift;;
+  --work-share) WORK_SHARE=1; shift;;
+  --no-work-share) WORK_SHARE=0; shift;;
+  --work-share-rows) WORK_SHARE_ROWS=$2; shift 2;;
   --dry-run) DRY=1; shift;;
   --) shift; break;;
   -h|--help) sed -n '2,/^set -/p' "$0" | sed '$d'; exit 0;;
@@ -72,6 +81,12 @@ if [ -n "${BIAS_LAYERS:-}" ]; then export LLAMA_MOE_ROUTE_BIAS_LAYERS="$BIAS_LAY
 if [ "$LOG_EVERY" != 0 ]; then export LLAMA_MOE_CACHE_LOG_EVERY="$LOG_EVERY"; fi
 export OMP_PROC_BIND=close OMP_PLACES=cores
 if [ "${HOST_THP:-0}" = 1 ]; then export GGML_CUDA_HOST_THP=1; fi
+if [ "$WORK_SHARE" = 1 ]; then
+  export GGML_CPU_MMID_DYN=1
+  if [ -n "${WORK_SHARE_ROWS:-}" ]; then export GGML_CPU_MMID_DYN_ROWS="$WORK_SHARE_ROWS"; fi
+fi
+PRE=()
+if [ "${NO_ASLR:-0}" = 1 ]; then PRE=(setarch "$(uname -m)" -R); fi
 
 if [ "$ENGINE" = full ]; then
   # the model-agnostic switches of glm53-offload recipes/common.sh (MoE cache, upload ring, scheduler, KV) and 1gpu.sh
@@ -86,10 +101,10 @@ if [ "$ENGINE" = full ]; then
 fi
 
 echo "serve.sh: cache ${CACHE_MIB} MiB, bias ${BIAS} (${MODE}), protect ${PROTECT}, cpu share ${CPU_SHARE}, ctx ${CTX}," \
-     "threads ${THREADS}, mtp ${MTP}, engine ${ENGINE}" >&2
+     "threads ${THREADS}, mtp ${MTP}, engine ${ENGINE}, work share $([ "$WORK_SHARE" = 1 ] && echo on || echo off), aslr $([ "${NO_ASLR:-0}" = 1 ] && echo off || echo on)" >&2
 if [ "$DRY" = 1 ]; then
   env | grep -E '^(LLAMA_|GGML_|OMP_|CUDA_)' | sort
-  printf '%q ' "$BIN/llama-server" "${ARGS[@]}" "$@"; echo
+  printf '%q ' "${PRE[@]}" "$BIN/llama-server" "${ARGS[@]}" "$@"; echo
   exit 0
 fi
-exec "$BIN/llama-server" "${ARGS[@]}" "$@"
+exec "${PRE[@]}" "$BIN/llama-server" "${ARGS[@]}" "$@"

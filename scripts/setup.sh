@@ -3,7 +3,7 @@
 #   1. llama.cpp at d02b4c0d (github.com/ggml-org/llama.cpp)
 #   2. glm53-offload at b5e86ee (github.com/killy-netsphere/glm53-offload): its patches/glm53-offload.patch onto llama.cpp
 #      (the expert cache, the route bias, the engine switches), and its bench/ prompts and probe used by scripts/run_arm.sh
-#   3. this repo's patches/0001-*.patch and patches/0002-*.patch
+#   3. this repo's patches/0001-*.patch, 0002-*.patch and 0003-*.patch
 # Then build inside the cuda13 distrobox: distrobox enter cuda13 -- scripts/build.sh   (see README.md)
 #   scripts/setup.sh                 THIRD_PARTY=<dir> puts the checkouts elsewhere
 set -euo pipefail
@@ -32,8 +32,9 @@ fetch "$TP/glm53-offload" "$GLM_URL" "$GLM_COMMIT"
 echo "$GLM_PATCH_SHA256  $TP/glm53-offload/patches/glm53-offload.patch" | sha256sum -c --quiet
 echo "setup.sh: llama.cpp ${LLAMA_COMMIT:0:7}"
 fetch "$TP/llama.cpp" "$LLAMA_URL" "$LLAMA_COMMIT"
-echo "setup.sh: applying glm53-offload.patch, then patches/0001 and 0002"
+echo "setup.sh: applying glm53-offload.patch, then patches/0001, 0002 and 0003"
 git -C "$TP/llama.cpp" apply "$TP/glm53-offload/patches/glm53-offload.patch"
 git -C "$TP/llama.cpp" apply "$ROOT"/patches/0001-*.patch
 git -C "$TP/llama.cpp" apply "$ROOT"/patches/0002-*.patch
+git -C "$TP/llama.cpp" apply "$ROOT"/patches/0003-*.patch
 echo "setup.sh: done. Next: distrobox enter cuda13 -- scripts/build.sh"

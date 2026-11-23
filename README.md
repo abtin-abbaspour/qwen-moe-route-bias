@@ -161,11 +161,16 @@ Notes on the build and setup:
 - **Why glm53-offload, despite the name:** its llama.cpp patch carries the general MoE-offload engine, not just GLM support. That
   means the expert cache (built on llama.cpp pull requests #29963 and #30966), CPU computation of misses and the route bias itself.
   Its GLM-specific kernels go unused with Qwen.
+- **Work sharing (patch 0003, on by default in `scripts/serve.sh`):** in a decode step, the CPU threads take the rows of the small
+  expert matrices from one shared queue instead of a fixed share each, which keeps decode speed steady from one server start to
+  the next. In 60 fresh starts with it, the slowest was 2.0 % below the median; with the fixed split, 4 of 60 starts ran 9–11 %
+  below. The output is byte-identical and the median speed unchanged, so the results above (measured with the fixed split) stand;
+  `--no-work-share` restores the fixed split.
 
 ## Repository layout
 
 ```
-patches/        this project's two llama.cpp patches (applied after glm53-offload's)
+patches/        this project's three llama.cpp patches (applied after glm53-offload's)
 scripts/        setup, build, server, benchmark, quality, analysis and figure scripts (each documents itself at the top)
 sweeps/         the run lists, in the order they ran
 results/
