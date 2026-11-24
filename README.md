@@ -1,15 +1,16 @@
 # Route bias on Qwen3.6-35B-A3B: trading routing fidelity for decode speed on a 16 GB GPU
 
-**One small nudge to a mixture-of-experts router, measured end to end on a consumer PC.** Within a quality budget equal to the cost of
-an 8-bit KV cache, it makes Qwen3.6-35B-A3B decode **about 5 % faster with a 3 GB expert cache and about 7 % faster with an 8 GB
-one**, with no significant loss on GSM8K. Spend more quality and it gives **+21 to +25 %**.
+This project tests the route bias from Killy's [glm53-offload](https://github.com/killy-netsphere/glm53-offload) on
+Qwen3.6-35B-A3B, running on a single 16 GB GPU. The bias was first measured on GLM-5.3 with two 96 GB cards. It adds a small constant
+to the router's probability of each expert already in the GPU cache, so near-ties go to experts the GPU can run.
 
-- **What it is:** the route bias from Killy's [glm53-offload](https://github.com/killy-netsphere/glm53-offload), first measured on
-  GLM-5.3 with two 96 GB cards. This project takes it to a different model family and to a single 16 GB card.
-- **How it was measured:** decode speed, KL divergence against an f16 reference, and GSM8K accuracy, under a pass rule fixed and
-  hashed before the final runs.
-- **What it found:** the full speed-quality curve at three cache sizes, which settings stay within a strict quality budget, and which
-  layers the quality cost comes from.
+It measures decode speed, KL divergence against an f16 reference, and GSM8K accuracy at expert caches of 3,000, 4,500 and 8,000 MiB,
+under a pass rule fixed and hashed before the final runs. With the added KL divergence capped at 0.0045 (the cost of an 8-bit KV
+cache), the bias speeds up decoding by 5.3 % at 3,000 MiB and 6.9 % at 8,000 MiB, with no significant loss on GSM8K. At 4,500 MiB
+the best setting reached +4.8 %, just under the 5 % bar. Larger biases give +21 to +25 % at four to five times the quality cost.
+
+The results include the full speed-quality curve at each cache size, the settings that pass the rule, and which layers the quality
+cost comes from.
 
 ## How it works
 
