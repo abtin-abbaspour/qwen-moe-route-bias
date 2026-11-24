@@ -24,8 +24,8 @@ For a missed one, the GPU sends the token's activations to the CPU, which comput
 </picture>
 
 The **route bias** adds a small constant δ to the router's probability of every expert that is already in the GPU cache, before the
-top-8 choice. Most choices don't change. But the router is full of near-ties, and when an expert in RAM narrowly beats a cached one,
-the bias hands the place to the cached expert. The mixing weights stay unbiased: an expert that gets in through the bias still counts
+top-8 choice. Most choices don't change. But the router has many near-ties, and when an expert in RAM narrowly beats a cached one,
+the bias gives the place to the cached expert. The mixing weights stay unbiased: an expert that gets in through the bias still counts
 at its true probability.
 
 <picture>
@@ -36,25 +36,26 @@ at its true probability.
 The cost is fidelity: the model now sometimes uses its 9th-choice expert instead of its 8th. This project measures how much speed
 that buys and how much quality it costs.
 
-## What's new here
+## Differences from the original results
 
 The original glm53-offload results are one setting on one model: GLM-5.3, δ = 0.03, GPU hit rate 79 → 89 %, decode +26 %. This
-project adds:
+project differs in five ways:
 
-1. **A different kind of router.** GLM-5.3 routes with sigmoid scores plus a per-expert selection bias, so there the bonus folds into
-   that term. Qwen routes with a softmax and has no such term. Here the bonus is added to the softmax probabilities, and only in that
-   additive form: adding it in logit space breaks the fused CUDA top-k kernel and costs about 5 % before a single choice changes.
-2. **A consumer machine.** One 16 GB card that also runs the desktop, 3 to 8 GB expert caches and 63 to 90 % hit rates, against the
-   original's 192 GB of VRAM. At 4,500 MiB, δ = 0.005 takes the hit rate from 75 to 87 % and decode up 25 %: about the size of the
-   original's effect, on a far smaller machine.
-3. **The whole curve, not one point.** Five deltas at three cache sizes. Quality is paired position by position against δ = 0 over
+1. The router is a different kind. GLM-5.3 routes with sigmoid scores plus a per-expert selection bias, so there the bonus folds into
+   that term. Qwen routes with a softmax and has no such term, so here the bonus is added to the softmax probabilities. Only that
+   additive form works well: adding it in logit space breaks the fused CUDA top-k kernel and costs about 5 % before any choice changes.
+2. The machine is a consumer PC: one 16 GB card that also runs the desktop, 3 to 8 GB expert caches and 63 to 90 % hit rates, against
+   the original's 192 GB of VRAM. At 4,500 MiB, δ = 0.005 raises the hit rate from 75 to 87 % and decode speed by 25 %, about the
+   same effect as the original's.
+3. It measures five deltas at three cache sizes instead of one setting. Quality is paired position by position against δ = 0 over
    32,752 positions, with block-bootstrap intervals. The swap counter added for this leaves the fast path bit-identical.
-4. **Findings specific to this model:**
-   - **Qwen's router is full of near-ties:** at the 3 and 4.5 GB caches, δ = 0.00026 already swaps 1 % of all expert picks.
-   - **Early layers cost several times more quality per swap than late ones,** yet biasing all 40 layers uniformly is still best.
-   - **Larger caches tolerate larger δ,** because fewer choices can flip.
-   - **Each point of hit rate is worth about 1.5 to 2 % of decode speed.**
-5. **A task-level check:** GSM8K on all 1,319 questions, each pick against δ = 0 on the same questions with McNemar's test.
+4. Some results are specific to this model:
+   - At the 3,000 and 4,500 MiB caches, δ = 0.00026 already swaps 1 % of all expert picks, so many router choices are near-ties.
+   - A swap in an early layer costs several times more quality than one in a late layer, but biasing all 40 layers uniformly still
+     gave the best trade-off.
+   - Larger caches tolerate a larger δ, because fewer choices can flip.
+   - Each point of hit rate is worth about 1.5 to 2 % of decode speed.
+5. It checks task accuracy on GSM8K: all 1,319 questions, each pick against δ = 0 on the same questions, with McNemar's test.
 
 ## The experiment
 
@@ -94,14 +95,14 @@ was measured in 5 shuffled blocks (40 fresh starts) and scored by the median blo
 | 4,500 MiB | 75 % | none passes | +4.8 % at δ = 0.001 | +0.0037 | — |
 | 8,000 MiB | 90 % | δ = 0.0025 | +6.9 % | +0.0041 | 95.07 % → 94.54 % (−0.53 points [−1.29, +0.23], p = 0.23) |
 
-- **About +5 % at small caches, +7 % at 8,000 MiB, inside the budget.** δ = 0.001 gives about +5 % at both 3,000 and 4,500 MiB
-  (+5.3 % and +4.8 %). One clearing the 5 % line and the other missing it is within the measurement's precision, not a real
+- Within the quality limit, δ = 0.001 gives about +5 % at both 3,000 and 4,500 MiB (+5.3 % and +4.8 %), and δ = 0.0025 gives
+  +6.9 % at 8,000 MiB. That 3,000 MiB clears the 5 % line and 4,500 MiB misses it is within the measurement's precision, not a real
   difference.
-- **On GSM8K the picks decoded even faster:** +9.2 % and +10.7 % (one run each). Neither lost significant accuracy, though both point
-  estimates are about half a point lower, and a test this size can't rule out losses up to about 1.3 points.
-- **Past the budget the speed keeps coming.** δ = 0.005 gives +21 % at 3,000 MiB and +25 % at 4,500 MiB, at four to five times the
-  quality cost: the top token differs from δ = 0's at an extra 2.9 to 3.7 % of positions, against about 1 % for the picks.
-- **Perplexity barely moves:** under 0.8 % for any setting. KL divergence and same-top-token agreement are the sensitive measures.
+- In the GSM8K runs, the picks decoded 9.2 % and 10.7 % faster than δ = 0 (one run each). Neither lost significant accuracy, though
+  both point estimates are about half a point lower, and a test this size can't rule out losses up to about 1.3 points.
+- Beyond the quality limit, δ = 0.005 gives +21 % at 3,000 MiB and +25 % at 4,500 MiB, at four to five times the quality cost: the
+  top token differs from δ = 0's at an extra 2.9 to 3.7 % of positions, against about 1 % for the picks.
+- Perplexity changes by under 0.8 % for every setting. KL divergence and same-top-token agreement are the sensitive measures.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/layers-dark.svg">
